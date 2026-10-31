@@ -1,0 +1,11 @@
+.env
+web-a/.env.local
+backend/.env
+node_modules/
+dist/
+__pycache__/
+.venv/
+*.log
+backend/data/
+evidence/
+.tools/

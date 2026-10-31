@@ -1,0 +1,41 @@
+{
+  "realm": "company-iam",
+  "roles": ["admin", "manager", "employee", "auditor"],
+  "client": {
+    "clientId": "employee-portal",
+    "name": "Employee Portal",
+    "protocol": "openid-connect",
+    "enabled": true,
+    "publicClient": true,
+    "standardFlowEnabled": true,
+    "directAccessGrantsEnabled": false,
+    "implicitFlowEnabled": false,
+    "serviceAccountsEnabled": false,
+    "redirectUris": ["http://localhost:5173", "http://localhost:5173/*"],
+    "webOrigins": ["http://localhost:5173"],
+    "attributes": {
+      "pkce.code.challenge.method": "S256",
+      "post.logout.redirect.uris": "http://localhost:5173##http://localhost:5173/*"
+    },
+    "defaultClientScopes": ["web-origins", "acr", "profile", "roles", "email"]
+  },
+  "audienceMapper": {
+    "name": "employee-api-audience",
+    "protocol": "openid-connect",
+    "protocolMapper": "oidc-audience-mapper",
+    "consentRequired": false,
+    "config": {
+      "included.custom.audience": "employee-api",
+      "access.token.claim": "true",
+      "id.token.claim": "false"
+    }
+  },
+  "users": [
+    {"username": "admin01", "role": "admin", "team": "Điều hành", "name": "Quản trị hệ thống"},
+    {"username": "manager01", "role": "manager", "team": "Sản phẩm", "name": "Minh Anh"},
+    {"username": "employee01", "role": "employee", "team": "Sản phẩm", "name": "Hoàng Nam"},
+    {"username": "auditor01", "role": "auditor", "team": "Kiểm soát", "name": "Thu Hà"},
+    {"username": "manager02", "role": "manager", "team": "Vận hành", "name": "Quang Huy"},
+    {"username": "employee02", "role": "employee", "team": "Vận hành", "name": "Ngọc Linh"}
+  ]
+}

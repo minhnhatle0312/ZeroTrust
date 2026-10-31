@@ -1,0 +1,125 @@
+﻿# Tiến độ đồ án IAM-ZeroTrust
+
+Cập nhật: **31/10/2026**. Đối chiếu mã nguồn, tài liệu tuần 1–2 và kết quả kiểm thử đã lưu; không chạy lại kiểm thử trong lần cập nhật này.
+
+**Quy ước:** `[x]` hoàn thành trong phạm vi ghi chú; `[ ]` chưa hoàn thành. **Một phần** nghĩa là đã triển khai một số nội dung nhưng chưa đủ để đánh dấu hoàn tất. Giữ mốc tuần của kế hoạch ban đầu; một số việc đã làm sớm trong tuần 2.
+
+## Giai đoạn 1 – Hạ tầng IAM (Tuần 1–2)
+
+- [x] Cài và kiểm tra Docker Desktop, WSL2, Node.js, VS Code.
+- [x] Tạo cấu trúc dự án IAM-ZeroTrust.
+- [x] Chạy PostgreSQL và Keycloak bằng Docker Compose — có volume lưu dữ liệu và healthcheck PostgreSQL.
+- [x] Tạo Realm `company-iam`.
+- [x] Tạo 4 Role: admin, manager, employee, auditor.
+- [x] Tạo 4 tài khoản kiểm thử và gán Role — tuần 2 đã mở rộng thành **6 tài khoản**, có 2 nhân viên và 2 quản lý để kiểm tra khác nhóm.
+- [x] Kiểm tra đăng nhập, lưu dữ liệu và khởi động lại container — đã ghi nhận ở tuần 1.
+
+## Giai đoạn 2 – Web A và RBAC (Tuần 3)
+
+- [x] Tạo OIDC Client `employee-portal` và cấu hình PKCE S256.
+- [x] Cấu hình Audience `employee-api` và Roles Mapper — audience mapper và client scope roles của Keycloak.
+- [x] Xây dựng Web A bằng React — giao diện Nhịp Workspace, hỗ trợ máy tính và điện thoại.
+- [x] Tạo backend Express, API và middleware xác minh JWT — chữ ký RS256, issuer, audience, thời hạn và danh tính nhân viên.
+- [x] Tích hợp đăng nhập, đăng xuất Keycloak.
+- [x] Xây dựng các API Profile, Manager, Admin, Auditor — bổ sung API chấm công, đơn điều chỉnh, nhóm và bảo mật.
+- [x] Kiểm thử phản hồi HTTP 200, 401, 403 theo Role — có kết quả backend và trình duyệt.
+
+## Giai đoạn 3 – Web B và SSO (Tuần 4)
+
+- [ ] Tạo Web B – Security Dashboard — **Một phần:** có Trung tâm bảo mật trong Web A; chưa có Web B độc lập.
+- [ ] Tạo OIDC Client riêng cho Web B.
+- [ ] Tích hợp đăng nhập Keycloak vào Web B.
+- [ ] Kiểm thử SSO từ Web A sang Web B.
+- [ ] Kiểm soát quyền truy cập riêng cho Web B.
+- [ ] Kiểm thử logout và phiên đăng nhập ở hai Web.
+
+## Giai đoạn 4 – MFA và tăng cường bảo mật (Tuần 5)
+
+- [ ] Cấu hình Required Actions và TOTP MFA — **Một phần:** admin yêu cầu `CONFIGURE_TOTP` theo tài khoản, đã kiểm tra ghi nhận tại Keycloak; chưa hoàn thành đăng ký thiết bị OTP và chưa bắt buộc MFA toàn hệ thống.
+- [ ] Kiểm thử đăng nhập với mật khẩu và OTP.
+- [ ] Kiểm tra OTP sai, thiếu hoặc hết hạn.
+- [ ] Kiểm soát phiên, token expiration và refresh token — **Một phần:** token 300 giây, frontend gọi `updateToken(30)`, có logout/thu hồi và chặn token cũ; còn kiểm thử đầy đủ vòng đời refresh token và lỗi làm mới.
+- [x] Kiểm thử truy cập trực tiếp API trái quyền — vượt quyền admin, xem công người khác, duyệt khác nhóm và tự duyệt đều có kịch bản kiểm tra.
+- [ ] Kiểm tra Redirect URI, CORS và cấu hình HTTPS — **Một phần:** đã giới hạn Redirect URI/CORS cho localhost; chưa triển khai HTTPS, Keycloak còn chạy `start-dev`.
+
+## Giai đoạn 5 – LDAP / Active Directory (Tuần 6)
+
+- [ ] Chọn OpenLDAP hoặc Windows Active Directory.
+- [ ] Cài dựng LDAP Server hoặc Domain Controller.
+- [ ] Tạo OU, Group, User mẫu.
+- [ ] Kết nối LDAP Federation trong Keycloak.
+- [ ] Cấu hình đồng bộ thuộc tính và nhóm người dùng.
+- [ ] Kiểm thử đăng nhập bằng tài khoản LDAP/AD.
+- [ ] Kiểm tra quyền và trạng thái khi dữ liệu LDAP thay đổi.
+
+Ghi chú: nhóm Sản phẩm/Vận hành hiện nằm trong hồ sơ nhân viên phía ứng dụng; chưa đồng bộ nhóm LDAP/AD.
+
+## Giai đoạn 6 – Vòng đời tài khoản JCL (Tuần 7)
+
+- [x] Join: thêm tài khoản và cấp quyền ban đầu — đã có script tạo tài khoản demo và gán role; chưa có màn hình thêm nhân viên tổng quát.
+- [ ] Change: thay đổi Group/Role và kiểm tra quyền mới — có cấu hình role/nhóm demo, chưa kiểm thử đầy đủ việc đổi quyền của tài khoản đang hoạt động.
+- [x] Leave: vô hiệu hóa tài khoản và chặn đăng nhập mới — khóa tại ứng dụng và đồng bộ vô hiệu hóa sang Keycloak.
+- [x] Kiểm tra token/phiên đã phát hành trước khi thu hồi — có kiểm tra token Keycloak thật; API từ chối token cũ.
+- [x] Lưu bằng chứng trước/sau thay đổi tài khoản — kết quả khóa/mở/thu hồi, audit và ảnh giao diện quản trị.
+- [ ] Xây dựng chức năng quản lý JCL trên Web hoặc qua Admin API bảo vệ — **Một phần:** đã có khóa/mở, thu hồi phiên, yêu cầu MFA qua API admin; còn luồng Join/Change đầy đủ trên ứng dụng.
+
+## Giai đoạn 7 – Audit Logging (Tuần 8)
+
+- [x] Bật Keycloak User Events và Admin Events.
+- [ ] Thiết kế bảng lưu trữ Audit Log trong PostgreSQL — **Một phần:** audit ứng dụng hiện lưu trong SQLite; PostgreSQL đang lưu dữ liệu Keycloak.
+- [ ] Xây dựng cơ chế thu thập sự kiện Keycloak — **Một phần:** backend đọc sự kiện gần đây để hiển thị; chưa có dịch vụ thu thập và lưu lịch sử tập trung.
+- [ ] Ghi log các yêu cầu ALLOW/DENY từ backend Web A/B — **Một phần:** đã ghi log Web A; chưa có Web B.
+- [ ] Ghi nhận thay đổi Role và trạng thái tài khoản — **Một phần:** đã audit khóa/mở/thu hồi/MFA; chưa hoàn thiện luồng đổi role và thu thập tập trung thay đổi từ Keycloak.
+- [ ] Tạo giao diện tra cứu, lọc và thống kê log — **Một phần:** có nhật ký gần đây, danh sách/lọc trạng thái cảnh báo và đếm cảnh báo; chưa có bộ tìm kiếm/lọc/thống kê audit đầy đủ.
+- [x] Kiểm thử khả năng truy vết người dùng, thời gian và hành động — có danh tính, thời điểm, hành động, request ID; kiểm thử rollback khi ghi audit thất bại.
+
+## Giai đoạn 8 – Python Detection (Tuần 8–9)
+
+- [ ] Xây dựng bộ dữ liệu Audit Log bình thường và bất thường — **Một phần:** có log demo và yêu cầu bị chặn; chưa có bộ dữ liệu gán nhãn phục vụ đánh giá.
+- [ ] Thiết kế quy tắc phát hiện đăng nhập thất bại nhiều lần — **Một phần:** Keycloak đã bật chống brute-force với ngưỡng 5 lần thất bại; chưa có quy tắc trong module Python.
+- [ ] Phát hiện truy cập sai Role hoặc ngoài giờ — **Một phần:** Node.js đã tạo cảnh báo sai quyền; chưa phát hiện bất thường ngoài giờ. Tính phút đi muộn là chức năng chấm công riêng.
+- [ ] Xây dựng module Python Normal/Anomaly.
+- [ ] Kết nối kết quả phát hiện với Security Dashboard — **Một phần:** cảnh báo backend đã hiển thị trong Web A; chưa tích hợp Python và Web B.
+- [ ] Đánh giá Precision, Recall, F1-score và False Positive Rate trên dữ liệu gán nhãn.
+
+## Giai đoạn 9 – Kiểm thử bảo mật (Tuần 9)
+
+- [ ] Kiểm thử SSO và logout giữa hai website.
+- [x] Kiểm thử RBAC và Least Privilege — 4 role, quyền theo nhóm, giới hạn auditor và cấm tự duyệt đơn.
+- [x] Kiểm thử token sai chữ ký, hết hạn, sai audience — thêm sai issuer, chưa hiệu lực, thiếu expiration và token không ký.
+- [ ] Kiểm thử MFA, LDAP và Join/Change/Leave — **Một phần:** đã kiểm tra yêu cầu thiết lập MFA, khóa/mở và thu hồi phiên; còn OTP thực tế, LDAP và đầy đủ luồng Change.
+- [x] Kiểm thử chống truy cập trái phép qua API — truy cập chéo người dùng/nhóm, giả mạo trường dữ liệu và kiểm tra quyền tại backend.
+- [x] Lưu HTTP Status, screenshot, log và bảng test case — tuần 2 có **54/54 test backend**, **27/27 kiểm tra trình duyệt**, **8 ảnh minh chứng** trong `evidence/week2`.
+- [x] Đánh giá giới hạn Zero Trust và rủi ro còn tồn tại — tài liệu tuần 2 đã ghi giới hạn localhost, HTTPS, MFA thực tế và các phần chưa triển khai.
+
+## Giai đoạn 10 – Hoàn thiện đồ án (Tuần 10)
+
+- [ ] Hoàn thiện cấu trúc source code và README — **Một phần:** có backend/frontend, script, tài liệu tuần 1–2 và `CHAY_NHANH.md`; chưa hoàn thiện README tổng thể.
+- [ ] Hoàn thiện Docker Compose và cấu hình triển khai — **Một phần:** PostgreSQL/Keycloak chạy Docker; backend/frontend còn chạy Node.js trên máy, chưa đóng gói toàn hệ thống và cấu hình production.
+- [ ] Vẽ System Architecture, OIDC Flow, SSO Flow và ERD — **Một phần:** có minh họa Docker trong báo cáo tuần 1; chưa đủ bộ sơ đồ theo kế hoạch.
+- [ ] Viết báo cáo đồ án, kết quả thực nghiệm — **Một phần:** có báo cáo Word tuần 1, tài liệu tuần 2 và kết quả kiểm thử; chưa có báo cáo đồ án cuối kỳ hoàn chỉnh.
+- [ ] Tổng hợp ma trận User–Role–Resource và minh chứng — **Một phần:** đã mô tả quyền 6 tài khoản/4 role, phạm vi nhóm và minh chứng Web A; còn tổng hợp toàn hệ thống sau khi bổ sung các phần tiếp theo.
+- [ ] Chuẩn bị slide PowerPoint và video demo.
+- [ ] Chạy demo tổng thể và luyện câu hỏi phản biện — **Một phần:** đã chạy demo tuần 2 bằng trình duyệt; chưa demo toàn bộ phạm vi đồ án và luyện phản biện.
+
+## Bổ sung đã hoàn thành trong tuần 2
+
+- [x] Chấm công ca **08:00–17:00, giờ Việt Nam**; check-in/check-out bằng thời gian máy chủ, ngăn ghi công trùng.
+- [x] Bảng công theo tháng, thống kê giờ làm/phút đi muộn và biểu đồ 7 ngày.
+- [x] Gửi đơn điều chỉnh công; quản lý chỉ xem/duyệt nhóm mình; admin xem toàn bộ; không tự duyệt đơn.
+- [x] Trung tâm bảo mật cho admin/auditor; admin điều tra, cập nhật trạng thái và ghi kết luận cảnh báo.
+- [x] Xử lý tài khoản bằng thu hồi phiên, khóa/mở, yêu cầu MFA; bắt buộc ghi lý do và lưu audit.
+- [x] Xử lý Keycloak lỗi/đồng bộ chưa hoàn tất; khóa/thu hồi cục bộ vẫn có hiệu lực, mở tài khoản cần Keycloak xác nhận.
+- [x] Kiểm tra đầu vào, giới hạn tần suất/kích thước request, SQL có tham số, kiểm tra nội dung XSS được hiển thị dưới dạng văn bản.
+- [x] Kiểm thử thao tác đồng thời, duyệt lại đơn, lưu dữ liệu qua khởi động lại và ranh giới ngày UTC+7.
+
+Ghi chú: admin xử lý cảnh báo và tài khoản/phiên. Đóng cảnh báo không tự vá lỗ hổng mã nguồn; lỗi mã nguồn cần bản sửa và kiểm thử lại.
+
+## Tài liệu và minh chứng đối chiếu
+
+- [Nội dung tuần 2](tuan2.md).
+- [Cách chạy nhanh](CHAY_NHANH.md).
+- [Kịch bản kiểm thử bảo mật tuần 2](docs/KIEM_THU_BAO_MAT_TUAN_2.md).
+- [Kết quả 54 test backend đã lưu](evidence/week2/backend-tests.tap).
+- [Kết quả kiểm tra trình duyệt đã lưu](evidence/week2/browser-results.json).
+- [Thư mục ảnh minh chứng tuần 2](evidence/week2/).
