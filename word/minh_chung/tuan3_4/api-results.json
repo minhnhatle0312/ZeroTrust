@@ -1,0 +1,157 @@
+{
+  "startedAt": "2026-11-01T15:46:59.369371+07:00",
+  "checks": [
+    {
+      "name": "New summary API available",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Create employee synchronizes Keycloak and app",
+      "actual": "employee",
+      "expected": "employee",
+      "passed": true
+    },
+    {
+      "name": "Profile and group changes persist",
+      "actual": "Kiểm thử nhóm mới",
+      "expected": "Kiểm thử nhóm mới",
+      "passed": true
+    },
+    {
+      "name": "Role change persists",
+      "actual": "manager",
+      "expected": "manager",
+      "passed": true
+    },
+    {
+      "name": "Password reset logged without revealing password",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Temporary password requires change",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "New role permits manager navigation",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Personal session shows current session",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Withdrawn correction displayed",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Admin receives new correction notification",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Notification list displays real data",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Read state persists",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "name": "Failed login imported from actual Keycloak",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Failed login generates visible alert",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Alert context includes related authentication",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Server-side audit searches beyond 100 records",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Audit sorting is performed on server",
+      "actual": 1,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "name": "Event detail exposes correlation ID",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Remote filtered export downloaded",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "New explorer fits mobile page",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Terminated session token rejected by API",
+      "actual": 401,
+      "expected": 401,
+      "passed": true
+    },
+    {
+      "name": "Automatic refresh can be enabled",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "No browser JavaScript errors",
+      "actual": [],
+      "expected": [],
+      "passed": true
+    }
+  ],
+  "screenshots": [
+    "01-created-employee.png",
+    "02-edit-role-team.png",
+    "03-personal-sessions.png",
+    "04-notification-center.png",
+    "05-keycloak-login-events.png",
+    "06-alert-context.png",
+    "07-event-detail.png",
+    "08-log-mobile.png"
+  ],
+  "errors": [],
+  "success": true,
+  "demoAccountDisabled": true,
+  "finishedAt": "2026-11-01T15:47:19.316689+07:00"
+}

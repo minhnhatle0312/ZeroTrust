@@ -1,0 +1,535 @@
+{
+  "capturedAt": "2026-11-01T10:13:07.777425+07:00",
+  "environment": "localhost; Keycloak thật; Authorization Code + PKCE S256",
+  "checks": [
+    {
+      "name": "Keycloak is ready",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Public OIDC client",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Authorization Code flow",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "PKCE S256",
+      "actual": "S256",
+      "expected": "S256",
+      "passed": true
+    },
+    {
+      "name": "Direct grants disabled",
+      "actual": false,
+      "expected": false,
+      "passed": true
+    },
+    {
+      "name": "Audience mapper",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Default roles scope",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Application realm roles",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Backend test command exit",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "name": "Backend tests passed",
+      "actual": 54,
+      "expected": 54,
+      "passed": true
+    },
+    {
+      "name": "Backend tests failed",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "name": "Missing token /api/profile",
+      "actual": 401,
+      "expected": 401,
+      "passed": true
+    },
+    {
+      "name": "employee01 issuer",
+      "actual": "http://localhost:8080/realms/company-iam",
+      "expected": "http://localhost:8080/realms/company-iam",
+      "passed": true
+    },
+    {
+      "name": "employee01 audience employee-api",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "employee01 /api/profile",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "employee01 /api/manager",
+      "actual": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "employee01 /api/admin",
+      "actual": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "employee01 /api/audit",
+      "actual": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "employee01 logout",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "manager01 issuer",
+      "actual": "http://localhost:8080/realms/company-iam",
+      "expected": "http://localhost:8080/realms/company-iam",
+      "passed": true
+    },
+    {
+      "name": "manager01 audience employee-api",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "manager01 /api/profile",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "manager01 /api/manager",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "manager01 /api/admin",
+      "actual": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "manager01 /api/audit",
+      "actual": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "manager01 logout",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "admin01 issuer",
+      "actual": "http://localhost:8080/realms/company-iam",
+      "expected": "http://localhost:8080/realms/company-iam",
+      "passed": true
+    },
+    {
+      "name": "admin01 audience employee-api",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "admin01 /api/profile",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "admin01 /api/manager",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "admin01 /api/admin",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "admin01 /api/audit",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "admin01 logout",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "auditor01 issuer",
+      "actual": "http://localhost:8080/realms/company-iam",
+      "expected": "http://localhost:8080/realms/company-iam",
+      "passed": true
+    },
+    {
+      "name": "auditor01 audience employee-api",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "auditor01 /api/profile",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "auditor01 /api/manager",
+      "actual": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "auditor01 /api/admin",
+      "actual": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "auditor01 /api/audit",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "auditor01 logout",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    }
+  ],
+  "responses": [
+    {
+      "user": "anonymous",
+      "method": "GET",
+      "path": "/api/profile",
+      "http": 401,
+      "body": {
+        "status": "DENY",
+        "code": "MISSING_TOKEN",
+        "message": "Vui lòng đăng nhập.",
+        "requestId": "0373e79c-a19a-41eb-8604-4cdf25a3cfbd"
+      }
+    },
+    {
+      "path": "/api/profile",
+      "http": 200,
+      "body": {
+        "status": "ALLOW",
+        "id": "ce8e25cd-5b4f-414a-bd65-3e844d45bcbe",
+        "username": "employee01",
+        "name": "Hoàng Nam",
+        "team": "Sản phẩm",
+        "role": "employee",
+        "disabled": false,
+        "roles": [
+          "employee"
+        ],
+        "serverTime": "2026-11-01T03:13:16.662Z",
+        "schedule": {
+          "start": "08:00",
+          "end": "17:00",
+          "timezone": "Asia/Ho_Chi_Minh"
+        },
+        "requestId": "9782bd04-3be6-45d8-b1e0-461e57a4724d"
+      },
+      "user": "employee01",
+      "method": "GET"
+    },
+    {
+      "path": "/api/manager",
+      "http": 403,
+      "body": {
+        "status": "DENY",
+        "code": "INSUFFICIENT_ROLE",
+        "message": "Bạn không có quyền thực hiện thao tác này.",
+        "requestId": "9b24ed1b-8ad0-4a86-b0b4-131d326a1a44"
+      },
+      "user": "employee01",
+      "method": "GET"
+    },
+    {
+      "path": "/api/admin",
+      "http": 403,
+      "body": {
+        "status": "DENY",
+        "code": "INSUFFICIENT_ROLE",
+        "message": "Bạn không có quyền thực hiện thao tác này.",
+        "requestId": "5d92a80d-5f6d-46c4-a05c-99e61058c7e6"
+      },
+      "user": "employee01",
+      "method": "GET"
+    },
+    {
+      "path": "/api/audit",
+      "http": 403,
+      "body": {
+        "status": "DENY",
+        "code": "INSUFFICIENT_ROLE",
+        "message": "Bạn không có quyền thực hiện thao tác này.",
+        "requestId": "2ee18c0c-7a24-408d-a3b0-f9edd53547e6"
+      },
+      "user": "employee01",
+      "method": "GET"
+    },
+    {
+      "path": "/api/profile",
+      "http": 200,
+      "body": {
+        "status": "ALLOW",
+        "id": "3242fc36-8a3d-4ed2-ab8e-d4f4d425a57b",
+        "username": "manager01",
+        "name": "Minh Anh",
+        "team": "Sản phẩm",
+        "role": "manager",
+        "disabled": false,
+        "roles": [
+          "manager"
+        ],
+        "serverTime": "2026-11-01T03:13:18.355Z",
+        "schedule": {
+          "start": "08:00",
+          "end": "17:00",
+          "timezone": "Asia/Ho_Chi_Minh"
+        },
+        "requestId": "ff0998da-3b23-4ff4-89e1-68f2a77d94f2"
+      },
+      "user": "manager01",
+      "method": "GET"
+    },
+    {
+      "path": "/api/manager",
+      "http": 200,
+      "body": {
+        "status": "ALLOW",
+        "resource": "Manager Dashboard",
+        "requestId": "03ea19ae-e107-4835-a39d-98f47ab26796"
+      },
+      "user": "manager01",
+      "method": "GET"
+    },
+    {
+      "path": "/api/admin",
+      "http": 403,
+      "body": {
+        "status": "DENY",
+        "code": "INSUFFICIENT_ROLE",
+        "message": "Bạn không có quyền thực hiện thao tác này.",
+        "requestId": "479315c5-60ac-44c1-81a8-66e1121e165d"
+      },
+      "user": "manager01",
+      "method": "GET"
+    },
+    {
+      "path": "/api/audit",
+      "http": 403,
+      "body": {
+        "status": "DENY",
+        "code": "INSUFFICIENT_ROLE",
+        "message": "Bạn không có quyền thực hiện thao tác này.",
+        "requestId": "99233c0a-b933-404d-a90f-380f8b4a60c0"
+      },
+      "user": "manager01",
+      "method": "GET"
+    },
+    {
+      "path": "/api/profile",
+      "http": 200,
+      "body": {
+        "status": "ALLOW",
+        "id": "b5300ca8-911b-44c3-968f-6b9113a6edbd",
+        "username": "admin01",
+        "name": "Quản trị hệ thống",
+        "team": "Điều hành",
+        "role": "admin",
+        "disabled": false,
+        "roles": [
+          "admin"
+        ],
+        "serverTime": "2026-11-01T03:13:20.333Z",
+        "schedule": {
+          "start": "08:00",
+          "end": "17:00",
+          "timezone": "Asia/Ho_Chi_Minh"
+        },
+        "requestId": "43063688-958f-4532-8340-a42222e8dee7"
+      },
+      "user": "admin01",
+      "method": "GET"
+    },
+    {
+      "path": "/api/manager",
+      "http": 200,
+      "body": {
+        "status": "ALLOW",
+        "resource": "Manager Dashboard",
+        "requestId": "b1ebbc3a-3d88-493d-9bd8-97449960214f"
+      },
+      "user": "admin01",
+      "method": "GET"
+    },
+    {
+      "path": "/api/admin",
+      "http": 200,
+      "body": {
+        "status": "ALLOW",
+        "resource": "Admin Resource",
+        "requestId": "e15d86ad-491e-49db-b3d1-341d9fdd7d1f"
+      },
+      "user": "admin01",
+      "method": "GET"
+    },
+    {
+      "path": "/api/audit",
+      "http": 200,
+      "body": {
+        "status": "ALLOW",
+        "eventCount": 20,
+        "requestId": "fd60dc59-832d-47c1-aa86-c24f8a4a4382"
+      },
+      "user": "admin01",
+      "method": "GET"
+    },
+    {
+      "path": "/api/profile",
+      "http": 200,
+      "body": {
+        "status": "ALLOW",
+        "id": "46f964e9-cd43-4369-b2b7-69c6f402f94d",
+        "username": "auditor01",
+        "name": "Thu Hà",
+        "team": "Kiểm soát",
+        "role": "auditor",
+        "disabled": false,
+        "roles": [
+          "auditor"
+        ],
+        "serverTime": "2026-11-01T03:13:22.334Z",
+        "schedule": {
+          "start": "08:00",
+          "end": "17:00",
+          "timezone": "Asia/Ho_Chi_Minh"
+        },
+        "requestId": "6c39f422-13ae-4efe-ae7a-5b6922d11ea7"
+      },
+      "user": "auditor01",
+      "method": "GET"
+    },
+    {
+      "path": "/api/manager",
+      "http": 403,
+      "body": {
+        "status": "DENY",
+        "code": "INSUFFICIENT_ROLE",
+        "message": "Bạn không có quyền thực hiện thao tác này.",
+        "requestId": "0ba57810-3e5d-477e-9458-bc5918b0c6c7"
+      },
+      "user": "auditor01",
+      "method": "GET"
+    },
+    {
+      "path": "/api/admin",
+      "http": 403,
+      "body": {
+        "status": "DENY",
+        "code": "INSUFFICIENT_ROLE",
+        "message": "Bạn không có quyền thực hiện thao tác này.",
+        "requestId": "7031a8f2-bc43-4e00-bf74-1b32e6035725"
+      },
+      "user": "auditor01",
+      "method": "GET"
+    },
+    {
+      "path": "/api/audit",
+      "http": 200,
+      "body": {
+        "status": "ALLOW",
+        "eventCount": 20,
+        "requestId": "99a4748d-7bb0-4ede-b5a6-2e4698bbcb20"
+      },
+      "user": "auditor01",
+      "method": "GET"
+    }
+  ],
+  "configuration": {
+    "clientId": "employee-portal",
+    "publicClient": true,
+    "standardFlowEnabled": true,
+    "pkce": "S256",
+    "redirectUris": [
+      "http://localhost:5173/*",
+      "http://localhost:5173"
+    ],
+    "webOrigins": [
+      "http://localhost:5173"
+    ],
+    "defaultScopes": [
+      "web-origins",
+      "acr",
+      "roles",
+      "profile",
+      "basic",
+      "email"
+    ],
+    "audience": "employee-api",
+    "roles": [
+      "admin",
+      "manager",
+      "employee",
+      "auditor"
+    ]
+  },
+  "backendTests": {
+    "tests": 54,
+    "pass": 54,
+    "fail": 0,
+    "skipped": 0
+  },
+  "success": true,
+  "finishedAt": "2026-11-01T10:13:22.907302+07:00"
+}

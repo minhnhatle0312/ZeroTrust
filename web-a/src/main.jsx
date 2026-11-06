@@ -4,6 +4,7 @@ import App from "./App.jsx";
 import keycloak from "./keycloak.js";
 import "./App.css";
 import "./auth.css";
+import {monitorSession} from '../../shared/sso.js';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -26,7 +27,7 @@ class AppErrorBoundary extends React.Component {
             <span className="auth-mark auth-mark-error">!</span>
             <div className="eyebrow">IAM ZERO TRUST · EMPLOYEE PORTAL</div>
             <h1>Không thể hiển thị trang</h1>
-            <p>{this.state.error.message || "Đã xảy ra lỗi khi tải Dashboard."}</p>
+            <p>Trang chưa hiển thị được đầy đủ. Hãy tải lại để kết nối và lấy dữ liệu mới nhất.</p>
             <div className="auth-actions">
               <button onClick={() => window.location.reload()}>Tải lại trang</button>
             </div>
@@ -70,6 +71,7 @@ async function startApp() {
     ]);
     if (!initialized) throw new Error("Keycloak chưa xác thực phiên đăng nhập.");
     root.render(<AppErrorBoundary><App /></AppErrorBoundary>);
+    monitorSession({keycloak,apiUrl:import.meta.env.VITE_API_URL || 'http://localhost:3001',onEnded:message=>renderAuthStatus('Phiên đăng nhập đã kết thúc',message,true)});
   } catch (error) {
     console.error("Keycloak initialization failed", error);
     renderAuthStatus(

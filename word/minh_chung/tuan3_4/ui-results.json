@@ -1,0 +1,280 @@
+{
+  "startedAt": "2026-11-01T15:36:50.531379+07:00",
+  "checks": [
+    {
+      "name": "Launcher shows six working feature links",
+      "actual": 6,
+      "expected": 6,
+      "passed": true
+    },
+    {
+      "name": "Launcher Vietnamese search",
+      "actual": 1,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "name": "Launcher category filter",
+      "actual": 2,
+      "expected": 2,
+      "passed": true
+    },
+    {
+      "name": "Launcher mobile width",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Dedicated admin overview",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Workspace function cards",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Command search navigates without accents",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Workspace deep link survives reload",
+      "actual": "Tài khoản & truy cập",
+      "expected": "Tài khoản & truy cập",
+      "passed": true
+    },
+    {
+      "name": "Account search without accents",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Role filter matches staff",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "CSV exports account fields",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "CSV excludes tokens and credentials",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Useful empty state",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Admin retains personal attendance",
+      "actual": "Chấm công",
+      "expected": "Chấm công",
+      "passed": true
+    },
+    {
+      "name": "Security SSO and direct function link",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "name": "Security deep link after SSO",
+      "actual": "Tài khoản & truy cập",
+      "expected": "Tài khoản & truy cập",
+      "passed": true
+    },
+    {
+      "name": "Audit pagination advances",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Audit filter respects results",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Audit search filters paths",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Audit CSV downloads filtered rows",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Application chooser has both applications",
+      "actual": 2,
+      "expected": 2,
+      "passed": true
+    },
+    {
+      "name": "Escape closes chooser and restores focus",
+      "actual": "Chọn ứng dụng",
+      "expected": "Chọn ứng dụng",
+      "passed": true
+    },
+    {
+      "name": "Security mobile layout 768",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Security mobile layout 390",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Security mobile layout 320",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Employee has no admin navigation",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "name": "Invalid time disables submission",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Employee correction persists in API and UI",
+      "actual": 1,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "name": "Approval persists through API",
+      "actual": "approved",
+      "expected": "approved",
+      "passed": true
+    },
+    {
+      "name": "Request filters show approved request",
+      "actual": 1,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "name": "Workspace mobile layout",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Unauthorized request produces a real security event",
+      "actual": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "Investigation note and status persist",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Demo account initially enabled",
+      "actual": false,
+      "expected": false,
+      "passed": true
+    },
+    {
+      "name": "Account action needs a reason",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Failed save keeps entered reason",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Disable action reaches real API",
+      "actual": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "Demo account restored",
+      "actual": false,
+      "expected": false,
+      "passed": true
+    },
+    {
+      "name": "Action history shows successful sync",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Auditor has no account navigation",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "name": "Auditor cannot save an investigation",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "name": "No browser JavaScript errors",
+      "actual": [],
+      "expected": [],
+      "passed": true
+    }
+  ],
+  "screenshots": [
+    "01-launcher-desktop.png",
+    "02-launcher-mobile.png",
+    "03-admin-workspace.png",
+    "04-workspace-functions.png",
+    "05-workspace-accounts.png",
+    "06-security-overview.png",
+    "07-audit-filters.png",
+    "08-security-functions.png",
+    "09-app-switcher.png",
+    "10-security-mobile.png",
+    "11-mobile-navigation.png",
+    "12-employee-overview.png",
+    "13-approved-request.png",
+    "14-workspace-mobile.png",
+    "18-investigation-saved.png",
+    "15-account-action-dialog.png",
+    "16-action-history.png",
+    "17-auditor-readonly.png"
+  ],
+  "errors": [],
+  "success": true,
+  "finishedAt": "2026-11-01T15:37:00.446106+07:00"
+}

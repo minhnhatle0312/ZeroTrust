@@ -1,6 +1,8 @@
 .env
 web-a/.env.local
 backend/.env
+web-b/.env.local
+network/.local/
 node_modules/
 dist/
 __pycache__/
@@ -9,3 +11,6 @@ __pycache__/
 backend/data/
 evidence/
 .tools/
+backups/
+deploy/.local/
+.runtime/

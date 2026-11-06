@@ -1,5 +1,7 @@
 # Cách chạy nhanh IAM-ZEROTRUST
 
+**Giai đoạn 3 — Web B và SSO:** xem [tuần 4](tuan4.md). Cách chạy mới từ thư mục gốc: `python scripts/configure_network.py --local`, rồi `python scripts/run_week3.py`. Để dùng hai máy cùng LAN/VPN, xem [hướng dẫn kết nối](docs/KET_NOI_HAI_MAY.md). Các bước tuần 2 bên dưới dành cho chế độ localhost; không dùng khi đang cấu hình địa chỉ HTTPS LAN.
+
 **Tuần 2:** giao diện hiện là **Nhịp Workspace — chấm công**. Làm theo các bước dưới; phần tài khoản/quyền chi tiết xem [tuan2.md](tuan2.md).
 
 Máy cần có **Docker Desktop, Node.js và Python**. Mở dự án `D:\IAM-ZeroTrust` bằng VS Code, chọn **Terminal → New Terminal** để nhập lệnh PowerShell.
