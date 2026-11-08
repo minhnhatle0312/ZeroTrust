@@ -1,0 +1,58 @@
+{
+  "checks": [
+    {
+      "name": "ldap-employee01 rejects expired OTP",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Live LDAP API before outage",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "LDAP outage fails closed",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "LDAP login recovers after source restart",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Captured token exchange in memory",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Refresh succeeds",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Refresh rotates token",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Old refresh token rejected",
+      "actual": 400,
+      "expected": 400,
+      "passed": true
+    },
+    {
+      "name": "Malformed access token rejected",
+      "actual": 401,
+      "expected": 401,
+      "passed": true
+    }
+  ]
+}

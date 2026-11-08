@@ -14,3 +14,5 @@ evidence/
 backups/
 deploy/.local/
 .runtime/
+directory/.local/
+audit/.local/

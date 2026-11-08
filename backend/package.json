@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "node --test audit.test.js security.test.js sso.test.js operations.test.js"
+    "test": "node --test audit.test.js security.test.js sso.test.js operations.test.js week5-10.test.js"
   },
   "dependencies": {
     "cors": "^2.8.5",

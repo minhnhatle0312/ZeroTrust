@@ -1,0 +1,604 @@
+{
+  "checks": [
+    {
+      "name": "Private service requires machine credential",
+      "actual": 401,
+      "expected": 401,
+      "passed": true
+    },
+    {
+      "name": "PostgreSQL ready",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Batch ingest committed",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "All unique events inserted",
+      "actual": 144,
+      "expected": 144,
+      "passed": true
+    },
+    {
+      "name": "Replay deduplicates",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "name": "Reject malformed batch",
+      "actual": 400,
+      "expected": 400,
+      "passed": true
+    },
+    {
+      "name": "Sensitive payload fields discarded",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Correlation returns related events",
+      "actual": 100,
+      "expected": 100,
+      "passed": true
+    },
+    {
+      "name": "Correlation truncation disclosed",
+      "actual": false,
+      "expected": false,
+      "passed": true
+    },
+    {
+      "name": "Pagination total",
+      "actual": 144,
+      "expected": 144,
+      "passed": true
+    },
+    {
+      "name": "Pagination first page",
+      "actual": 25,
+      "expected": 25,
+      "passed": true
+    },
+    {
+      "name": "Queue detection batch",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Detection batch succeeds",
+      "actual": "completed",
+      "expected": "completed",
+      "passed": true
+    },
+    {
+      "name": "Queue detection batch",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Detection batch succeeds",
+      "actual": "completed",
+      "expected": "completed",
+      "passed": true
+    },
+    {
+      "name": "Queue detection batch",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Detection batch succeeds",
+      "actual": "completed",
+      "expected": "completed",
+      "passed": true
+    },
+    {
+      "name": "Queue detection batch",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Detection batch succeeds",
+      "actual": "completed",
+      "expected": "completed",
+      "passed": true
+    },
+    {
+      "name": "Queue detection batch",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Detection batch succeeds",
+      "actual": "completed",
+      "expected": "completed",
+      "passed": true
+    },
+    {
+      "name": "Queue detection batch",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Detection batch succeeds",
+      "actual": "completed",
+      "expected": "completed",
+      "passed": true
+    },
+    {
+      "name": "Queue detection batch",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Detection batch succeeds",
+      "actual": "completed",
+      "expected": "completed",
+      "passed": true
+    },
+    {
+      "name": "Queue detection batch",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Detection batch succeeds",
+      "actual": "completed",
+      "expected": "completed",
+      "passed": true
+    },
+    {
+      "name": "Queue detection batch",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Detection batch succeeds",
+      "actual": "completed",
+      "expected": "completed",
+      "passed": true
+    },
+    {
+      "name": "Queue detection batch",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Detection batch succeeds",
+      "actual": "completed",
+      "expected": "completed",
+      "passed": true
+    },
+    {
+      "name": "Queue detection batch",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Detection batch succeeds",
+      "actual": "completed",
+      "expected": "completed",
+      "passed": true
+    },
+    {
+      "name": "Queue detection batch",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Detection batch succeeds",
+      "actual": "completed",
+      "expected": "completed",
+      "passed": true
+    },
+    {
+      "name": "Queue detection batch",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Detection batch succeeds",
+      "actual": "completed",
+      "expected": "completed",
+      "passed": true
+    },
+    {
+      "name": "Every scenario has a result",
+      "actual": 27,
+      "expected": 27,
+      "passed": true
+    },
+    {
+      "name": "normal prediction",
+      "actual": "Normal",
+      "expected": "Normal",
+      "passed": true
+    },
+    {
+      "name": "Store controlled scenario label",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "normal prediction",
+      "actual": "Normal",
+      "expected": "Normal",
+      "passed": true
+    },
+    {
+      "name": "Store controlled scenario label",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "normal prediction",
+      "actual": "Normal",
+      "expected": "Normal",
+      "passed": true
+    },
+    {
+      "name": "Store controlled scenario label",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "normal prediction",
+      "actual": "Normal",
+      "expected": "Normal",
+      "passed": true
+    },
+    {
+      "name": "Store controlled scenario label",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "normal prediction",
+      "actual": "Normal",
+      "expected": "Normal",
+      "passed": true
+    },
+    {
+      "name": "Store controlled scenario label",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "normal prediction",
+      "actual": "Normal",
+      "expected": "Normal",
+      "passed": true
+    },
+    {
+      "name": "Store controlled scenario label",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "normal prediction",
+      "actual": "Normal",
+      "expected": "Normal",
+      "passed": true
+    },
+    {
+      "name": "Store controlled scenario label",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "normal prediction",
+      "actual": "Normal",
+      "expected": "Normal",
+      "passed": true
+    },
+    {
+      "name": "Store controlled scenario label",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "normal prediction",
+      "actual": "Normal",
+      "expected": "Normal",
+      "passed": true
+    },
+    {
+      "name": "Store controlled scenario label",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "normal prediction",
+      "actual": "Normal",
+      "expected": "Normal",
+      "passed": true
+    },
+    {
+      "name": "Store controlled scenario label",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "normal prediction",
+      "actual": "Normal",
+      "expected": "Normal",
+      "passed": true
+    },
+    {
+      "name": "Store controlled scenario label",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "normal prediction",
+      "actual": "Normal",
+      "expected": "Normal",
+      "passed": true
+    },
+    {
+      "name": "Store controlled scenario label",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "normal prediction",
+      "actual": "Normal",
+      "expected": "Normal",
+      "passed": true
+    },
+    {
+      "name": "Store controlled scenario label",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "normal prediction",
+      "actual": "Normal",
+      "expected": "Normal",
+      "passed": true
+    },
+    {
+      "name": "Store controlled scenario label",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "normal prediction",
+      "actual": "Normal",
+      "expected": "Normal",
+      "passed": true
+    },
+    {
+      "name": "Store controlled scenario label",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "normal prediction",
+      "actual": "Normal",
+      "expected": "Normal",
+      "passed": true
+    },
+    {
+      "name": "Store controlled scenario label",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "normal prediction",
+      "actual": "Normal",
+      "expected": "Normal",
+      "passed": true
+    },
+    {
+      "name": "Store controlled scenario label",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "normal prediction",
+      "actual": "Normal",
+      "expected": "Normal",
+      "passed": true
+    },
+    {
+      "name": "Store controlled scenario label",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "normal prediction",
+      "actual": "Normal",
+      "expected": "Normal",
+      "passed": true
+    },
+    {
+      "name": "Store controlled scenario label",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "normal prediction",
+      "actual": "Normal",
+      "expected": "Normal",
+      "passed": true
+    },
+    {
+      "name": "Store controlled scenario label",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "LOGIN_FAILURE_BURST prediction",
+      "actual": "Anomaly",
+      "expected": "Anomaly",
+      "passed": true
+    },
+    {
+      "name": "LOGIN_FAILURE_BURST explanation",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Store controlled scenario label",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "CONSECUTIVE_DENY prediction",
+      "actual": "Anomaly",
+      "expected": "Anomaly",
+      "passed": true
+    },
+    {
+      "name": "CONSECUTIVE_DENY explanation",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Store controlled scenario label",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "EMPLOYEE_ADMIN_ACCESS prediction",
+      "actual": "Anomaly",
+      "expected": "Anomaly",
+      "passed": true
+    },
+    {
+      "name": "EMPLOYEE_ADMIN_ACCESS explanation",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Store controlled scenario label",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "REVOKED_TOKEN_REUSE prediction",
+      "actual": "Anomaly",
+      "expected": "Anomaly",
+      "passed": true
+    },
+    {
+      "name": "REVOKED_TOKEN_REUSE explanation",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Store controlled scenario label",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "NEW_IP_REVIEW prediction",
+      "actual": "Anomaly",
+      "expected": "Anomaly",
+      "passed": true
+    },
+    {
+      "name": "NEW_IP_REVIEW explanation",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Store controlled scenario label",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "OUTSIDE_BUSINESS_HOURS prediction",
+      "actual": "Anomaly",
+      "expected": "Anomaly",
+      "passed": true
+    },
+    {
+      "name": "OUTSIDE_BUSINESS_HOURS explanation",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Store controlled scenario label",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "REQUEST_SPIKE prediction",
+      "actual": "Anomaly",
+      "expected": "Anomaly",
+      "passed": true
+    },
+    {
+      "name": "REQUEST_SPIKE explanation",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Store controlled scenario label",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Persist evaluation snapshot",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    }
+  ]
+}

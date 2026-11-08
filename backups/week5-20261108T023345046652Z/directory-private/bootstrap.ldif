@@ -1,0 +1,89 @@
+dn: dc=company,dc=local
+objectClass: top
+objectClass: dcObject
+objectClass: organization
+dc: company
+o: Nhip IAM Lab
+
+dn: ou=people,dc=company,dc=local
+objectClass: organizationalUnit
+ou: people
+
+dn: ou=groups,dc=company,dc=local
+objectClass: organizationalUnit
+ou: groups
+
+dn: ou=services,dc=company,dc=local
+objectClass: organizationalUnit
+ou: services
+
+dn: cn=keycloak-reader,ou=services,dc=company,dc=local
+objectClass: organizationalRole
+objectClass: simpleSecurityObject
+cn: keycloak-reader
+description: Read-only Keycloak service bind
+userPassword: {SSHA}+CS5qLSYi5kEPfUN13at7zf7JIcqbB+Uc70gGpAxj7dmsrff
+
+dn: uid=ldap-employee01,ou=people,dc=company,dc=local
+objectClass: inetOrgPerson
+uid: ldap-employee01
+cn:: TMOqIE1pbmggTmjhuq10
+sn:: TMOqIE1pbmg=
+givenName:: Tmjhuq10
+mail: ldap-employee01@example.test
+ou:: U+G6o24gcGjhuqlt
+employeeType: active
+businessCategory: true
+userPassword: {SSHA}uhB4S19/CsYYn/8TqdkZEC+YD6Al1+4fIwOiv26Eoto28/1/
+
+dn: uid=ldap-employee02,ou=people,dc=company,dc=local
+objectClass: inetOrgPerson
+uid: ldap-employee02
+cn:: Tmd1eeG7hW4gTWluaCBUdeG6pW4=
+sn:: Tmd1eeG7hW4gTWluaA==
+givenName:: VHXhuqVu
+mail: ldap-employee02@example.test
+ou:: VuG6rW4gaMOgbmg=
+employeeType: active
+businessCategory: true
+userPassword: {SSHA}Fd7l3I/qcCx+H3+YbnghiZVVrdR3AiqdXbAdXB1Gd7fc3oSH
+
+dn: uid=ldap-manager01,ou=people,dc=company,dc=local
+objectClass: inetOrgPerson
+uid: ldap-manager01
+cn:: TERBUCBRdeG6o24gbMO9
+sn: LDAP
+givenName:: UXXhuqNuIGzDvQ==
+mail: ldap-manager01@example.test
+ou:: U+G6o24gcGjhuqlt
+employeeType: active
+businessCategory: true
+userPassword: {SSHA}ODIWjyeV8jfidX0Eh1onE7uBSmhzH/GTereiJ9RNvJWOAOXB
+
+dn: uid=ldap-auditor01,ou=people,dc=company,dc=local
+objectClass: inetOrgPerson
+uid: ldap-auditor01
+cn:: TERBUCBLaeG7g20gdG/DoW4=
+sn: LDAP
+givenName:: S2nhu4NtIHRvw6Fu
+mail: ldap-auditor01@example.test
+ou:: S2nhu4NtIHNvw6F0
+employeeType: active
+businessCategory: true
+userPassword: {SSHA}jWfzL3ICFdxunyzHRHyWbdUU2ZR5SWBts7XpsHHZuSO9Ngjf
+
+dn: cn=employees,ou=groups,dc=company,dc=local
+objectClass: groupOfNames
+cn: employees
+member: uid=ldap-employee01,ou=people,dc=company,dc=local
+member: uid=ldap-employee02,ou=people,dc=company,dc=local
+
+dn: cn=managers,ou=groups,dc=company,dc=local
+objectClass: groupOfNames
+cn: managers
+member: uid=ldap-manager01,ou=people,dc=company,dc=local
+
+dn: cn=auditors,ou=groups,dc=company,dc=local
+objectClass: groupOfNames
+cn: auditors
+member: uid=ldap-auditor01,ou=people,dc=company,dc=local

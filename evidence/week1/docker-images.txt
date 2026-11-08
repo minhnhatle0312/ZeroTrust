@@ -1,0 +1,5 @@
+Captured: 2026-10-21T14:06:39.266117+00:00
+$ docker compose images
+CONTAINER           REPOSITORY                  TAG                 PLATFORM            IMAGE ID            SIZE                CREATED
+iam-keycloak        quay.io/keycloak/keycloak   26.8.0              linux/amd64         27b3230fbabb        762MB               11 days ago
+iam-postgres        postgres                    17                  linux/amd64         2d2b8998d310        640MB               2 weeks ago

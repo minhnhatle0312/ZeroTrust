@@ -1,0 +1,255 @@
+{
+  "status": "ALLOW",
+  "resource": "Audit Resource",
+  "events": [
+    {
+      "timestamp": "2026-10-21T14:06:45.830Z",
+      "requestId": "9eda396b-fd7a-4f55-bc2b-28f3de310c0b",
+      "username": "auditor01",
+      "roles": [
+        "auditor"
+      ],
+      "method": "GET",
+      "path": "/api/admin",
+      "httpStatus": 403,
+      "decision": "DENY",
+      "reason": "INSUFFICIENT_ROLE"
+    },
+    {
+      "timestamp": "2026-10-21T14:06:45.781Z",
+      "requestId": "e06de12a-92bf-430b-afa9-91e107de7c32",
+      "username": "auditor01",
+      "roles": [
+        "auditor"
+      ],
+      "method": "GET",
+      "path": "/api/manager",
+      "httpStatus": 403,
+      "decision": "DENY",
+      "reason": "INSUFFICIENT_ROLE"
+    },
+    {
+      "timestamp": "2026-10-21T14:06:45.733Z",
+      "requestId": "c40f34b9-faee-42d3-b04f-b729c42c354b",
+      "username": "auditor01",
+      "roles": [
+        "auditor"
+      ],
+      "method": "GET",
+      "path": "/api/profile",
+      "httpStatus": 200,
+      "decision": "ALLOW",
+      "reason": "AUTHORIZED"
+    },
+    {
+      "timestamp": "2026-10-21T14:06:44.189Z",
+      "requestId": "d4f87643-5cec-4c46-b6b0-e8a5e09dbbf1",
+      "username": "manager01",
+      "roles": [
+        "manager"
+      ],
+      "method": "GET",
+      "path": "/api/audit",
+      "httpStatus": 403,
+      "decision": "DENY",
+      "reason": "INSUFFICIENT_ROLE"
+    },
+    {
+      "timestamp": "2026-10-21T14:06:44.185Z",
+      "requestId": "87b4a12f-a1f7-4d08-84e8-8f807077aa6a",
+      "username": "anonymous",
+      "roles": [],
+      "method": "GET",
+      "path": "/api/profile",
+      "httpStatus": 401,
+      "decision": "DENY",
+      "reason": "INVALID_TOKEN"
+    },
+    {
+      "timestamp": "2026-10-21T14:06:44.178Z",
+      "requestId": "ebc6499e-c7d9-4cba-a9c9-c0393864196a",
+      "username": "manager01",
+      "roles": [
+        "manager"
+      ],
+      "method": "GET",
+      "path": "/api/audit",
+      "httpStatus": 403,
+      "decision": "DENY",
+      "reason": "INSUFFICIENT_ROLE"
+    },
+    {
+      "timestamp": "2026-10-21T14:06:44.128Z",
+      "requestId": "223ce65a-e3f7-42ea-a866-bbce6cdf53b6",
+      "username": "manager01",
+      "roles": [
+        "manager"
+      ],
+      "method": "GET",
+      "path": "/api/admin",
+      "httpStatus": 403,
+      "decision": "DENY",
+      "reason": "INSUFFICIENT_ROLE"
+    },
+    {
+      "timestamp": "2026-10-21T14:06:43.936Z",
+      "requestId": "5341ec7f-3e1b-4b1f-8f6a-32f42485a144",
+      "username": "manager01",
+      "roles": [
+        "manager"
+      ],
+      "method": "GET",
+      "path": "/api/manager",
+      "httpStatus": 200,
+      "decision": "ALLOW",
+      "reason": "AUTHORIZED"
+    },
+    {
+      "timestamp": "2026-10-21T14:06:43.870Z",
+      "requestId": "5e1edc6a-ef9c-42ba-8752-70b2f641820f",
+      "username": "manager01",
+      "roles": [
+        "manager"
+      ],
+      "method": "GET",
+      "path": "/api/profile",
+      "httpStatus": 200,
+      "decision": "ALLOW",
+      "reason": "AUTHORIZED"
+    },
+    {
+      "timestamp": "2026-10-21T14:06:42.373Z",
+      "requestId": "9bb07bb3-06a9-4f63-a8a8-049d0a9ba250",
+      "username": "employee01",
+      "roles": [
+        "employee"
+      ],
+      "method": "GET",
+      "path": "/api/audit",
+      "httpStatus": 403,
+      "decision": "DENY",
+      "reason": "INSUFFICIENT_ROLE"
+    },
+    {
+      "timestamp": "2026-10-21T14:06:42.369Z",
+      "requestId": "715c87ba-84b3-425c-aad9-d53c2cc46ae1",
+      "username": "anonymous",
+      "roles": [],
+      "method": "GET",
+      "path": "/api/profile",
+      "httpStatus": 401,
+      "decision": "DENY",
+      "reason": "INVALID_TOKEN"
+    },
+    {
+      "timestamp": "2026-10-21T14:06:42.360Z",
+      "requestId": "0089b0b3-216d-4c03-ae77-0dbad1429730",
+      "username": "employee01",
+      "roles": [
+        "employee"
+      ],
+      "method": "GET",
+      "path": "/api/audit",
+      "httpStatus": 403,
+      "decision": "DENY",
+      "reason": "INSUFFICIENT_ROLE"
+    },
+    {
+      "timestamp": "2026-10-21T14:06:42.245Z",
+      "requestId": "8e3e50f6-b879-457c-b208-ac03254141f6",
+      "username": "employee01",
+      "roles": [
+        "employee"
+      ],
+      "method": "GET",
+      "path": "/api/admin",
+      "httpStatus": 403,
+      "decision": "DENY",
+      "reason": "INSUFFICIENT_ROLE"
+    },
+    {
+      "timestamp": "2026-10-21T14:06:42.197Z",
+      "requestId": "1910d2bf-50a2-402c-9b8f-56c7f9efdc45",
+      "username": "employee01",
+      "roles": [
+        "employee"
+      ],
+      "method": "GET",
+      "path": "/api/manager",
+      "httpStatus": 403,
+      "decision": "DENY",
+      "reason": "INSUFFICIENT_ROLE"
+    },
+    {
+      "timestamp": "2026-10-21T14:06:41.968Z",
+      "requestId": "15119392-13f2-468a-8105-9bb38e37858f",
+      "username": "employee01",
+      "roles": [
+        "employee"
+      ],
+      "method": "GET",
+      "path": "/api/profile",
+      "httpStatus": 200,
+      "decision": "ALLOW",
+      "reason": "AUTHORIZED"
+    },
+    {
+      "timestamp": "2026-10-21T14:06:40.381Z",
+      "requestId": "6d8c3c0b-74d4-47eb-9ccc-915db03154dc",
+      "username": "anonymous",
+      "roles": [],
+      "method": "GET",
+      "path": "/api/admin",
+      "httpStatus": 401,
+      "decision": "DENY",
+      "reason": "INVALID_TOKEN"
+    },
+    {
+      "timestamp": "2026-10-21T14:06:40.377Z",
+      "requestId": "7d9656ac-3997-4c76-94a5-b693609dc057",
+      "username": "anonymous",
+      "roles": [],
+      "method": "GET",
+      "path": "/api/profile",
+      "httpStatus": 401,
+      "decision": "DENY",
+      "reason": "MISSING_TOKEN"
+    },
+    {
+      "timestamp": "2026-10-21T14:03:02.005Z",
+      "requestId": "50745dc5-1dd4-4b2e-9312-52ef80c8fecd",
+      "username": "anonymous",
+      "roles": [],
+      "method": "GET",
+      "path": "/api/admin",
+      "httpStatus": 401,
+      "decision": "DENY",
+      "reason": "INVALID_TOKEN"
+    },
+    {
+      "timestamp": "2026-10-21T14:03:02.002Z",
+      "requestId": "87c209c1-49af-4552-b632-3e6b908a4f90",
+      "username": "anonymous",
+      "roles": [],
+      "method": "GET",
+      "path": "/api/profile",
+      "httpStatus": 401,
+      "decision": "DENY",
+      "reason": "MISSING_TOKEN"
+    },
+    {
+      "timestamp": "2026-10-21T14:01:25.632Z",
+      "requestId": "c2375b3d-ede2-44f9-887c-69afd427d3e3",
+      "username": "admin01",
+      "roles": [
+        "admin"
+      ],
+      "method": "GET",
+      "path": "/api/audit",
+      "httpStatus": 400,
+      "decision": "DENY",
+      "reason": "REQUEST_REJECTED"
+    }
+  ],
+  "requestId": "e9acf56c-14f1-4a02-aa07-9e5b234cc610"
+}

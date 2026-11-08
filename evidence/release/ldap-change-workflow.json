@@ -1,0 +1,131 @@
+{
+  "workflow": {
+    "id": "e46a95d4-1349-465c-a18b-af55f60b4d00",
+    "kind": "change",
+    "source": "ldap",
+    "target_id": "1ac66f66-4bf9-41cb-bade-a2df1b563059",
+    "username": "ldap-qa-jcl-1794105920",
+    "creator_id": "b5300ca8-911b-44c3-968f-6b9113a6edbd",
+    "note": "Release QA lifecycle scenario verification",
+    "approval": "approved",
+    "reviewer_id": "b5300ca8-911b-44c3-968f-6b9113a6edbd",
+    "review_note": "Release QA approved isolated demo identity",
+    "state": "synced",
+    "step": "complete",
+    "version": 8,
+    "attempts": 2,
+    "message": "Đã đối chiếu nguồn, Keycloak, quyền và phiên.",
+    "source_done": 1,
+    "source_receipt": "49d8b115-26b2-4625-bed0-398d6497fcdc",
+    "created_at": "2026-11-08T02:45:28.380Z",
+    "updated_at": "2026-11-08T02:45:32.174Z",
+    "desired": {
+      "name": "Release QA Employee",
+      "email": "ldap-qa-jcl-1794105920@example.test",
+      "team": "Release QA Moved",
+      "role": "manager"
+    },
+    "before": {
+      "id": "1ac66f66-4bf9-41cb-bade-a2df1b563059",
+      "username": "ldap-qa-jcl-1794105920",
+      "name": "Release QA Employee",
+      "email": "ldap-qa-jcl-1794105920@example.test",
+      "team": "Release QA",
+      "role": "employee",
+      "disabled": false,
+      "source": "ldap",
+      "provider": "a0BjJX1uTFm2QLpz3xdIxg",
+      "governanceState": "active"
+    }
+  },
+  "history": [
+    {
+      "id": "87bb28c8-7212-42bf-95e8-c5e020b403bb",
+      "workflow_id": "e46a95d4-1349-465c-a18b-af55f60b4d00",
+      "actor_id": "b5300ca8-911b-44c3-968f-6b9113a6edbd",
+      "event": "REQUESTED",
+      "note": "Release QA lifecycle scenario verification",
+      "time": "2026-11-08T02:45:28.380Z",
+      "actor": "admin01"
+    },
+    {
+      "id": "c2800379-42e7-4fe3-a6ca-6b4a2265570b",
+      "workflow_id": "e46a95d4-1349-465c-a18b-af55f60b4d00",
+      "actor_id": "b5300ca8-911b-44c3-968f-6b9113a6edbd",
+      "event": "APPROVED",
+      "note": "Release QA approved isolated demo identity",
+      "time": "2026-11-08T02:45:28.388Z",
+      "actor": "admin01"
+    },
+    {
+      "id": "c41eee37-2536-4730-885a-2d906593d61a",
+      "workflow_id": "e46a95d4-1349-465c-a18b-af55f60b4d00",
+      "actor_id": "b5300ca8-911b-44c3-968f-6b9113a6edbd",
+      "event": "EXECUTION_REQUESTED",
+      "note": "Release QA execute and verify remote state",
+      "time": "2026-11-08T02:45:28.395Z",
+      "actor": "admin01"
+    },
+    {
+      "id": "a57f8df3-aa0f-4364-b713-25e049322e8f",
+      "workflow_id": "e46a95d4-1349-465c-a18b-af55f60b4d00",
+      "actor_id": "b5300ca8-911b-44c3-968f-6b9113a6edbd",
+      "event": "SOURCE_REQUIRED",
+      "note": "Chờ công cụ ghi tại nguồn LDAP.",
+      "time": "2026-11-08T02:45:28.396Z",
+      "actor": "admin01"
+    },
+    {
+      "id": "cdb22acf-4efa-4633-8be1-b6896abe46e6",
+      "workflow_id": "e46a95d4-1349-465c-a18b-af55f60b4d00",
+      "actor_id": null,
+      "event": "SOURCE_WRITE_STARTED",
+      "note": "Operator started the approved source intent.",
+      "time": "2026-11-08T02:45:29.440382Z",
+      "actor": null
+    },
+    {
+      "id": "591e0a19-244a-44da-adbb-88504ba27b2d",
+      "workflow_id": "e46a95d4-1349-465c-a18b-af55f60b4d00",
+      "actor_id": null,
+      "event": "SOURCE_WRITTEN",
+      "note": "LDAP operation completed. This receipt is not an acceptance test.",
+      "time": "2026-11-08T02:45:31.104050Z",
+      "actor": null
+    },
+    {
+      "id": "8e700460-ee69-48c3-b40c-7392285bcca4",
+      "workflow_id": "e46a95d4-1349-465c-a18b-af55f60b4d00",
+      "actor_id": "b5300ca8-911b-44c3-968f-6b9113a6edbd",
+      "event": "EXECUTION_REQUESTED",
+      "note": "Release QA reconcile completed LDAP source receipt",
+      "time": "2026-11-08T02:45:31.125Z",
+      "actor": "admin01"
+    },
+    {
+      "id": "ddaf20fe-b996-4226-8440-0cfe8796984f",
+      "workflow_id": "e46a95d4-1349-465c-a18b-af55f60b4d00",
+      "actor_id": "b5300ca8-911b-44c3-968f-6b9113a6edbd",
+      "event": "SYNCED",
+      "note": "Đã xác nhận trạng thái đích; quyền bổ sung cũ được thu hồi.",
+      "time": "2026-11-08T02:45:32.174Z",
+      "actor": "admin01"
+    }
+  ],
+  "user": {
+    "id": "1ac66f66-4bf9-41cb-bade-a2df1b563059",
+    "username": "ldap-qa-jcl-1794105920",
+    "name": "Release QA Employee",
+    "email": "ldap-qa-jcl-1794105920@example.test",
+    "team": "Release QA Moved",
+    "role": "manager",
+    "disabled": false,
+    "mfaRequired": true,
+    "securityUpdatedAt": "2026-11-08T02:45:32.174Z",
+    "identitySource": "ldap",
+    "directoryStatus": "active",
+    "directorySyncedAt": "2026-11-08T02:45:31.570Z",
+    "governanceState": "active"
+  },
+  "requestId": "b3c66306-a809-4a8e-818f-59df3ecf1d1b"
+}

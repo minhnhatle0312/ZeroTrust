@@ -1,0 +1,10 @@
+{
+  "flowId": "b51f3209-6da9-49ec-832e-eecea811174a",
+  "flowAlias": "nhip-week5-browser",
+  "users": [
+    "mfa-employee",
+    "mfa-auditor"
+  ],
+  "appliedAt": "2026-11-08T02:35:14.341366+00:00",
+  "tested": false
+}

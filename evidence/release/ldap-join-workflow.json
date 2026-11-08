@@ -1,0 +1,120 @@
+{
+  "workflow": {
+    "id": "f100ff81-9761-4297-afc2-4fa52e460e1a",
+    "kind": "join",
+    "source": "ldap",
+    "target_id": "1ac66f66-4bf9-41cb-bade-a2df1b563059",
+    "username": "ldap-qa-jcl-1794105920",
+    "creator_id": "b5300ca8-911b-44c3-968f-6b9113a6edbd",
+    "note": "Release QA lifecycle scenario verification",
+    "approval": "approved",
+    "reviewer_id": "b5300ca8-911b-44c3-968f-6b9113a6edbd",
+    "review_note": "Release QA approved isolated demo identity",
+    "state": "synced",
+    "step": "complete",
+    "version": 8,
+    "attempts": 2,
+    "message": "Đã cấp hồ sơ; lần đăng nhập đầu phải hoàn tất mật khẩu/MFA theo nguồn.",
+    "source_done": 1,
+    "source_receipt": "bff92db6-a3ca-4747-8eb9-ab39ce05eec2",
+    "created_at": "2026-11-08T02:45:20.241Z",
+    "updated_at": "2026-11-08T02:45:23.996Z",
+    "desired": {
+      "name": "Release QA Employee",
+      "email": "ldap-qa-jcl-1794105920@example.test",
+      "team": "Release QA",
+      "role": "employee"
+    },
+    "before": null
+  },
+  "history": [
+    {
+      "id": "ef85507d-1786-4e3d-a2f3-eb41b9989a1c",
+      "workflow_id": "f100ff81-9761-4297-afc2-4fa52e460e1a",
+      "actor_id": "b5300ca8-911b-44c3-968f-6b9113a6edbd",
+      "event": "REQUESTED",
+      "note": "Release QA lifecycle scenario verification",
+      "time": "2026-11-08T02:45:20.241Z",
+      "actor": "admin01"
+    },
+    {
+      "id": "a0bf8ff5-3c46-452d-b841-da13fed55ccf",
+      "workflow_id": "f100ff81-9761-4297-afc2-4fa52e460e1a",
+      "actor_id": "b5300ca8-911b-44c3-968f-6b9113a6edbd",
+      "event": "APPROVED",
+      "note": "Release QA approved isolated demo identity",
+      "time": "2026-11-08T02:45:20.249Z",
+      "actor": "admin01"
+    },
+    {
+      "id": "56167019-8f9c-49b3-9208-62806b85aaf1",
+      "workflow_id": "f100ff81-9761-4297-afc2-4fa52e460e1a",
+      "actor_id": "b5300ca8-911b-44c3-968f-6b9113a6edbd",
+      "event": "EXECUTION_REQUESTED",
+      "note": "Release QA execute and verify remote state",
+      "time": "2026-11-08T02:45:20.255Z",
+      "actor": "admin01"
+    },
+    {
+      "id": "6088663d-2623-4880-9047-9b4943396050",
+      "workflow_id": "f100ff81-9761-4297-afc2-4fa52e460e1a",
+      "actor_id": "b5300ca8-911b-44c3-968f-6b9113a6edbd",
+      "event": "SOURCE_REQUIRED",
+      "note": "Chờ công cụ ghi tại nguồn LDAP.",
+      "time": "2026-11-08T02:45:20.257Z",
+      "actor": "admin01"
+    },
+    {
+      "id": "1097d8a4-3693-4bcc-91a6-242ae03c45c0",
+      "workflow_id": "f100ff81-9761-4297-afc2-4fa52e460e1a",
+      "actor_id": null,
+      "event": "SOURCE_WRITE_STARTED",
+      "note": "Operator started the approved source intent.",
+      "time": "2026-11-08T02:45:21.323965Z",
+      "actor": null
+    },
+    {
+      "id": "44f036e1-1cec-4bb2-9c09-70e6ecaac819",
+      "workflow_id": "f100ff81-9761-4297-afc2-4fa52e460e1a",
+      "actor_id": null,
+      "event": "SOURCE_WRITTEN",
+      "note": "LDAP operation completed. This receipt is not an acceptance test.",
+      "time": "2026-11-08T02:45:22.827705Z",
+      "actor": null
+    },
+    {
+      "id": "0e9c36cf-699a-416f-8704-e4a12904582e",
+      "workflow_id": "f100ff81-9761-4297-afc2-4fa52e460e1a",
+      "actor_id": "b5300ca8-911b-44c3-968f-6b9113a6edbd",
+      "event": "EXECUTION_REQUESTED",
+      "note": "Release QA reconcile completed LDAP source receipt",
+      "time": "2026-11-08T02:45:22.852Z",
+      "actor": "admin01"
+    },
+    {
+      "id": "94ad50e6-cbd5-475b-a534-9167621acc95",
+      "workflow_id": "f100ff81-9761-4297-afc2-4fa52e460e1a",
+      "actor_id": "b5300ca8-911b-44c3-968f-6b9113a6edbd",
+      "event": "SYNCED",
+      "note": "Đã xác nhận trạng thái đích; quyền bổ sung cũ được thu hồi.",
+      "time": "2026-11-08T02:45:23.996Z",
+      "actor": "admin01"
+    }
+  ],
+  "user": {
+    "id": "1ac66f66-4bf9-41cb-bade-a2df1b563059",
+    "username": "ldap-qa-jcl-1794105920",
+    "name": "Release QA Employee",
+    "email": "ldap-qa-jcl-1794105920@example.test",
+    "team": "Release QA",
+    "role": "employee",
+    "disabled": false,
+    "mfaRequired": true,
+    "securityUpdatedAt": "2026-11-08T02:45:23.995Z",
+    "identitySource": "ldap",
+    "directoryStatus": "active",
+    "directorySyncedAt": "2026-11-08T02:45:23.312Z",
+    "governanceState": "active"
+  },
+  "requestId": "b8a6a8c8-a9c0-4c46-a0fb-ce5171a4738a"
+}

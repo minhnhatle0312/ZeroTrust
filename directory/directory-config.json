@@ -1,0 +1,20 @@
+{
+  "name": "nhip-openldap",
+  "baseDn": "dc=company,dc=local",
+  "usersDn": "ou=people,dc=company,dc=local",
+  "groupsDn": "ou=groups,dc=company,dc=local",
+  "bindDn": "cn=keycloak-reader,ou=services,dc=company,dc=local",
+  "groupRoot": "/directory",
+  "editMode": "READ_ONLY",
+  "mappings": [
+    {"ldapGroup":"employees","keycloakPath":"/directory/employees","role":"employee","resources":["Web A: cá nhân"]},
+    {"ldapGroup":"managers","keycloakPath":"/directory/managers","role":"manager","resources":["Web A: cá nhân, nhóm theo thuộc tính ou"]},
+    {"ldapGroup":"auditors","keycloakPath":"/directory/auditors","role":"auditor","resources":["Web A: cá nhân, bảo mật chỉ đọc","Web B: giám sát chỉ đọc"]}
+  ],
+  "users": [
+    {"username":"ldap-employee01","givenName":"Nhật","sn":"Lê Minh","team":"Sản phẩm","group":"employees"},
+    {"username":"ldap-employee02","givenName":"Tuấn","sn":"Nguyễn Minh","team":"Vận hành","group":"employees"},
+    {"username":"ldap-manager01","givenName":"Quản lý","sn":"LDAP","team":"Sản phẩm","group":"managers"},
+    {"username":"ldap-auditor01","givenName":"Kiểm toán","sn":"LDAP","team":"Kiểm soát","group":"auditors"}
+  ]
+}

@@ -64,6 +64,17 @@ def main():
             user_ctx=browser.new_context(ignore_https_errors=ui.NETWORK,viewport={'width':1440,'height':1050},locale='vi-VN')
             user=user_ctx.new_page();user.set_default_timeout(25000);us=watch(user)
             user.goto(ui.A);user.locator('#username').fill(username);user.locator('#password').fill(temporary);user.locator('#kc-login').click()
+            # Mandatory OTP may precede the temporary-password required action.
+            user.wait_for_timeout(1000)
+            if user.locator('#totp').count():
+                from release_live import otp
+                if not user.locator('#kc-totp-secret-key').count():
+                    user.locator('a[href*="mode=manual"]').click()
+                seed=user.locator('#kc-totp-secret-key').inner_text().strip().replace(' ','')
+                user.locator('#totp').fill(otp(seed))
+                if user.locator('#userLabel').count():user.locator('#userLabel').fill('Operations QA')
+                user.locator('input[type=submit],button[type=submit]').last.click()
+                check('New employee requires OTP enrollment',True)
             expect(user.locator('#password-new')).to_be_visible()
             check('Temporary password requires change',user.locator('#password-new').is_visible())
             user.locator('#password-new').fill(permanent);user.locator('#password-confirm').fill(permanent)
@@ -96,7 +107,13 @@ def main():
             expect(bad.get_by_text('Invalid username or password.',exact=True)).to_be_visible()
             nav(admin,'Đăng nhập & xác thực');admin.get_by_role('button',name='Đồng bộ Keycloak',exact=True).click()
             expect(admin.get_by_role('button',name='Đồng bộ Keycloak',exact=True)).to_be_enabled()
-            _,result=api(admin_ctx,saved,'/api/security/login-events?q='+username)
+            # Collector intentionally closes its event window two seconds behind
+            # wall time; poll explicit synchronization instead of racing that lag.
+            for _ in range(10):
+                time.sleep(1)
+                api(admin_ctx,saved,'/api/security/sync','POST',{})
+                _,result=api(admin_ctx,saved,'/api/security/login-events?q='+username)
+                if any(e['type']=='LOGIN_ERROR' for e in result['items']):break
             check('Failed login imported from actual Keycloak',any(e['type']=='LOGIN_ERROR' for e in result['items']))
             _,context=api(admin_ctx,saved,'/api/security/alert-list?q='+username)
             check('Failed login generates visible alert',any('Keycloak' in a['kind'] for a in context['items']))

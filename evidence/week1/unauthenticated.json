@@ -1,0 +1,12 @@
+{
+  "missingToken": {
+    "status": "DENY",
+    "message": "Missing bearer token",
+    "requestId": "7d9656ac-3997-4c76-94a5-b693609dc057"
+  },
+  "invalidToken": {
+    "status": "DENY",
+    "message": "Invalid or expired access token",
+    "requestId": "6d8c3c0b-74d4-47eb-9ccc-915db03154dc"
+  }
+}

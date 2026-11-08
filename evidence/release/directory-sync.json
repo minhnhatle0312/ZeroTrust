@@ -1,0 +1,77 @@
+{
+  "configured": true,
+  "providerId": "a0BjJX1uTFm2QLpz3xdIxg",
+  "name": "nhip-openldap",
+  "editMode": "READ_ONLY",
+  "scheduleSeconds": 300,
+  "authCacheSeconds": 5,
+  "users": {
+    "total": 4,
+    "active": 4,
+    "issues": 0
+  },
+  "lastJob": {
+    "id": "a4c8a91b-4bc2-4637-bfbf-c41886dc3ba5",
+    "provider_id": "a0BjJX1uTFm2QLpz3xdIxg",
+    "mode": "full",
+    "state": "synced",
+    "actor_id": "b5300ca8-911b-44c3-968f-6b9113a6edbd",
+    "note": "Release acceptance full LDAP synchronization",
+    "started_at": "2026-11-08T02:37:48.165Z",
+    "finished_at": "2026-11-08T02:37:49.379Z",
+    "imported": 0,
+    "updated": 0,
+    "blocked": 0,
+    "error_count": 0,
+    "message": "Đã đối chiếu nguồn LDAP, Keycloak và hồ sơ ứng dụng.",
+    "remote": {
+      "added": 0,
+      "updated": 4,
+      "failed": 0,
+      "complete": true
+    }
+  },
+  "mappings": [
+    {
+      "ldapGroup": "employees",
+      "keycloakPath": "/directory/employees",
+      "role": "employee",
+      "resources": [
+        "Web A: cá nhân"
+      ]
+    },
+    {
+      "ldapGroup": "managers",
+      "keycloakPath": "/directory/managers",
+      "role": "manager",
+      "resources": [
+        "Web A: cá nhân, nhóm theo thuộc tính ou"
+      ]
+    },
+    {
+      "ldapGroup": "auditors",
+      "keycloakPath": "/directory/auditors",
+      "role": "auditor",
+      "resources": [
+        "Web A: cá nhân, bảo mật chỉ đọc",
+        "Web B: giám sát chỉ đọc"
+      ]
+    }
+  ],
+  "provider": {
+    "id": "a0BjJX1uTFm2QLpz3xdIxg",
+    "name": "nhip-openldap",
+    "enabled": true,
+    "editMode": "READ_ONLY",
+    "usersDn": "ou=people,dc=company,dc=local",
+    "connectionUrl": "ldaps://ldap:636",
+    "cachePolicy": "NO_CACHE",
+    "lastSync": null
+  },
+  "connection": {
+    "status": "keycloak_reachable",
+    "observedAt": "2026-11-08T02:37:50.202Z",
+    "note": "Đọc được cấu hình Keycloak; kết quả bind LDAP được xác nhận bởi lượt đồng bộ, không suy từ HTTP 200."
+  },
+  "requestId": "369fa5de-fb6f-411f-80e8-a9b049ed95b7"
+}

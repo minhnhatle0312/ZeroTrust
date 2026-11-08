@@ -1,0 +1,21 @@
+{
+  "createdAt": "2026-11-07T02:07:53.892292+00:00",
+  "complete": true,
+  "coordinatedSnapshot": false,
+  "writeQuiescenceRequiredForCrossStoreConsistency": true,
+  "files": {
+    "attendance.sqlite": "8e882f1ac52fbc0e2fee4aff7c2a8c896264cdca298bbf67feb48db7896a2e75",
+    "keycloak-config.json": "6740df6134073747da8dc7f834a34de87cf2470dbd84637fbf6c016765e66f2a",
+    "keycloak.pgdump": "33ca7ba3799788bcd0c2f38a8556cd9c13084c6270cd241a6be2181b698a298a",
+    "files\\.env": "f854195cb005d3554e401eb330f262b06c0b989a922679d3c5c13960aa30db06",
+    "files\\backend\\.env": "188f89a884f8db9f1799e7d5e7f90effb2eb0f91af931c61058b20f958ec31d3",
+    "files\\backend\\data\\staff.json": "52f6acf9876a80d147e24a76a11424cb4e79b3ec9765f1721df82e56e82f229a",
+    "files\\network\\.local\\config.json": "345e1f373ae309f1e48066c119cbc39704a79e0b6ad2beb642857ec651e53bf7",
+    "files\\web-a\\.env.local": "9860c56c504425e2fe91c684f3ddb955105c841c7e7bd692edbbac63d74eff77",
+    "files\\web-b\\.env.local": "72edf2283decd25b151fdb4a0f6e9e357cc5d709e659a5b963a08ac86e0df410"
+  },
+  "commit": "7e60fddc774860468c356e6b4e7ba82dc1e6aac7",
+  "node": "v22.19.0",
+  "docker": "Docker version 29.8.2, build 7fc2dff",
+  "workingTreeHasChanges": true
+}

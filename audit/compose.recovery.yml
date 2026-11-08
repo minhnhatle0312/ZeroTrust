@@ -1,0 +1,20 @@
+# Standalone recovery project: no exposed ports, no connection to the live lab.
+services:
+  audit-db:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: audit
+      POSTGRES_DB: audit
+      POSTGRES_PASSWORD: ${AUDIT_DB_PASSWORD:?Use private backup environment}
+    volumes: [recovered_audit:/var/lib/postgresql/data]
+    networks: [recovery]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U audit -d audit"]
+      interval: 3s
+      timeout: 3s
+      retries: 30
+volumes:
+  recovered_audit:
+networks:
+  recovery:
+    internal: true

@@ -1,0 +1,51 @@
+{
+  "url": "https://10.0.130.254:8443",
+  "http": {
+    "/": 200,
+    "/a/": 200,
+    "/b/": 200,
+    "/health": 200,
+    "/ready": 200
+  },
+  "/health": {
+    "connected": true
+  },
+  "/detection/status": {
+    "enabled": true,
+    "pending": 9,
+    "lastError": null
+  },
+  "/summary": [
+    {
+      "source": "web-b",
+      "count": 705
+    },
+    {
+      "source": "web-a",
+      "count": 743
+    },
+    {
+      "source": "keycloak",
+      "count": 204
+    },
+    {
+      "source": "keycloak-admin",
+      "count": 287
+    },
+    {
+      "source": "api",
+      "count": 1111
+    }
+  ],
+  "auditOutboxPending": 0,
+  "collectorErrors": [
+    [
+      "keycloak-admin",
+      null
+    ],
+    [
+      "keycloak",
+      null
+    ]
+  ]
+}

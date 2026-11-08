@@ -1,5 +1,12 @@
 # Tuần 5 — MFA, phiên đăng nhập và củng cố hệ thống
 
+## Note kiểm thử bổ sung — 08/11/2026
+
+SSO/HTTPS 29/29; đăng ký và xác thực TOTP LDAP/local, refresh rotation; khôi phục MFA được kiểm thử bằng mock. Còn xác nhận CA/đăng nhập trên máy vật lý thứ hai.
+
+Chi tiết: [kết quả thực tế](KET_QUA_KIEM_THU_2026_11_08.md). Các đoạn “chưa kiểm thử” bên dưới là ghi chép tại thời điểm triển khai source trước đây.
+
+
 Cập nhật **04/11/2026 (UTC+7)**.
 
 **Trạng thái: đã bổ sung mã nguồn và cấu hình; chưa kiểm thử theo yêu cầu.** Trong lượt triển khai này không chạy test, build, browser automation, Docker hoặc script đổi authentication flow. Không sử dụng số liệu 97/97 của mốc trước để kết luận mã tuần 5 đạt. Chưa ghi nhận đăng ký thiết bị OTP hoặc nghiệm thu hai máy.

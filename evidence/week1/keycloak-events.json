@@ -1,0 +1,142 @@
+[
+  {
+    "time": 1792591607840,
+    "type": "LOGOUT",
+    "clientId": "employee-portal",
+    "userId": "b5300ca8-911b-44c3-968f-6b9113a6edbd",
+    "error": null
+  },
+  {
+    "time": 1792591607129,
+    "type": "CODE_TO_TOKEN",
+    "clientId": "employee-portal",
+    "userId": "b5300ca8-911b-44c3-968f-6b9113a6edbd",
+    "error": null
+  },
+  {
+    "time": 1792591607098,
+    "type": "LOGIN",
+    "clientId": "employee-portal",
+    "userId": "b5300ca8-911b-44c3-968f-6b9113a6edbd",
+    "error": null
+  },
+  {
+    "time": 1792591606077,
+    "type": "LOGOUT",
+    "clientId": "employee-portal",
+    "userId": "46f964e9-cd43-4369-b2b7-69c6f402f94d",
+    "error": null
+  },
+  {
+    "time": 1792591605345,
+    "type": "CODE_TO_TOKEN",
+    "clientId": "employee-portal",
+    "userId": "46f964e9-cd43-4369-b2b7-69c6f402f94d",
+    "error": null
+  },
+  {
+    "time": 1792591605316,
+    "type": "LOGIN",
+    "clientId": "employee-portal",
+    "userId": "46f964e9-cd43-4369-b2b7-69c6f402f94d",
+    "error": null
+  },
+  {
+    "time": 1792591604231,
+    "type": "LOGOUT",
+    "clientId": "employee-portal",
+    "userId": "3242fc36-8a3d-4ed2-ab8e-d4f4d425a57b",
+    "error": null
+  },
+  {
+    "time": 1792591603467,
+    "type": "CODE_TO_TOKEN",
+    "clientId": "employee-portal",
+    "userId": "3242fc36-8a3d-4ed2-ab8e-d4f4d425a57b",
+    "error": null
+  },
+  {
+    "time": 1792591603437,
+    "type": "LOGIN",
+    "clientId": "employee-portal",
+    "userId": "3242fc36-8a3d-4ed2-ab8e-d4f4d425a57b",
+    "error": null
+  },
+  {
+    "time": 1792591602413,
+    "type": "LOGOUT",
+    "clientId": "employee-portal",
+    "userId": "ce8e25cd-5b4f-414a-bd65-3e844d45bcbe",
+    "error": null
+  },
+  {
+    "time": 1792591601558,
+    "type": "CODE_TO_TOKEN",
+    "clientId": "employee-portal",
+    "userId": "ce8e25cd-5b4f-414a-bd65-3e844d45bcbe",
+    "error": null
+  },
+  {
+    "time": 1792591601524,
+    "type": "LOGIN",
+    "clientId": "employee-portal",
+    "userId": "ce8e25cd-5b4f-414a-bd65-3e844d45bcbe",
+    "error": null
+  },
+  {
+    "time": 1792591285688,
+    "type": "LOGOUT",
+    "clientId": "employee-portal",
+    "userId": "b5300ca8-911b-44c3-968f-6b9113a6edbd",
+    "error": null
+  },
+  {
+    "time": 1792591283627,
+    "type": "CODE_TO_TOKEN",
+    "clientId": "employee-portal",
+    "userId": "b5300ca8-911b-44c3-968f-6b9113a6edbd",
+    "error": null
+  },
+  {
+    "time": 1792591283580,
+    "type": "LOGIN",
+    "clientId": "employee-portal",
+    "userId": "b5300ca8-911b-44c3-968f-6b9113a6edbd",
+    "error": null
+  },
+  {
+    "time": 1792591282478,
+    "type": "LOGOUT",
+    "clientId": "employee-portal",
+    "userId": "46f964e9-cd43-4369-b2b7-69c6f402f94d",
+    "error": null
+  },
+  {
+    "time": 1792591280899,
+    "type": "CODE_TO_TOKEN",
+    "clientId": "employee-portal",
+    "userId": "46f964e9-cd43-4369-b2b7-69c6f402f94d",
+    "error": null
+  },
+  {
+    "time": 1792591280859,
+    "type": "LOGIN",
+    "clientId": "employee-portal",
+    "userId": "46f964e9-cd43-4369-b2b7-69c6f402f94d",
+    "error": null
+  },
+  {
+    "time": 1792591279760,
+    "type": "LOGOUT",
+    "clientId": "employee-portal",
+    "userId": "3242fc36-8a3d-4ed2-ab8e-d4f4d425a57b",
+    "error": null
+  },
+  {
+    "time": 1792591278096,
+    "type": "CODE_TO_TOKEN",
+    "clientId": "employee-portal",
+    "userId": "3242fc36-8a3d-4ed2-ab8e-d4f4d425a57b",
+    "error": null
+  }
+]

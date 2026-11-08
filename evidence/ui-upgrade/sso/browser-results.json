@@ -1,0 +1,202 @@
+{
+  "startedAt": "2026-11-01T13:50:43.373305+07:00",
+  "mode": "HTTPS LAN/VPN",
+  "publicUrl": "https://10.0.103.227:8443",
+  "checks": [
+    {
+      "name": "HTTPS certificate chain and IP SAN validated",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Web A signed in",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "A to B SSO without entering password",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "name": "Web B security API",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Separate OIDC clients",
+      "actual": [
+        "employee-portal",
+        "security-dashboard"
+      ],
+      "expected": [
+        "employee-portal",
+        "security-dashboard"
+      ],
+      "passed": true
+    },
+    {
+      "name": "Same Keycloak browser session",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Web B own audience",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Web B token cannot read attendance",
+      "actual": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "Admin accounts rendered",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "B logout detected by Web A",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Old A token rejected after B logout",
+      "actual": 401,
+      "expected": 401,
+      "passed": true
+    },
+    {
+      "name": "Old B token rejected after B logout",
+      "actual": 401,
+      "expected": 401,
+      "passed": true
+    },
+    {
+      "name": "Auditor reads Web B",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Auditor denied account API",
+      "actual": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "Auditor has no account navigation",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "name": "Mobile has no horizontal page overflow",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "B to A SSO without password",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "name": "A logout detected by Web B",
+      "actual": 401,
+      "expected": 401,
+      "passed": true
+    },
+    {
+      "name": "employee01 denied by Web B UI",
+      "actual": "Bạn chưa có quyền truy cập",
+      "expected": "Bạn chưa có quyền truy cập",
+      "passed": true
+    },
+    {
+      "name": "employee01 denied by Web B API",
+      "actual": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "employee01 may still use Web A",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "manager01 denied by Web B UI",
+      "actual": "Bạn chưa có quyền truy cập",
+      "expected": "Bạn chưa có quyền truy cập",
+      "passed": true
+    },
+    {
+      "name": "manager01 denied by Web B API",
+      "actual": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "manager01 may still use Web A",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Separate browser/device must authenticate independently",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Private path blocked /network/.local/server.key",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Private path blocked /.env",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Private path blocked /admin/",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Private path blocked /a/%2e%2e/%2e%2e/.env",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    }
+  ],
+  "screenshots": [
+    "01-web-a-admin.png",
+    "02-web-b-admin.png",
+    "03-web-b-alerts.png",
+    "04-web-b-audit.png",
+    "05-web-b-accounts.png",
+    "06-logout-b-ends-a.png",
+    "07-web-b-auditor.png",
+    "08-web-b-mobile.png",
+    "09-logout-a-ends-b.png",
+    "10-employee01-denied.png",
+    "10-manager01-denied.png"
+  ],
+  "success": true,
+  "finishedAt": "2026-11-01T13:51:17.230502+07:00"
+}

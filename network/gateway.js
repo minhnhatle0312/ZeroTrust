@@ -3,6 +3,7 @@ const https=require('node:https');
 const http=require('node:http');
 const fs=require('node:fs');
 const path=require('node:path');
+const {randomUUID}=require('node:crypto');
 const {secureHeaders,proxyHeaders,requestPath,HOP_HEADERS}=require('./security');
 const root=path.resolve(__dirname,'..');
 const configFile=process.env.IAM_GATEWAY_CONFIG || path.join(__dirname,'.local/config.json');
@@ -20,7 +21,14 @@ function proxy(req,res,port){
     res.writeHead(incoming.statusCode,safeHeaders);incoming.pipe(res);
   });
   upstream.on('timeout',()=>upstream.destroy());
-  upstream.on('error',()=>{if(!res.headersSent)reply(res,503,'Dịch vụ đang khởi động hoặc tạm thời không sẵn sàng.');else res.destroy();});
+  upstream.on('error',()=>{
+    if(res.headersSent)return res.destroy();
+    const message='Dịch vụ đang khởi động hoặc tạm thời không sẵn sàng.';
+    if(req.url.startsWith('/api/')){
+      const requestId=randomUUID();res.setHeader('X-Request-Id',requestId);
+      reply(res,503,JSON.stringify({status:'DENY',code:'UPSTREAM_UNAVAILABLE',message,requestId}),'application/json; charset=utf-8');
+    }else reply(res,503,message);
+  });
   req.on('aborted',()=>upstream.destroy());req.pipe(upstream);
 }
 function staticApp(req,res,prefix,directory){

@@ -208,7 +208,8 @@ def main():
             nav(security,'Tài khoản');security.get_by_label('Tìm tài khoản',exact=True).fill('employee02')
             _,account_data=api(admin_ctx,ss,'/api/admin/users');target=next(u for u in account_data['users'] if u['username']=='employee02')
             check('Demo account initially enabled',target['disabled'],False)
-            security.get_by_role('button',name='Quản lý truy cập',exact=True).click()
+            account_row=security.get_by_role('row').filter(has=security.get_by_text('employee02',exact=True))
+            account_row.get_by_role('button',name='Quản lý truy cập',exact=True).click()
             security.get_by_role('dialog').get_by_text('Khóa tài khoản',exact=True).click()
             confirm=security.get_by_role('button',name='Khóa tài khoản & lưu',exact=True)
             check('Account action needs a reason',confirm.is_disabled())
@@ -221,11 +222,11 @@ def main():
             check('Failed save keeps entered reason',security.get_by_label('Lý do thực hiện',exact=True).input_value().startswith('Kiểm thử giao diện'))
             security.unroute(pattern);changed=True;confirm.click();expect(security.get_by_role('dialog')).to_have_count(0)
             check('Disable action reaches real API',api(employee_ctx,es,'/api/profile')[0],403)
-            security.get_by_role('button',name='Quản lý truy cập',exact=True).click();expect(security.get_by_role('radio',name=re.compile('Mở tài khoản'))).to_be_checked()
+            account_row.get_by_role('button',name='Quản lý truy cập',exact=True).click();expect(security.get_by_role('radio',name=re.compile('Mở tài khoản'))).to_be_checked()
             security.get_by_label('Lý do thực hiện',exact=True).fill('Hoàn nguyên tài khoản demo sau kiểm thử nâng cấp giao diện.')
             security.get_by_role('button',name='Mở tài khoản & lưu',exact=True).click();expect(security.get_by_role('dialog')).to_have_count(0);changed=False
             _,account_data=api(admin_ctx,ss,'/api/admin/users');check('Demo account restored',next(u for u in account_data['users'] if u['id']==target['id'])['disabled'],False)
-            nav(security,'Lịch sử xử lý');expect(security.get_by_role('table',name='Lịch sử xử lý tài khoản')).to_be_visible();shot(security,'16-action-history.png')
+            nav(security,'Lịch sử xử lý');security.get_by_label('Trạng thái đối chiếu',exact=True).select_option('synced');expect(security.get_by_role('table',name='Đối chiếu tài khoản')).to_be_visible();shot(security,'16-action-history.png')
             check('Action history shows successful sync','Đã đồng bộ' in security.locator('tbody').inner_text())
 
             stage='auditor and browser quality'

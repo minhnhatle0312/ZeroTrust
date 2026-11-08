@@ -1,0 +1,95 @@
+{
+  "workflow": {
+    "id": "7bcf469d-e349-4492-a198-ce033198cf1d",
+    "kind": "change",
+    "source": "local",
+    "target_id": "352c0c48-36c5-444c-90ac-7efe1a22b1b0",
+    "username": "qa-jcl-1794105742",
+    "creator_id": "b5300ca8-911b-44c3-968f-6b9113a6edbd",
+    "note": "Release QA lifecycle scenario verification",
+    "approval": "approved",
+    "reviewer_id": "b5300ca8-911b-44c3-968f-6b9113a6edbd",
+    "review_note": "Release QA approved isolated demo identity",
+    "state": "synced",
+    "step": "complete",
+    "version": 4,
+    "attempts": 1,
+    "message": "Đã đối chiếu nguồn, Keycloak, quyền và phiên.",
+    "source_done": 0,
+    "source_receipt": null,
+    "created_at": "2026-11-08T02:42:26.402Z",
+    "updated_at": "2026-11-08T02:42:26.495Z",
+    "desired": {
+      "name": "Release QA Employee",
+      "email": "qa-jcl-1794105742@example.test",
+      "team": "Release QA Moved",
+      "role": "manager"
+    },
+    "before": {
+      "id": "352c0c48-36c5-444c-90ac-7efe1a22b1b0",
+      "username": "qa-jcl-1794105742",
+      "name": "Release QA Employee",
+      "email": "qa-jcl-1794105742@example.test",
+      "team": "Release QA",
+      "role": "employee",
+      "disabled": false,
+      "source": "local",
+      "provider": null,
+      "governanceState": "active"
+    }
+  },
+  "history": [
+    {
+      "id": "665829a3-1cc0-4a53-afe1-66b42ab12c7e",
+      "workflow_id": "7bcf469d-e349-4492-a198-ce033198cf1d",
+      "actor_id": "b5300ca8-911b-44c3-968f-6b9113a6edbd",
+      "event": "REQUESTED",
+      "note": "Release QA lifecycle scenario verification",
+      "time": "2026-11-08T02:42:26.402Z",
+      "actor": "admin01"
+    },
+    {
+      "id": "145f0c49-9bb4-408f-8317-d1f88482f5c6",
+      "workflow_id": "7bcf469d-e349-4492-a198-ce033198cf1d",
+      "actor_id": "b5300ca8-911b-44c3-968f-6b9113a6edbd",
+      "event": "APPROVED",
+      "note": "Release QA approved isolated demo identity",
+      "time": "2026-11-08T02:42:26.408Z",
+      "actor": "admin01"
+    },
+    {
+      "id": "752fbe47-a94e-4443-99b0-178a873ed725",
+      "workflow_id": "7bcf469d-e349-4492-a198-ce033198cf1d",
+      "actor_id": "b5300ca8-911b-44c3-968f-6b9113a6edbd",
+      "event": "EXECUTION_REQUESTED",
+      "note": "Release QA execute and verify remote state",
+      "time": "2026-11-08T02:42:26.415Z",
+      "actor": "admin01"
+    },
+    {
+      "id": "ff2d6ee4-3131-407e-aef8-ce4cdd161f8d",
+      "workflow_id": "7bcf469d-e349-4492-a198-ce033198cf1d",
+      "actor_id": "b5300ca8-911b-44c3-968f-6b9113a6edbd",
+      "event": "SYNCED",
+      "note": "Đã xác nhận trạng thái đích; quyền bổ sung cũ được thu hồi.",
+      "time": "2026-11-08T02:42:26.495Z",
+      "actor": "admin01"
+    }
+  ],
+  "user": {
+    "id": "352c0c48-36c5-444c-90ac-7efe1a22b1b0",
+    "username": "qa-jcl-1794105742",
+    "name": "Release QA Employee",
+    "email": "qa-jcl-1794105742@example.test",
+    "team": "Release QA Moved",
+    "role": "manager",
+    "disabled": false,
+    "mfaRequired": true,
+    "securityUpdatedAt": "2026-11-08T02:42:26.495Z",
+    "identitySource": "local",
+    "directoryStatus": "local",
+    "directorySyncedAt": null,
+    "governanceState": "active"
+  },
+  "requestId": "02450ab5-33bf-4245-adb1-67aea242a5c1"
+}

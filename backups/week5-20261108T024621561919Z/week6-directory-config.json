@@ -1,0 +1,764 @@
+{
+  "components": [
+    {
+      "id": "01f49e59-e462-4662-b862-d881146f68ab",
+      "name": "Trusted Hosts",
+      "providerId": "trusted-hosts",
+      "providerType": "org.keycloak.services.clientregistration.policy.ClientRegistrationPolicy",
+      "parentId": "aee56043-0309-4ba6-ba2d-3493bd423386",
+      "subType": "anonymous",
+      "config": {
+        "host-sending-registration-request-must-match": [
+          "true"
+        ],
+        "client-uris-must-match": [
+          "true"
+        ]
+      }
+    },
+    {
+      "id": "faad1f7f-52d5-44c8-b978-3f6f00468642",
+      "name": "modify date",
+      "providerId": "user-attribute-ldap-mapper",
+      "providerType": "org.keycloak.storage.ldap.mappers.LDAPStorageMapper",
+      "parentId": "a0BjJX1uTFm2QLpz3xdIxg",
+      "config": {
+        "ldap.attribute": [
+          "modifyTimestamp"
+        ],
+        "is.mandatory.in.ldap": [
+          "false"
+        ],
+        "always.read.value.from.ldap": [
+          "true"
+        ],
+        "read.only": [
+          "true"
+        ],
+        "user.model.attribute": [
+          "modifyTimestamp"
+        ]
+      }
+    },
+    {
+      "id": "296aaee7-0323-4309-bcbc-29d8cae6cfa5",
+      "name": "rsa-enc-generated",
+      "providerId": "rsa-enc-generated",
+      "providerType": "org.keycloak.keys.KeyProvider",
+      "parentId": "aee56043-0309-4ba6-ba2d-3493bd423386",
+      "config": {
+        "priority": [
+          "100"
+        ],
+        "algorithm": [
+          "RSA-OAEP"
+        ]
+      }
+    },
+    {
+      "id": "79a7628d-631b-487b-8bdc-db0e7dacd15f",
+      "name": "nhip-directory-groups",
+      "providerId": "group-ldap-mapper",
+      "providerType": "org.keycloak.storage.ldap.mappers.LDAPStorageMapper",
+      "parentId": "a0BjJX1uTFm2QLpz3xdIxg",
+      "config": {
+        "mode": [
+          "READ_ONLY"
+        ],
+        "membership.attribute.type": [
+          "DN"
+        ],
+        "user.roles.retrieve.strategy": [
+          "LOAD_GROUPS_BY_MEMBER_ATTRIBUTE"
+        ],
+        "group.name.ldap.attribute": [
+          "cn"
+        ],
+        "membership.user.ldap.attribute": [
+          "uid"
+        ],
+        "ignore.missing.groups": [
+          "false"
+        ],
+        "preserve.group.inheritance": [
+          "false"
+        ],
+        "membership.ldap.attribute": [
+          "member"
+        ],
+        "group.object.classes": [
+          "groupOfNames"
+        ],
+        "groups.dn": [
+          "ou=groups,dc=company,dc=local"
+        ],
+        "groups.path": [
+          "/directory"
+        ],
+        "drop.non.existing.groups.during.sync": [
+          "false"
+        ]
+      }
+    },
+    {
+      "id": "0558d0ad-d4cf-4256-9400-96b16a4ea7d7",
+      "name": "Allowed Protocol Mapper Types",
+      "providerId": "allowed-protocol-mappers",
+      "providerType": "org.keycloak.services.clientregistration.policy.ClientRegistrationPolicy",
+      "parentId": "aee56043-0309-4ba6-ba2d-3493bd423386",
+      "subType": "authenticated",
+      "config": {
+        "allowed-protocol-mapper-types": [
+          "saml-role-list-mapper",
+          "oidc-usermodel-attribute-mapper",
+          "oidc-sha256-pairwise-sub-mapper",
+          "oidc-full-name-mapper",
+          "saml-user-property-mapper",
+          "oidc-address-mapper",
+          "oidc-usermodel-property-mapper",
+          "saml-user-attribute-mapper"
+        ]
+      }
+    },
+    {
+      "id": "fd384bf1-0eb6-44bc-9248-9097bda947bf",
+      "name": "Consent Required",
+      "providerId": "consent-required",
+      "providerType": "org.keycloak.services.clientregistration.policy.ClientRegistrationPolicy",
+      "parentId": "aee56043-0309-4ba6-ba2d-3493bd423386",
+      "subType": "anonymous",
+      "config": {}
+    },
+    {
+      "id": "bc97e6d3-d3e7-4db5-b0b0-3d0e0f9d0de9",
+      "providerId": "declarative-user-profile",
+      "providerType": "org.keycloak.userprofile.UserProfileProvider",
+      "parentId": "aee56043-0309-4ba6-ba2d-3493bd423386",
+      "config": {
+        "kc.user.profile.config": [
+          "{\"attributes\":[{\"name\":\"username\",\"displayName\":\"${username}\",\"validations\":{\"length\":{\"min\":3,\"max\":255},\"username-prohibited-characters\":{},\"up-username-not-idn-homograph\":{}},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"multivalued\":false},{\"name\":\"email\",\"displayName\":\"${email}\",\"validations\":{\"email\":{},\"length\":{\"max\":255}},\"required\":{\"roles\":[\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"multivalued\":false},{\"name\":\"firstName\",\"displayName\":\"${firstName}\",\"validations\":{\"length\":{\"max\":255},\"person-name-prohibited-characters\":{}},\"required\":{\"roles\":[\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"multivalued\":false},{\"name\":\"lastName\",\"displayName\":\"${lastName}\",\"validations\":{\"length\":{\"max\":255},\"person-name-prohibited-characters\":{}},\"required\":{\"roles\":[\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"multivalued\":false},{\"name\":\"nhip.directory.team\",\"displayName\":\"nhip.directory.team\",\"permissions\":{\"view\":[\"admin\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"nhip.directory.status\",\"displayName\":\"nhip.directory.status\",\"permissions\":{\"view\":[\"admin\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"nhip.join.request\",\"displayName\":\"Join workflow reference\",\"permissions\":{\"view\":[\"admin\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"nhip.mfa.required\",\"displayName\":\"Nhịp: bắt buộc MFA\",\"validations\":{\"options\":{\"options\":[\"true\",\"false\"]}},\"permissions\":{\"view\":[\"admin\"],\"edit\":[\"admin\"]},\"multivalued\":false}],\"groups\":[{\"name\":\"user-metadata\",\"displayHeader\":\"User metadata\",\"displayDescription\":\"Attributes, which refer to user metadata\"}]}"
+        ]
+      }
+    },
+    {
+      "id": "d05a76e6-cff1-4c08-890a-99b503bda2d1",
+      "name": "nhip-lastName",
+      "providerId": "user-attribute-ldap-mapper",
+      "providerType": "org.keycloak.storage.ldap.mappers.LDAPStorageMapper",
+      "parentId": "a0BjJX1uTFm2QLpz3xdIxg",
+      "config": {
+        "ldap.attribute": [
+          "sn"
+        ],
+        "is.mandatory.in.ldap": [
+          "true"
+        ],
+        "always.read.value.from.ldap": [
+          "true"
+        ],
+        "read.only": [
+          "true"
+        ],
+        "user.model.attribute": [
+          "lastName"
+        ]
+      }
+    },
+    {
+      "id": "65a932ff-07ed-4f51-abc1-c61216f9c6f5",
+      "name": "creation date",
+      "providerId": "user-attribute-ldap-mapper",
+      "providerType": "org.keycloak.storage.ldap.mappers.LDAPStorageMapper",
+      "parentId": "a0BjJX1uTFm2QLpz3xdIxg",
+      "config": {
+        "ldap.attribute": [
+          "createTimestamp"
+        ],
+        "is.mandatory.in.ldap": [
+          "false"
+        ],
+        "always.read.value.from.ldap": [
+          "true"
+        ],
+        "read.only": [
+          "true"
+        ],
+        "user.model.attribute": [
+          "createTimestamp"
+        ]
+      }
+    },
+    {
+      "id": "5690cbaf-e79c-4d84-b6f9-f50bf2fb5356",
+      "name": "Allowed Registration Web Origins",
+      "providerId": "registration-web-origins",
+      "providerType": "org.keycloak.services.clientregistration.policy.ClientRegistrationPolicy",
+      "parentId": "aee56043-0309-4ba6-ba2d-3493bd423386",
+      "subType": "authenticated",
+      "config": {}
+    },
+    {
+      "id": "43a6fa4e-9ea5-43dc-bc13-9f87451d5fe9",
+      "name": "Kerberos principal attribute mapper",
+      "providerId": "kerberos-principal-attribute-mapper",
+      "providerType": "org.keycloak.storage.ldap.mappers.LDAPStorageMapper",
+      "parentId": "a0BjJX1uTFm2QLpz3xdIxg",
+      "config": {}
+    },
+    {
+      "id": "0f7d8c75-6e5c-45b5-bf3f-7c48411c6119",
+      "name": "Max Clients Limit",
+      "providerId": "max-clients",
+      "providerType": "org.keycloak.services.clientregistration.policy.ClientRegistrationPolicy",
+      "parentId": "aee56043-0309-4ba6-ba2d-3493bd423386",
+      "subType": "anonymous",
+      "config": {
+        "max-clients": [
+          "200"
+        ]
+      }
+    },
+    {
+      "id": "b7a03919-d5ab-418f-b0be-b3ab84595a45",
+      "name": "nhip-nhip.directory.team",
+      "providerId": "user-attribute-ldap-mapper",
+      "providerType": "org.keycloak.storage.ldap.mappers.LDAPStorageMapper",
+      "parentId": "a0BjJX1uTFm2QLpz3xdIxg",
+      "config": {
+        "ldap.attribute": [
+          "ou"
+        ],
+        "is.mandatory.in.ldap": [
+          "true"
+        ],
+        "always.read.value.from.ldap": [
+          "true"
+        ],
+        "read.only": [
+          "true"
+        ],
+        "user.model.attribute": [
+          "nhip.directory.team"
+        ]
+      }
+    },
+    {
+      "id": "a0BjJX1uTFm2QLpz3xdIxg",
+      "name": "nhip-openldap",
+      "providerId": "ldap",
+      "providerType": "org.keycloak.storage.UserStorageProvider",
+      "parentId": "aee56043-0309-4ba6-ba2d-3493bd423386",
+      "config": {
+        "pagination": [
+          "true"
+        ],
+        "fullSyncPeriod": [
+          "-1"
+        ],
+        "connectionPooling": [
+          "false"
+        ],
+        "usersDn": [
+          "ou=people,dc=company,dc=local"
+        ],
+        "cachePolicy": [
+          "NO_CACHE"
+        ],
+        "importEnabled": [
+          "true"
+        ],
+        "enabled": [
+          "true"
+        ],
+        "changedSyncPeriod": [
+          "-1"
+        ],
+        "usernameLDAPAttribute": [
+          "uid"
+        ],
+        "bindCredential": [
+          "**********"
+        ],
+        "bindDn": [
+          "cn=keycloak-reader,ou=services,dc=company,dc=local"
+        ],
+        "vendor": [
+          "other"
+        ],
+        "uuidLDAPAttribute": [
+          "entryUUID"
+        ],
+        "connectionUrl": [
+          "ldaps://ldap:636"
+        ],
+        "syncRegistrations": [
+          "false"
+        ],
+        "authType": [
+          "simple"
+        ],
+        "connectionTimeout": [
+          "5000"
+        ],
+        "krbPrincipalAttribute": [
+          "krb5PrincipalName"
+        ],
+        "customUserSearchFilter": [
+          "(uid=ldap-*)"
+        ],
+        "searchScope": [
+          "1"
+        ],
+        "useTruststoreSpi": [
+          "always"
+        ],
+        "priority": [
+          "10"
+        ],
+        "userObjectClasses": [
+          "inetOrgPerson"
+        ],
+        "removeInvalidUsersEnabled": [
+          "false"
+        ],
+        "rdnLDAPAttribute": [
+          "uid"
+        ],
+        "readTimeout": [
+          "5000"
+        ],
+        "editMode": [
+          "READ_ONLY"
+        ],
+        "batchSizeForSync": [
+          "100"
+        ]
+      }
+    },
+    {
+      "id": "cb594282-3de3-4a00-8cd1-74c2502352f0",
+      "name": "nhip-firstName",
+      "providerId": "user-attribute-ldap-mapper",
+      "providerType": "org.keycloak.storage.ldap.mappers.LDAPStorageMapper",
+      "parentId": "a0BjJX1uTFm2QLpz3xdIxg",
+      "config": {
+        "ldap.attribute": [
+          "givenName"
+        ],
+        "is.mandatory.in.ldap": [
+          "true"
+        ],
+        "always.read.value.from.ldap": [
+          "true"
+        ],
+        "read.only": [
+          "true"
+        ],
+        "user.model.attribute": [
+          "firstName"
+        ]
+      }
+    },
+    {
+      "id": "59637aa2-acb8-406f-9019-7e13f051bb4c",
+      "name": "nhip-nhip.mfa.required",
+      "providerId": "user-attribute-ldap-mapper",
+      "providerType": "org.keycloak.storage.ldap.mappers.LDAPStorageMapper",
+      "parentId": "a0BjJX1uTFm2QLpz3xdIxg",
+      "config": {
+        "ldap.attribute": [
+          "businessCategory"
+        ],
+        "is.mandatory.in.ldap": [
+          "true"
+        ],
+        "read.only": [
+          "true"
+        ],
+        "always.read.value.from.ldap": [
+          "true"
+        ],
+        "user.model.attribute": [
+          "nhip.mfa.required"
+        ]
+      }
+    },
+    {
+      "id": "2f0fcbae-d3e6-4b2d-a382-7962e362ffca",
+      "name": "nhip-username",
+      "providerId": "user-attribute-ldap-mapper",
+      "providerType": "org.keycloak.storage.ldap.mappers.LDAPStorageMapper",
+      "parentId": "a0BjJX1uTFm2QLpz3xdIxg",
+      "config": {
+        "ldap.attribute": [
+          "uid"
+        ],
+        "is.mandatory.in.ldap": [
+          "true"
+        ],
+        "always.read.value.from.ldap": [
+          "true"
+        ],
+        "read.only": [
+          "true"
+        ],
+        "user.model.attribute": [
+          "username"
+        ]
+      }
+    },
+    {
+      "id": "207bf245-4aa2-4caa-a68c-42e54ac5d538",
+      "name": "nhip-email",
+      "providerId": "user-attribute-ldap-mapper",
+      "providerType": "org.keycloak.storage.ldap.mappers.LDAPStorageMapper",
+      "parentId": "a0BjJX1uTFm2QLpz3xdIxg",
+      "config": {
+        "ldap.attribute": [
+          "mail"
+        ],
+        "is.mandatory.in.ldap": [
+          "true"
+        ],
+        "read.only": [
+          "true"
+        ],
+        "always.read.value.from.ldap": [
+          "true"
+        ],
+        "user.model.attribute": [
+          "email"
+        ]
+      }
+    },
+    {
+      "id": "1f9465a4-e847-462a-b853-1a7a3264bc81",
+      "name": "Full Scope Disabled",
+      "providerId": "scope",
+      "providerType": "org.keycloak.services.clientregistration.policy.ClientRegistrationPolicy",
+      "parentId": "aee56043-0309-4ba6-ba2d-3493bd423386",
+      "subType": "anonymous",
+      "config": {}
+    },
+    {
+      "id": "c31ae482-2cde-413c-9fea-8b9321ab1127",
+      "name": "hmac-generated-hs512",
+      "providerId": "hmac-generated",
+      "providerType": "org.keycloak.keys.KeyProvider",
+      "parentId": "aee56043-0309-4ba6-ba2d-3493bd423386",
+      "config": {
+        "priority": [
+          "100"
+        ],
+        "algorithm": [
+          "HS512"
+        ]
+      }
+    },
+    {
+      "id": "e7ef6f16-cd31-4bbc-a579-f350fcad5b46",
+      "name": "nhip-nhip.directory.status",
+      "providerId": "user-attribute-ldap-mapper",
+      "providerType": "org.keycloak.storage.ldap.mappers.LDAPStorageMapper",
+      "parentId": "a0BjJX1uTFm2QLpz3xdIxg",
+      "config": {
+        "ldap.attribute": [
+          "employeeType"
+        ],
+        "is.mandatory.in.ldap": [
+          "true"
+        ],
+        "always.read.value.from.ldap": [
+          "true"
+        ],
+        "read.only": [
+          "true"
+        ],
+        "user.model.attribute": [
+          "nhip.directory.status"
+        ]
+      }
+    },
+    {
+      "id": "32b8fba9-9c5d-4f1f-bf51-bdcf1585cb2a",
+      "name": "Allowed Registration Web Origins",
+      "providerId": "registration-web-origins",
+      "providerType": "org.keycloak.services.clientregistration.policy.ClientRegistrationPolicy",
+      "parentId": "aee56043-0309-4ba6-ba2d-3493bd423386",
+      "subType": "anonymous",
+      "config": {}
+    },
+    {
+      "id": "1a309228-2aa5-46ff-8ab1-67877ac9aa22",
+      "name": "Allowed Client Scopes",
+      "providerId": "allowed-client-templates",
+      "providerType": "org.keycloak.services.clientregistration.policy.ClientRegistrationPolicy",
+      "parentId": "aee56043-0309-4ba6-ba2d-3493bd423386",
+      "subType": "anonymous",
+      "config": {
+        "allow-default-scopes": [
+          "true"
+        ]
+      }
+    },
+    {
+      "id": "7a9b6266-3969-40f3-963a-1ace16353a95",
+      "name": "Allowed Protocol Mapper Types",
+      "providerId": "allowed-protocol-mappers",
+      "providerType": "org.keycloak.services.clientregistration.policy.ClientRegistrationPolicy",
+      "parentId": "aee56043-0309-4ba6-ba2d-3493bd423386",
+      "subType": "anonymous",
+      "config": {
+        "allowed-protocol-mapper-types": [
+          "oidc-full-name-mapper",
+          "oidc-address-mapper",
+          "saml-user-property-mapper",
+          "oidc-usermodel-property-mapper",
+          "saml-user-attribute-mapper",
+          "saml-role-list-mapper",
+          "oidc-sha256-pairwise-sub-mapper",
+          "oidc-usermodel-attribute-mapper"
+        ]
+      }
+    },
+    {
+      "id": "b420b622-f35d-4b99-96f6-5dd8477417e2",
+      "name": "Allowed Client Scopes",
+      "providerId": "allowed-client-templates",
+      "providerType": "org.keycloak.services.clientregistration.policy.ClientRegistrationPolicy",
+      "parentId": "aee56043-0309-4ba6-ba2d-3493bd423386",
+      "subType": "authenticated",
+      "config": {
+        "allow-default-scopes": [
+          "true"
+        ]
+      }
+    },
+    {
+      "id": "b65b242b-b5a6-473a-9788-4b2078e8958d",
+      "name": "rsa-generated",
+      "providerId": "rsa-generated",
+      "providerType": "org.keycloak.keys.KeyProvider",
+      "parentId": "aee56043-0309-4ba6-ba2d-3493bd423386",
+      "config": {
+        "priority": [
+          "100"
+        ]
+      }
+    },
+    {
+      "id": "572e6deb-fc2c-40e3-a45e-5f232aef2236",
+      "name": "aes-generated",
+      "providerId": "aes-generated",
+      "providerType": "org.keycloak.keys.KeyProvider",
+      "parentId": "aee56043-0309-4ba6-ba2d-3493bd423386",
+      "config": {
+        "priority": [
+          "100"
+        ]
+      }
+    }
+  ],
+  "userProfile": {
+    "attributes": [
+      {
+        "name": "username",
+        "displayName": "${username}",
+        "validations": {
+          "length": {
+            "min": 3,
+            "max": 255
+          },
+          "username-prohibited-characters": {},
+          "up-username-not-idn-homograph": {}
+        },
+        "permissions": {
+          "view": [
+            "admin",
+            "user"
+          ],
+          "edit": [
+            "admin",
+            "user"
+          ]
+        },
+        "multivalued": false
+      },
+      {
+        "name": "email",
+        "displayName": "${email}",
+        "validations": {
+          "email": {},
+          "length": {
+            "max": 255
+          }
+        },
+        "required": {
+          "roles": [
+            "user"
+          ]
+        },
+        "permissions": {
+          "view": [
+            "admin",
+            "user"
+          ],
+          "edit": [
+            "admin",
+            "user"
+          ]
+        },
+        "multivalued": false
+      },
+      {
+        "name": "firstName",
+        "displayName": "${firstName}",
+        "validations": {
+          "length": {
+            "max": 255
+          },
+          "person-name-prohibited-characters": {}
+        },
+        "required": {
+          "roles": [
+            "user"
+          ]
+        },
+        "permissions": {
+          "view": [
+            "admin",
+            "user"
+          ],
+          "edit": [
+            "admin",
+            "user"
+          ]
+        },
+        "multivalued": false
+      },
+      {
+        "name": "lastName",
+        "displayName": "${lastName}",
+        "validations": {
+          "length": {
+            "max": 255
+          },
+          "person-name-prohibited-characters": {}
+        },
+        "required": {
+          "roles": [
+            "user"
+          ]
+        },
+        "permissions": {
+          "view": [
+            "admin",
+            "user"
+          ],
+          "edit": [
+            "admin",
+            "user"
+          ]
+        },
+        "multivalued": false
+      },
+      {
+        "name": "nhip.directory.team",
+        "displayName": "nhip.directory.team",
+        "permissions": {
+          "view": [
+            "admin"
+          ],
+          "edit": [
+            "admin"
+          ]
+        },
+        "multivalued": false
+      },
+      {
+        "name": "nhip.directory.status",
+        "displayName": "nhip.directory.status",
+        "permissions": {
+          "view": [
+            "admin"
+          ],
+          "edit": [
+            "admin"
+          ]
+        },
+        "multivalued": false
+      },
+      {
+        "name": "nhip.join.request",
+        "displayName": "Join workflow reference",
+        "permissions": {
+          "view": [
+            "admin"
+          ],
+          "edit": [
+            "admin"
+          ]
+        },
+        "multivalued": false
+      },
+      {
+        "name": "nhip.mfa.required",
+        "displayName": "Nhịp: bắt buộc MFA",
+        "validations": {
+          "options": {
+            "options": [
+              "true",
+              "false"
+            ]
+          }
+        },
+        "permissions": {
+          "view": [
+            "admin"
+          ],
+          "edit": [
+            "admin"
+          ]
+        },
+        "multivalued": false
+      }
+    ],
+    "groups": [
+      {
+        "name": "user-metadata",
+        "displayHeader": "User metadata",
+        "displayDescription": "Attributes, which refer to user metadata"
+      }
+    ]
+  },
+  "groupRoles": {
+    "cbfb60ec-2217-454c-9fd7-fb94ba9dea53": [],
+    "93356a2b-7272-49b2-8dba-4252be6ff329": [
+      {
+        "id": "8aadb84e-1c27-4134-bcd2-f93059278662",
+        "name": "auditor",
+        "composite": false,
+        "clientRole": false,
+        "containerId": "aee56043-0309-4ba6-ba2d-3493bd423386"
+      }
+    ],
+    "4b02f8f3-b641-4f07-893f-c5af47563050": [
+      {
+        "id": "4bef4b50-75d7-4371-ba5b-8ab0856ef22c",
+        "name": "employee",
+        "composite": false,
+        "clientRole": false,
+        "containerId": "aee56043-0309-4ba6-ba2d-3493bd423386"
+      }
+    ],
+    "e8a377a4-549b-4b65-b58f-9454c89650ba": [
+      {
+        "id": "2da519f3-21de-4618-9ecc-373847a8697e",
+        "name": "manager",
+        "composite": false,
+        "clientRole": false,
+        "containerId": "aee56043-0309-4ba6-ba2d-3493bd423386"
+      }
+    ]
+  }
+}

@@ -11,8 +11,11 @@ function fields(body, allowed) {
 }
 function text(v,min,max) { return typeof v==='string' && v.trim().length>=min && v.length<=max; }
 function validDay(d) { return typeof d==='string' && /^\d{4}-\d{2}-\d{2}$/.test(d) && !Number.isNaN(Date.parse(d)) && new Date(d).toISOString().slice(0,10)===d; }
-function createApp({store,verify,identity,origin='http://localhost:5173',checkSession,checkAccount,collectorOptions,now=()=>new Date(),rateLimit=120}) {
+function createApp({store,verify,identity,origin='http://localhost:5173',checkSession,checkAccount,collectorOptions,centralAuditOptions={},directoryOptions={},now=()=>new Date(),rateLimit=120}) {
   const app=express(), buckets=new Map();
+  const directory=require('./directory').createDirectory({store,identity,now,checkAccount,...directoryOptions});
+  app.locals.directory=directory;
+  app.locals.centralAudit=require('./central-audit').createCentralAudit({store,identity,collectorOptions,...centralAuditOptions});
   const allowedOrigins=new Set(Array.isArray(origin)?origin:[origin]);
   app.disable('x-powered-by');
   app.set('trust proxy','loopback');
@@ -26,7 +29,7 @@ function createApp({store,verify,identity,origin='http://localhost:5173',checkSe
     if(req.method==='OPTIONS') {res.set({'Access-Control-Allow-Methods':'GET,POST,PATCH,OPTIONS','Access-Control-Allow-Headers':'Authorization,Content-Type'});return res.sendStatus(204);} next();
   });
   app.use(express.json({limit:'16kb',strict:true}));
-  app.get('/health',(_req,res)=>res.json({status:'OK',service:'Workspace API',version:5}));
+  app.get('/health',(_req,res)=>res.json({status:'OK',service:'Workspace API',version:10}));
   async function readiness() {
     const checks={database:false,keycloak:false};
     try{checks.database=store.one('SELECT 1 AS ready').ready===1;}catch{}
@@ -39,15 +42,23 @@ function createApp({store,verify,identity,origin='http://localhost:5173',checkSe
       if(!/^Bearer \S+$/.test(req.headers.authorization || '')) reject(401,'MISSING_TOKEN','Vui lòng đăng nhập.');
       let p; try {p=await verify(req.headers.authorization.slice(7));} catch {reject(401,'INVALID_TOKEN','Phiên đăng nhập không hợp lệ hoặc đã hết hạn.');}
       req.claims=p;req.staff=store.one('SELECT * FROM staff WHERE id=?',p.sub || '');
+      if(req.staff&&req.staff.governance_state!=='active')reject(403,'GOVERNANCE_HOLD','Tài khoản đang xử lý vòng đời hoặc đã nghỉ việc. Liên hệ quản trị viên.');
+      if((!req.staff&&directory.configured)||(req.staff?.identity_source==='ldap'&&!req.staff.disabled)) {
+        try{req.staff=await directory.refresh(p.sub) || req.staff;}
+        catch(e){reject(e.code==='DIRECTORY_CONFLICT'?403:503,e.code || 'DIRECTORY_UNAVAILABLE',e.message || 'Chưa xác nhận được nguồn LDAP.');}
+      }
       if(!req.staff) reject(403,'UNREGISTERED','Tài khoản chưa được cấp hồ sơ nhân viên.');
+      if(req.staff.governance_state!=='active')reject(403,'GOVERNANCE_HOLD','Tài khoản đang xử lý vòng đời hoặc đã nghỉ việc. Liên hệ quản trị viên.');
       if(req.staff.disabled) reject(403,'ACCOUNT_DISABLED','Tài khoản đã bị khóa. Liên hệ quản trị viên.');
+      if(req.staff.identity_source==='ldap'&&req.staff.directory_status!=='active')reject(403,'DIRECTORY_ACCESS_CHANGED','Nguồn LDAP bị khóa, chờ đồng bộ hoặc có xung đột. Liên hệ quản trị viên.');
       if(!Number.isInteger(p.iat) || p.iat<=req.staff.revoked_before) reject(401,'SESSION_REVOKED','Phiên đã bị thu hồi. Hãy đăng nhập lại.');
       const tokenRoles=Array.isArray(p.realm_access?.roles)?p.realm_access.roles:[];
       req.roles=tokenRoles.filter(r=>ROLES.includes(r) && r===req.staff.role);
+      if(req.staff.identity_source==='ldap'&&tokenRoles.filter(r=>ROLES.includes(r)).length!==1)reject(403,'DIRECTORY_ACCESS_CHANGED','Quyền trên token không khớp một ánh xạ LDAP duy nhất. Hãy đăng nhập lại sau đồng bộ.');
       if(!req.roles.length) reject(403,'INSUFFICIENT_ROLE','Vai trò không khớp hồ sơ nhân viên.');
       if(p.azp==='security-dashboard') {
         if(!req.roles.some(r=>['admin','auditor'].includes(r))) reject(403,'DASHBOARD_ACCESS_DENIED','Web B chỉ dành cho quản trị viên và kiểm toán viên.');
-        const permitted=/^\/api\/(profile|audit|notifications(?:\/read-all|\/[^/]+\/read)?|me\/(?:sessions(?:\/revoke)?|security)|security(?:\/.*)?|admin\/users(?:\/[^/]+(?:\/.*)?)?)$/.test(req.originalUrl.split('?')[0]);
+        const permitted=/^\/api\/(profile|audit|notifications(?:\/read-all|\/[^/]+\/read)?|me\/(?:sessions(?:\/revoke)?|security|access(?:\/.*)?)|governance(?:\/.*)?|security(?:\/.*)?|admin\/users(?:\/[^/]+(?:\/.*)?)?)$/.test(req.originalUrl.split('?')[0]);
         if(!permitted) reject(403,'CLIENT_SCOPE_DENIED','Token Web B không được dùng cho nghiệp vụ chấm công.');
       }
       if(checkAccount) {
@@ -62,6 +73,16 @@ function createApp({store,verify,identity,origin='http://localhost:5173',checkSe
         try { active=await checkSession(p); } catch { reject(503,'IDENTITY_UNAVAILABLE','Chưa xác nhận được phiên Keycloak. Vui lòng thử lại.'); }
         if(!active) reject(401,'SSO_SESSION_ENDED','Phiên đăng nhập chung đã kết thúc. Hãy đăng nhập lại.');
       }
+      // Re-read containment after remote awaits so an admitted request does not
+      // use a profile captured before a concurrent lifecycle transition.
+      const currentStaff=store.one('SELECT * FROM staff WHERE id=?',req.staff.id);
+      if(!currentStaff||currentStaff.governance_state!=='active')reject(403,'GOVERNANCE_HOLD','Trạng thái vòng đời vừa thay đổi. Hãy liên hệ quản trị viên.');
+      if(currentStaff.disabled)reject(403,'ACCOUNT_DISABLED','Tài khoản vừa bị khóa.');
+      if(p.iat<=currentStaff.revoked_before)reject(401,'SESSION_REVOKED','Phiên vừa bị thu hồi. Hãy đăng nhập lại.');
+      if(currentStaff.identity_source==='ldap'&&currentStaff.directory_status!=='active')reject(403,'DIRECTORY_ACCESS_CHANGED','Nguồn LDAP vừa thay đổi trạng thái truy cập.');
+      req.staff=currentStaff;req.roles=tokenRoles.filter(r=>ROLES.includes(r)&&r===currentStaff.role);
+      if(!req.roles.length)reject(403,'INSUFFICIENT_ROLE','Vai trò tài khoản vừa thay đổi. Hãy đăng nhập lại.');
+      if(p.azp==='security-dashboard'&&!req.roles.some(r=>['admin','auditor'].includes(r)))reject(403,'DASHBOARD_ACCESS_DENIED','Vai trò hiện tại không được dùng Web B.');
       const key=req.staff.id,current=Date.now();
       if(buckets.size>10000) for(const [k,v] of buckets) if(v.until<current) buckets.delete(k);
       let b=buckets.get(key);if(!b || b.until<current){b={count:0,until:current+60000};buckets.set(key,b);}
@@ -71,7 +92,7 @@ function createApp({store,verify,identity,origin='http://localhost:5173',checkSe
   const roles=(...list)=>(req,_res,next)=>{if(!req.roles.some(r=>list.includes(r)))return next(new Rejection(403,'INSUFFICIENT_ROLE','Bạn không có quyền thực hiện thao tác này.'));next();};
   function scope(req,target){if(req.roles.includes('admin') || (req.roles.includes('manager') && req.staff.team===target.team))return;reject(403,'CROSS_TEAM','Chỉ được truy cập nhân viên trong nhóm của mình.');}
   function month(req){const m=req.query.month || localDay(now()).slice(0,7);if(!/^\d{4}-(0[1-9]|1[0-2])$/.test(m))reject(400,'INVALID_DATE','Tháng không hợp lệ.');return m;}
-  const staffView=u=>({id:u.id,username:u.username,name:u.name,email:u.email || '',team:u.team,role:u.role,disabled:!!u.disabled,mfaRequired:!!u.mfa_required,securityUpdatedAt:u.security_updated_at || null});
+  const staffView=u=>({id:u.id,username:u.username,name:u.name,email:u.email || '',team:u.team,role:u.role,disabled:!!u.disabled,mfaRequired:!!u.mfa_required,securityUpdatedAt:u.security_updated_at || null,identitySource:u.identity_source || 'local',directoryStatus:u.directory_status || 'local',directorySyncedAt:u.directory_synced_at || null,governanceState:u.governance_state || 'active'});
   app.get('/api/profile',(req,res)=>send(req,res,200,{status:'ALLOW',...staffView(req.staff),roles:req.roles,serverTime:now().toISOString(),schedule:{start:'08:00',end:'17:00',timezone:'Asia/Ho_Chi_Minh'}}));
   app.get('/api/attendance',(req,res)=>{
     if(req.query.userId && req.query.userId!==req.staff.id)reject(403,'NOT_OWNER','Chỉ được xem bảng công của mình.');
@@ -133,8 +154,14 @@ function createApp({store,verify,identity,origin='http://localhost:5173',checkSe
     if(!['revoke','disable','enable','require-mfa'].includes(action) || !text(note,10,300))reject(400,'INVALID_ACTION','Cần thao tác hợp lệ và lý do ít nhất 10 ký tự.');
     const target=store.one('SELECT * FROM staff WHERE id=?',req.params.id);
     if(!target)reject(404,'NOT_FOUND','Không tìm thấy tài khoản.');if(target.id===req.staff.id || target.role==='admin')reject(403,'PROTECTED_ADMIN','Tài khoản quản trị được bảo vệ; quản lý trực tiếp trong Keycloak.');
+    if(target.governance_state!=='active')reject(409,'GOVERNANCE_HOLD','Xử lý qua quy trình vòng đời đang giữ chặn; không mở khóa bằng thao tác riêng.');
+    if(target.identity_source==='ldap'){
+      if(action==='require-mfa')reject(409,'DIRECTORY_READ_ONLY','Chính sách MFA của người dùng LDAP được quản lý tại nguồn; dùng khôi phục thiết bị khi cần.');
+      if(action==='enable')await directory.allowEnable(target);
+    }
     const id=randomUUID();
     store.tx(()=>{
+      if(store.one('SELECT governance_state FROM staff WHERE id=?',target.id)?.governance_state!=='active')reject(409,'GOVERNANCE_HOLD','Quy trình vòng đời vừa bắt đầu; không thực hiện thay đổi riêng.');
       if(store.one("SELECT id FROM actions WHERE target_id=? AND state='pending'",target.id))reject(409,'ACTION_PENDING','Tài khoản đang có thao tác xử lý. Vui lòng chờ.');
       if(action!=='enable')store.run('UPDATE staff SET revoked_before=?,disabled=?,mfa_required=?,security_updated_at=? WHERE id=?',Math.floor(now().getTime()/1000),action==='disable'?1:target.disabled,action==='require-mfa'?1:target.mfa_required,now().toISOString(),target.id);
       store.run('INSERT INTO actions(id,actor_id,target_id,action,note,time,state) VALUES(?,?,?,?,?,?,?)',id,req.staff.id,target.id,action,note.trim(),now().toISOString(),'pending');store.event(req,202,'REMEDIATION_REQUESTED',target.id);
@@ -152,6 +179,9 @@ function createApp({store,verify,identity,origin='http://localhost:5173',checkSe
   app.get('/api/audit',roles('admin','auditor'),(req,res)=>{const n=Number(req.query.limit || 20);if(!Number.isInteger(n)||n<1||n>100)reject(400,'INVALID_LIMIT','limit phải từ 1 đến 100.');send(req,res,200,{status:'ALLOW',events:store.all('SELECT * FROM events ORDER BY id DESC LIMIT ?',n)});});
   require('./operations').registerOperations(app,{store,identity,roles,send,mutate,fields,reject,text,validDay,staffView,now,checkAccount,collectorOptions});
   require('./week5').registerWeek5(app,{store,identity,roles,send,mutate,fields,reject,text,staffView,now,checkAccount,readiness});
+  require('./directory').registerDirectory(app,{directory,store,roles,send,mutate,fields,reject,text});
+  require('./governance').registerGovernance(app,{store,identity,roles,send,mutate,fields,reject,text,staffView,now,checkAccount});
+  require('./central-audit').registerCentralAudit(app,{store,roles,send,fields,reject,text});
   app.use('/api',(_req,_res,next)=>next(new Rejection(404,'NOT_FOUND','Không có chức năng này.')));
   app.use((error,req,res,_next)=>{
     if(res.headersSent)return;let status=error.status || 503,code=error.code || 'SERVICE_UNAVAILABLE',message=error instanceof Rejection?error.message:'Dịch vụ tạm thời không sẵn sàng.';

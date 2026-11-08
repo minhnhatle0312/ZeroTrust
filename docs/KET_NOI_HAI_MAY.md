@@ -27,8 +27,9 @@ Dùng `ipconfig` để lấy IPv4 của adapter Wi-Fi/Ethernet đang có Default
 Với IP Wi-Fi hiện tại của máy dự án:
 
 ```powershell
-python scripts/configure_network.py --host 10.0.103.227
-python scripts/run_week3.py --network
+python scripts/configure_network.py --host 10.0.130.254
+python -c "import sys;sys.path.insert(0,'scripts');from setup_week3 import configure;configure()"
+python scripts/run_week10.py --network
 ```
 
 Lệnh cấu hình tạo chứng chỉ và khóa trong `network/.local`, đồng thời cập nhật các tệp `.env` cục bộ. Mật khẩu, dữ liệu PostgreSQL và SQLite được giữ lại. Lệnh chạy đồng bộ cấu hình hai OIDC client, build Web A/B và giữ API/HTTPS gateway hoạt động; giữ terminal mở. Ctrl+C dừng các tiến trình ứng dụng của lượt chạy, container Docker vẫn chạy.
@@ -37,9 +38,9 @@ Các địa chỉ dùng trên cả hai máy:
 
 | Địa chỉ | Chức năng |
 |---|---|
-| `https://10.0.103.227:8443/` | Trang chọn ứng dụng |
-| `https://10.0.103.227:8443/a/` | Web A — Nhịp Workspace |
-| `https://10.0.103.227:8443/b/` | Web B — Nhịp Security |
+| `https://10.0.130.254:8443/` | Trang chọn ứng dụng |
+| `https://10.0.130.254:8443/a/` | Web A — Nhịp Workspace |
+| `https://10.0.130.254:8443/b/` | Web B — Nhịp Security |
 
 IP có thể đổi khi chuyển mạng hoặc nhận lại DHCP. Khi đó dừng runner, chạy lại `configure_network.py --host IP_MOI` và khởi động lại. Với VPN riêng, dùng địa chỉ VPN của máy chủ; hai thiết bị phải truy cập được địa chỉ đó. Có thể dùng tên DNS nội bộ đã được cả hai máy phân giải đúng.
 
@@ -76,7 +77,7 @@ Chỉ áp dụng khi mạng LAN đã được thiết lập là mạng riêng ti
 Máy khách có thể kiểm tra đường truyền:
 
 ```powershell
-Test-NetConnection 10.0.103.227 -Port 8443
+Test-NetConnection 10.0.130.254 -Port 8443
 ```
 
 Nếu không kết nối được: kiểm tra cùng LAN/VPN, đúng IP, runner còn hoạt động, firewall, VPN route và chế độ client isolation trên Wi-Fi. Một số mạng trường/công cộng chặn kết nối trực tiếp giữa thiết bị; khi đó dùng LAN riêng hoặc VPN được phép.

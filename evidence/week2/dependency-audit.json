@@ -1,0 +1,30 @@
+{
+  "checkedDate": "2026-10-31",
+  "source": "Summary of successful npm audit commands observed during week-2 validation. This is dependency advisory checking, not a full application penetration test.",
+  "backend": {
+    "command": "npm.cmd audit --omit=dev --json",
+    "exitCode": 0,
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    },
+    "lockfileSha256": "b6fb4e6be91a1a07d941619a0ca7ca3e596f80b461e49b997c2c087da0ec2a39"
+  },
+  "web-a": {
+    "command": "npm.cmd audit --json",
+    "exitCode": 0,
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    },
+    "lockfileSha256": "f691ee777a1c09a8b03efa91c9e5ae220e3ea5f5a4273f89e8a1b86ce48b847b"
+  }
+}

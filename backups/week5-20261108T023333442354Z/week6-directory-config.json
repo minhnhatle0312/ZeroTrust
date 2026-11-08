@@ -1,0 +1,360 @@
+{
+  "components": [
+    {
+      "id": "01f49e59-e462-4662-b862-d881146f68ab",
+      "name": "Trusted Hosts",
+      "providerId": "trusted-hosts",
+      "providerType": "org.keycloak.services.clientregistration.policy.ClientRegistrationPolicy",
+      "parentId": "aee56043-0309-4ba6-ba2d-3493bd423386",
+      "subType": "anonymous",
+      "config": {
+        "host-sending-registration-request-must-match": [
+          "true"
+        ],
+        "client-uris-must-match": [
+          "true"
+        ]
+      }
+    },
+    {
+      "id": "296aaee7-0323-4309-bcbc-29d8cae6cfa5",
+      "name": "rsa-enc-generated",
+      "providerId": "rsa-enc-generated",
+      "providerType": "org.keycloak.keys.KeyProvider",
+      "parentId": "aee56043-0309-4ba6-ba2d-3493bd423386",
+      "config": {
+        "priority": [
+          "100"
+        ],
+        "algorithm": [
+          "RSA-OAEP"
+        ]
+      }
+    },
+    {
+      "id": "0558d0ad-d4cf-4256-9400-96b16a4ea7d7",
+      "name": "Allowed Protocol Mapper Types",
+      "providerId": "allowed-protocol-mappers",
+      "providerType": "org.keycloak.services.clientregistration.policy.ClientRegistrationPolicy",
+      "parentId": "aee56043-0309-4ba6-ba2d-3493bd423386",
+      "subType": "authenticated",
+      "config": {
+        "allowed-protocol-mapper-types": [
+          "saml-role-list-mapper",
+          "oidc-usermodel-attribute-mapper",
+          "oidc-sha256-pairwise-sub-mapper",
+          "oidc-full-name-mapper",
+          "saml-user-property-mapper",
+          "oidc-address-mapper",
+          "oidc-usermodel-property-mapper",
+          "saml-user-attribute-mapper"
+        ]
+      }
+    },
+    {
+      "id": "fd384bf1-0eb6-44bc-9248-9097bda947bf",
+      "name": "Consent Required",
+      "providerId": "consent-required",
+      "providerType": "org.keycloak.services.clientregistration.policy.ClientRegistrationPolicy",
+      "parentId": "aee56043-0309-4ba6-ba2d-3493bd423386",
+      "subType": "anonymous",
+      "config": {}
+    },
+    {
+      "id": "bc97e6d3-d3e7-4db5-b0b0-3d0e0f9d0de9",
+      "providerId": "declarative-user-profile",
+      "providerType": "org.keycloak.userprofile.UserProfileProvider",
+      "parentId": "aee56043-0309-4ba6-ba2d-3493bd423386",
+      "config": {
+        "kc.user.profile.config": [
+          "{\"attributes\":[{\"name\":\"username\",\"displayName\":\"${username}\",\"validations\":{\"length\":{\"min\":3,\"max\":255},\"username-prohibited-characters\":{},\"up-username-not-idn-homograph\":{}},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"multivalued\":false},{\"name\":\"email\",\"displayName\":\"${email}\",\"validations\":{\"email\":{},\"length\":{\"max\":255}},\"required\":{\"roles\":[\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"multivalued\":false},{\"name\":\"firstName\",\"displayName\":\"${firstName}\",\"validations\":{\"length\":{\"max\":255},\"person-name-prohibited-characters\":{}},\"required\":{\"roles\":[\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"multivalued\":false},{\"name\":\"lastName\",\"displayName\":\"${lastName}\",\"validations\":{\"length\":{\"max\":255},\"person-name-prohibited-characters\":{}},\"required\":{\"roles\":[\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"multivalued\":false},{\"name\":\"nhip.directory.team\",\"displayName\":\"nhip.directory.team\",\"permissions\":{\"view\":[\"admin\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"nhip.directory.status\",\"displayName\":\"nhip.directory.status\",\"permissions\":{\"view\":[\"admin\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"nhip.mfa.required\",\"displayName\":\"nhip.mfa.required\",\"validations\":{\"options\":{\"options\":[\"true\",\"false\"]}},\"permissions\":{\"view\":[\"admin\"],\"edit\":[\"admin\"]},\"multivalued\":false}],\"groups\":[{\"name\":\"user-metadata\",\"displayHeader\":\"User metadata\",\"displayDescription\":\"Attributes, which refer to user metadata\"}]}"
+        ]
+      }
+    },
+    {
+      "id": "1f9465a4-e847-462a-b853-1a7a3264bc81",
+      "name": "Full Scope Disabled",
+      "providerId": "scope",
+      "providerType": "org.keycloak.services.clientregistration.policy.ClientRegistrationPolicy",
+      "parentId": "aee56043-0309-4ba6-ba2d-3493bd423386",
+      "subType": "anonymous",
+      "config": {}
+    },
+    {
+      "id": "5690cbaf-e79c-4d84-b6f9-f50bf2fb5356",
+      "name": "Allowed Registration Web Origins",
+      "providerId": "registration-web-origins",
+      "providerType": "org.keycloak.services.clientregistration.policy.ClientRegistrationPolicy",
+      "parentId": "aee56043-0309-4ba6-ba2d-3493bd423386",
+      "subType": "authenticated",
+      "config": {}
+    },
+    {
+      "id": "c31ae482-2cde-413c-9fea-8b9321ab1127",
+      "name": "hmac-generated-hs512",
+      "providerId": "hmac-generated",
+      "providerType": "org.keycloak.keys.KeyProvider",
+      "parentId": "aee56043-0309-4ba6-ba2d-3493bd423386",
+      "config": {
+        "priority": [
+          "100"
+        ],
+        "algorithm": [
+          "HS512"
+        ]
+      }
+    },
+    {
+      "id": "32b8fba9-9c5d-4f1f-bf51-bdcf1585cb2a",
+      "name": "Allowed Registration Web Origins",
+      "providerId": "registration-web-origins",
+      "providerType": "org.keycloak.services.clientregistration.policy.ClientRegistrationPolicy",
+      "parentId": "aee56043-0309-4ba6-ba2d-3493bd423386",
+      "subType": "anonymous",
+      "config": {}
+    },
+    {
+      "id": "0f7d8c75-6e5c-45b5-bf3f-7c48411c6119",
+      "name": "Max Clients Limit",
+      "providerId": "max-clients",
+      "providerType": "org.keycloak.services.clientregistration.policy.ClientRegistrationPolicy",
+      "parentId": "aee56043-0309-4ba6-ba2d-3493bd423386",
+      "subType": "anonymous",
+      "config": {
+        "max-clients": [
+          "200"
+        ]
+      }
+    },
+    {
+      "id": "1a309228-2aa5-46ff-8ab1-67877ac9aa22",
+      "name": "Allowed Client Scopes",
+      "providerId": "allowed-client-templates",
+      "providerType": "org.keycloak.services.clientregistration.policy.ClientRegistrationPolicy",
+      "parentId": "aee56043-0309-4ba6-ba2d-3493bd423386",
+      "subType": "anonymous",
+      "config": {
+        "allow-default-scopes": [
+          "true"
+        ]
+      }
+    },
+    {
+      "id": "7a9b6266-3969-40f3-963a-1ace16353a95",
+      "name": "Allowed Protocol Mapper Types",
+      "providerId": "allowed-protocol-mappers",
+      "providerType": "org.keycloak.services.clientregistration.policy.ClientRegistrationPolicy",
+      "parentId": "aee56043-0309-4ba6-ba2d-3493bd423386",
+      "subType": "anonymous",
+      "config": {
+        "allowed-protocol-mapper-types": [
+          "oidc-full-name-mapper",
+          "oidc-address-mapper",
+          "saml-user-property-mapper",
+          "oidc-usermodel-property-mapper",
+          "saml-user-attribute-mapper",
+          "saml-role-list-mapper",
+          "oidc-sha256-pairwise-sub-mapper",
+          "oidc-usermodel-attribute-mapper"
+        ]
+      }
+    },
+    {
+      "id": "b420b622-f35d-4b99-96f6-5dd8477417e2",
+      "name": "Allowed Client Scopes",
+      "providerId": "allowed-client-templates",
+      "providerType": "org.keycloak.services.clientregistration.policy.ClientRegistrationPolicy",
+      "parentId": "aee56043-0309-4ba6-ba2d-3493bd423386",
+      "subType": "authenticated",
+      "config": {
+        "allow-default-scopes": [
+          "true"
+        ]
+      }
+    },
+    {
+      "id": "b65b242b-b5a6-473a-9788-4b2078e8958d",
+      "name": "rsa-generated",
+      "providerId": "rsa-generated",
+      "providerType": "org.keycloak.keys.KeyProvider",
+      "parentId": "aee56043-0309-4ba6-ba2d-3493bd423386",
+      "config": {
+        "priority": [
+          "100"
+        ]
+      }
+    },
+    {
+      "id": "572e6deb-fc2c-40e3-a45e-5f232aef2236",
+      "name": "aes-generated",
+      "providerId": "aes-generated",
+      "providerType": "org.keycloak.keys.KeyProvider",
+      "parentId": "aee56043-0309-4ba6-ba2d-3493bd423386",
+      "config": {
+        "priority": [
+          "100"
+        ]
+      }
+    }
+  ],
+  "userProfile": {
+    "attributes": [
+      {
+        "name": "username",
+        "displayName": "${username}",
+        "validations": {
+          "length": {
+            "min": 3,
+            "max": 255
+          },
+          "username-prohibited-characters": {},
+          "up-username-not-idn-homograph": {}
+        },
+        "permissions": {
+          "view": [
+            "admin",
+            "user"
+          ],
+          "edit": [
+            "admin",
+            "user"
+          ]
+        },
+        "multivalued": false
+      },
+      {
+        "name": "email",
+        "displayName": "${email}",
+        "validations": {
+          "email": {},
+          "length": {
+            "max": 255
+          }
+        },
+        "required": {
+          "roles": [
+            "user"
+          ]
+        },
+        "permissions": {
+          "view": [
+            "admin",
+            "user"
+          ],
+          "edit": [
+            "admin",
+            "user"
+          ]
+        },
+        "multivalued": false
+      },
+      {
+        "name": "firstName",
+        "displayName": "${firstName}",
+        "validations": {
+          "length": {
+            "max": 255
+          },
+          "person-name-prohibited-characters": {}
+        },
+        "required": {
+          "roles": [
+            "user"
+          ]
+        },
+        "permissions": {
+          "view": [
+            "admin",
+            "user"
+          ],
+          "edit": [
+            "admin",
+            "user"
+          ]
+        },
+        "multivalued": false
+      },
+      {
+        "name": "lastName",
+        "displayName": "${lastName}",
+        "validations": {
+          "length": {
+            "max": 255
+          },
+          "person-name-prohibited-characters": {}
+        },
+        "required": {
+          "roles": [
+            "user"
+          ]
+        },
+        "permissions": {
+          "view": [
+            "admin",
+            "user"
+          ],
+          "edit": [
+            "admin",
+            "user"
+          ]
+        },
+        "multivalued": false
+      },
+      {
+        "name": "nhip.directory.team",
+        "displayName": "nhip.directory.team",
+        "permissions": {
+          "view": [
+            "admin"
+          ],
+          "edit": [
+            "admin"
+          ]
+        },
+        "multivalued": false
+      },
+      {
+        "name": "nhip.directory.status",
+        "displayName": "nhip.directory.status",
+        "permissions": {
+          "view": [
+            "admin"
+          ],
+          "edit": [
+            "admin"
+          ]
+        },
+        "multivalued": false
+      },
+      {
+        "name": "nhip.mfa.required",
+        "displayName": "nhip.mfa.required",
+        "validations": {
+          "options": {
+            "options": [
+              "true",
+              "false"
+            ]
+          }
+        },
+        "permissions": {
+          "view": [
+            "admin"
+          ],
+          "edit": [
+            "admin"
+          ]
+        },
+        "multivalued": false
+      }
+    ],
+    "groups": [
+      {
+        "name": "user-metadata",
+        "displayHeader": "User metadata",
+        "displayDescription": "Attributes, which refer to user metadata"
+      }
+    ]
+  },
+  "groupRoles": {}
+}

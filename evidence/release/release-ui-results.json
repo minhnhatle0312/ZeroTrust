@@ -1,0 +1,118 @@
+{
+  "checks": [
+    {
+      "name": "directory renders without API error",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "name": "directory mobile no page overflow",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "federation renders without API error",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "name": "federation mobile no page overflow",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "directory-mapping renders without API error",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "name": "directory-mapping mobile no page overflow",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "governance renders without API error",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "name": "governance mobile no page overflow",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "access-approvals renders without API error",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "name": "access-approvals mobile no page overflow",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "access-review renders without API error",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "name": "access-review mobile no page overflow",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "grant-matrix renders without API error",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "name": "grant-matrix mobile no page overflow",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "central-audit renders without API error",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "name": "central-audit mobile no page overflow",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "detection renders without API error",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "name": "detection mobile no page overflow",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "New screens no JavaScript errors",
+      "actual": [],
+      "expected": [],
+      "passed": true
+    }
+  ]
+}

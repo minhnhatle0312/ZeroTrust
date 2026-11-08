@@ -1,0 +1,23 @@
+# Merge explicitly with docker-compose.yml. Not started by earlier runners.
+services:
+  ldap:
+    build:
+      context: ./directory
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:1636:636"
+    volumes:
+      - ./directory/.local:/bootstrap:ro
+      - ldap_week6_data:/var/lib/ldap
+    networks:
+      iam-network:
+        aliases: [ldap]
+    stop_grace_period: 30s
+  keycloak:
+    environment:
+      KC_TRUSTSTORE_PATHS: /opt/keycloak/conf/nhip-directory/ca.crt
+    volumes:
+      - ./directory/.local/ca.crt:/opt/keycloak/conf/nhip-directory/ca.crt:ro
+
+volumes:
+  ldap_week6_data:

@@ -1,6 +1,6 @@
 ﻿# Tiến độ đồ án IAM-ZeroTrust
 
-Cập nhật: **01/11/2026**. Đã triển khai giai đoạn 3 và mở rộng chức năng quản trị: Web B độc lập, SSO hai chiều, single logout, HTTPS LAN/VPN, nhân viên/role/phiên/thông báo và tra cứu log tại máy chủ. Web A/B build thành công. Minh chứng giai đoạn 3 ban đầu giữ riêng tại `evidence/week3` (73 backend, 29 SSO, 11 ảnh).
+Cập nhật: **08/11/2026**. Đã triển khai lab và kiểm thử tuần 5–10: 130 backend, 8 tiện ích/API client, 7 Python; SSO/UI/nghiệp vụ và các bộ tích hợp mới đã có minh chứng. Có video thao tác, backup đa kho và phục hồi Audit cô lập. Xem [kết quả kiểm thử 08/11/2026](docs/KET_QUA_KIEM_THU_2026_11_08.md). Các số liệu mốc cũ bên dưới giữ như lịch sử; không thay kết quả mới.
 
 Bổ sung giao diện: đã thiết kế lại trang chọn ứng dụng, tổng quan admin và điều hướng chức năng cho Web A/B; thêm tìm kiếm không dấu, bộ lọc, sắp xếp, phân trang, CSV và hộp thoại quản trị thống nhất. **42/42 kiểm tra UI**, **18 ảnh minh chứng UI**. Xem [hướng dẫn giao diện](docs/NANG_CAP_GIAO_DIEN.md) và [kết quả](evidence/ui-upgrade/results.json).
 
@@ -61,7 +61,15 @@ Các dấu [x] ngay trên chỉ xác nhận có mã nguồn/cấu hình, không 
 
 ## Giai đoạn 5 – LDAP / Active Directory (Tuần 6)
 
-- [ ] Chọn OpenLDAP hoặc Windows Active Directory.
+**Mã nguồn bổ sung ngày 06/11/2026; chưa nghiệm thu.** Xem [triển khai tuần 6](docs/TUAN_6_TRIEN_KHAI.md) và [các ca để chạy sau](docs/TUAN_6_NGHIEM_THU.md). Không dùng dấu đã có code để kết luận đã kết nối/đăng nhập LDAP thành công.
+
+- [x] Chọn OpenLDAP Docker, LDAPS và nguồn danh tính READ_ONLY.
+- [x] Chuẩn bị Dockerfile/ACL, bootstrap OU/user/group, CA và bind account riêng; chưa chạy.
+- [x] Viết setup federation, attribute/group mapper, đối chiếu source → Keycloak → app; chưa áp dụng.
+- [x] Viết 5 API Directory, job/scheduler, maintenance hold và xử lý lỗi/xung đột.
+- [x] Bổ sung Directory Users, Federation Sync và Group Mapping trên Web B; chưa build.
+- [x] Chuẩn bị backup/rollback/runner và hướng dẫn thay đổi nhóm/trạng thái tại nguồn.
+
 - [ ] Cài dựng LDAP Server hoặc Domain Controller.
 - [ ] Tạo OU, Group, User mẫu.
 - [ ] Kết nối LDAP Federation trong Keycloak.
@@ -69,9 +77,23 @@ Các dấu [x] ngay trên chỉ xác nhận có mã nguồn/cấu hình, không 
 - [ ] Kiểm thử đăng nhập bằng tài khoản LDAP/AD.
 - [ ] Kiểm tra quyền và trạng thái khi dữ liệu LDAP thay đổi.
 
-Ghi chú: nhóm Sản phẩm/Vận hành hiện nằm trong hồ sơ nhân viên phía ứng dụng; chưa đồng bộ nhóm LDAP/AD.
+Ghi chú: đã có mã ánh xạ ou/LDAP group sang hồ sơ ứng dụng và role Keycloak; trạng thái lab chưa được áp dụng/kiểm chứng. Không triển khai Windows AD DS trong đợt này.
 
 ## Giai đoạn 6 – Vòng đời tài khoản JCL (Tuần 7)
+
+**Phần mở rộng tuần 7 ngày 06/11/2026 chỉ hoàn thành mã nguồn, chưa nghiệm thu.** Xem [triển khai tuần 7](docs/TUAN_7_TRIEN_KHAI.md) và [các ca chưa chạy](docs/TUAN_7_NGHIEM_THU.md).
+
+- [x] Bổ sung quy trình JCL: đề nghị, phê duyệt, snapshot/version, thực hiện, đối chiếu và timeline.
+- [x] Join local có marker retry, mật khẩu tạm và MFA; Join LDAP qua source CLI, enrollment riêng và onboarding hold.
+- [x] Change/Leave giữ chặn khi lỗi, thu hồi grant/phiên và bảo vệ trạng thái processing/left trước các nút quản trị cũ.
+- [x] Bổ sung yêu cầu quyền có thời hạn, duyệt theo nhóm, kiểm tra grant tại API và ba tài nguyên thực tế.
+- [x] Bổ sung snapshot review, khuyến nghị auditor, ma trận grant và thông báo nội bộ.
+- [x] Bổ sung giao diện Web A/B, công cụ operator, setup/runner và tài liệu tuần 7.
+- [ ] Áp dụng schema/cấu hình và build giao diện tuần 7.
+- [ ] Nghiệm thu Join → MFA → Change → cấp/thu hồi quyền → Leave với LDAP và local.
+- [ ] Nghiệm thu lỗi giữa chừng, restart/resume, phân quyền và lưu minh chứng mới.
+
+Các mục lịch sử dưới đây ghi nhận CRUD/JCL cơ bản đã có trước tuần 7; không xác nhận phần mở rộng LDAP/phê duyệt mới đã chạy:
 
 - [x] Join: tạo nhân viên từ Web A/B và Keycloak, nhập hồ sơ/email/nhóm/role, mật khẩu tạm thời và buộc đổi ở lần đăng nhập đầu.
 - [x] Change: sửa hồ sơ/nhóm ứng dụng và role Keycloak, kết thúc phiên cũ; đã kiểm tra đăng nhập bằng role mới. Nhóm chưa đồng bộ LDAP/AD; ứng dụng không cấp role admin.
@@ -83,23 +105,25 @@ Ghi chú: nhóm Sản phẩm/Vận hành hiện nằm trong hồ sơ nhân viên
 ## Giai đoạn 7 – Audit Logging (Tuần 8)
 
 - [x] Bật Keycloak User Events và Admin Events.
-- [ ] Thiết kế bảng lưu trữ Audit Log trong PostgreSQL — **Một phần:** audit ứng dụng hiện lưu trong SQLite; PostgreSQL đang lưu dữ liệu Keycloak.
-- [ ] Xây dựng cơ chế thu thập sự kiện Keycloak — **Một phần:** đã thu thập/lưu SQLite và chống trùng mỗi 30 giây, tối đa 200 sự kiện/lượt; có đăng nhập, đăng xuất, lỗi và thay đổi mật khẩu/MFA được chọn. Chưa có dịch vụ tập trung, lấy bù đầy đủ và PostgreSQL audit.
-- [x] Ghi log ALLOW/DENY cho yêu cầu từ Web A/B qua API chung; audit vẫn ở SQLite, chưa có trường client_id riêng và chưa tách dịch vụ audit.
-- [ ] Ghi nhận thay đổi Role và trạng thái tài khoản — **Một phần:** đã audit tạo nhân viên, đổi hồ sơ/role, mật khẩu, khóa/mở/thu hồi/MFA qua ứng dụng; chưa thu thập đầy đủ Admin Events của những thay đổi trực tiếp ở Keycloak.
+- [x] **Source:** schema/service PostgreSQL audit riêng, Compose overlay và SQLite outbox; chưa khởi chạy/áp dụng/kiểm thử. Xem [note tuần 8](docs/TUAN_8_TRIEN_KHAI.md).
+- [x] **Source:** collector user/admin events có checkpoint, phân trang, retry, overlap, backfill và gap; chưa nghiệm thu độ đầy đủ.
+- [x] Ghi log ALLOW/DENY cho API Web A/B ở mốc cũ; source mới bổ sung client_id, IP, role, session hash và chuyển qua Audit Service, chưa kiểm thử phần mới.
+- [x] **Source:** thu Admin Events, chuẩn hóa actor/hành động/resource; không nhập representation. Chưa đối chiếu role change thật tại PostgreSQL.
 - [x] Giao diện tra cứu, lọc và thống kê audit trong SQLite: tìm toàn bộ lịch sử đã lưu, lọc ngày/kết quả/cảnh báo, sắp xếp và phân trang tại máy chủ, CSV tối đa 200 kết quả theo bộ lọc và thống kê hoạt động.
 - [x] Kiểm thử khả năng truy vết người dùng, thời gian và hành động — có danh tính, thời điểm, hành động, request ID; kiểm thử rollback khi ghi audit thất bại.
 
 ## Giai đoạn 8 – Python Detection (Tuần 8–9)
 
 - [ ] Xây dựng bộ dữ liệu Audit Log bình thường và bất thường — **Một phần:** có log demo và yêu cầu bị chặn; chưa có bộ dữ liệu gán nhãn phục vụ đánh giá.
-- [ ] Thiết kế quy tắc phát hiện đăng nhập thất bại nhiều lần — **Một phần:** Keycloak đã bật chống brute-force với ngưỡng 5 lần thất bại; chưa có quy tắc trong module Python.
-- [ ] Phát hiện truy cập sai Role hoặc ngoài giờ — **Một phần:** Node.js đã tạo cảnh báo sai quyền; chưa phát hiện bất thường ngoài giờ. Tính phút đi muộn là chức năng chấm công riêng.
-- [ ] Xây dựng module Python Normal/Anomaly.
-- [ ] Kết nối kết quả phát hiện với Security Dashboard — **Một phần:** cảnh báo Node.js đã hiển thị trong Web A/B; chưa tích hợp module Python.
-- [ ] Đánh giá Precision, Recall, F1-score và False Positive Rate trên dữ liệu gán nhãn.
+- [x] **Source:** luật login failures, DENY liên tiếp, token thu hồi và request spike; chưa chạy.
+- [x] **Source:** employee thử admin, IP mới, ngoài giờ; chỉ tạo tín hiệu điều tra, không tự khóa.
+- [x] **Source:** module Python Normal/Anomaly, features và worker checkpoint, auto mặc định tắt.
+- [x] **Source:** giao diện Web B Detection, incident, nhãn độc lập và lịch sử job. Xem [note tuần 9](docs/TUAN_9_TRIEN_KHAI.md).
+- [ ] Chạy đánh giá Precision/Recall/F1/FPR, confusion matrix và latency trên dataset thật — công cụ/snapshot đã có, chưa có số đo.
 
 ## Giai đoạn 9 – Kiểm thử bảo mật (Tuần 9)
+
+**Các dấu [x] bên dưới chỉ ghi nhận lịch sử trước tuần 5.** Đã soạn thêm nguồn test Python/API và [checklist tuần 9](docs/TUAN_9_NGHIEM_THU.md); toàn bộ kiểm thử mã tuần 5–10 hiện chưa chạy.
 
 - [x] Kiểm thử SSO và logout giữa hai website — luồng A→B, B→A, phát hiện logout và chặn token phiên cũ; kết quả trong `evidence/week3/browser-results.json`.
 - [x] Kiểm thử RBAC và Least Privilege — 4 role, quyền theo nhóm, giới hạn auditor và cấm tự duyệt đơn.
@@ -111,12 +135,13 @@ Ghi chú: nhóm Sản phẩm/Vận hành hiện nằm trong hồ sơ nhân viên
 
 ## Giai đoạn 10 – Hoàn thiện đồ án (Tuần 10)
 
-- [ ] Hoàn thiện cấu trúc source code và README — **Một phần:** đã có `README.md` tổng quan lab Web A/B, script và hướng dẫn LAN/VPN; các module của giai đoạn sau vẫn chưa hoàn thiện.
-- [ ] Hoàn thiện Docker Compose và cấu hình triển khai — **Một phần:** PostgreSQL/Keycloak chạy Docker; backend/frontend còn chạy Node.js trên máy, chưa đóng gói toàn hệ thống và cấu hình production.
-- [ ] Vẽ System Architecture, OIDC Flow, SSO Flow và ERD — **Một phần:** có minh họa Docker trong báo cáo tuần 1; chưa đủ bộ sơ đồ theo kế hoạch.
-- [ ] Viết báo cáo đồ án, kết quả thực nghiệm — **Một phần:** có Word tuần 1/tuần 3, tài liệu tuần 2/tuần 4 và kết quả kiểm thử; chưa có báo cáo đồ án cuối kỳ hoàn chỉnh.
-- [ ] Tổng hợp ma trận User–Role–Resource và minh chứng — **Một phần:** đã mô tả quyền 6 tài khoản/4 role và giới hạn Web A/B; còn tổng hợp toàn hệ thống sau các giai đoạn tiếp theo.
-- [ ] Chuẩn bị slide PowerPoint và video demo.
+- [x] **Source/tài liệu:** cập nhật README, note từng tuần, runner và hướng dẫn bàn giao; chưa xác nhận runtime.
+- [x] **Source:** Compose IAM/LDAP/Audit, runner local/LAN và recovery project; backend/frontend tiếp tục chạy Node trên host theo kiến trúc lab.
+- [x] **Tài liệu:** kiến trúc/trust boundary, OIDC/MFA, SSO, JCL, Audit và ERD tại [sơ đồ](docs/KIEN_TRUC_VA_LUONG_HE_THONG.md).
+- [x] **Bản thảo:** báo cáo tổng hợp Markdown/Word; phần thực nghiệm ghi chờ. Chưa phải báo cáo nghiệm thu đạt.
+- [x] **Source/tài liệu:** ma trận role/resource và grant, review quyền; minh chứng mới còn chờ chạy.
+- [x] **Bản thảo:** PowerPoint 15 slide và kịch bản demo/video; xem [note tuần 10](docs/TUAN_10_TRIEN_KHAI.md).
+- [ ] Quay video demo, đo số liệu, diễn tập restore và hoàn tất hồ sơ bằng chứng thật.
 - [ ] Chạy demo tổng thể và luyện câu hỏi phản biện — **Một phần:** đã chạy demo tuần 2 bằng trình duyệt; chưa demo toàn bộ phạm vi đồ án và luyện phản biện.
 
 ## Bổ sung đã hoàn thành trong tuần 2

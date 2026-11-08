@@ -71,20 +71,21 @@ def configure(usernames):
 
     executions = rows(FLOW)
     password = next((e for e in executions if e.get('providerId') == 'auth-username-password-form'), None)
-    configured = next((e for e in executions if e.get('providerId') == 'conditional-user-configured'), None)
-    if not password or not configured:
+    otp = next((e for e in executions if e.get('providerId') == 'auth-otp-form'
+                and parent_alias(executions, e) != FLOW + '-selected-otp'), None)
+    if not password or not otp:
         raise RuntimeError('Unexpected browser-flow structure; review the saved flow before continuing.')
     forms_alias = parent_alias(executions, password)
-    existing_otp_alias = parent_alias(executions, configured)
+    existing_otp_alias = parent_alias(executions, otp)
     selected_alias = FLOW + '-selected-otp'
-    if not any(f['alias'] == selected_alias for f in api('/authentication/flows')):
+    if not any(e.get('authenticationFlow') and e.get('displayName') == selected_alias for e in rows(forms_alias)):
         api('/authentication/flows/' + quote(forms_alias, safe='') + '/executions/flow', 'POST',
             {'alias': selected_alias, 'type': 'basic-flow', 'provider': 'basic-flow',
              'description': 'OTP required for administrator-selected Nhịp accounts'})
-    selected_flow = next(f for f in api('/authentication/flows') if f['alias'] == selected_alias)
-    selected_execution = next(e for e in rows(forms_alias) if e.get('flowId') == selected_flow['id'])
+    # Keycloak lists top-level flows only; nested flows are found through executions.
+    selected_execution = next(e for e in rows(forms_alias) if e.get('authenticationFlow') and e.get('displayName') == selected_alias)
     api('/authentication/flows/' + quote(forms_alias, safe='') + '/executions', 'PUT',
-        {'id': selected_execution['id'], 'requirement': 'CONDITIONAL'})
+        {**selected_execution, 'requirement': 'CONDITIONAL'})
 
     def execution(alias, provider):
         matches = [e for e in rows(alias) if e.get('providerId') == provider and e.get('level', 0) == 0]
@@ -93,7 +94,7 @@ def configure(usernames):
             matches = [e for e in rows(alias) if e.get('providerId') == provider and e.get('level', 0) == 0]
         result = matches[0]
         api('/authentication/flows/' + quote(alias, safe='') + '/executions', 'PUT',
-            {'id': result['id'], 'requirement': 'REQUIRED'})
+            {**result, 'requirement': 'REQUIRED'})
         return result
 
     def condition(alias, negate):
@@ -113,6 +114,15 @@ def configure(usernames):
     # the new mandatory branch, avoiding a second/replayed-code OTP challenge.
     condition(existing_otp_alias, True)
     execution(existing_otp_alias, 'auth-otp-form')
+    # New executions can have priority zero. Identify the user before evaluating
+    # user-attribute conditions; otherwise Keycloak rejects even the login page.
+    for _ in range(20):
+        siblings = [e for e in rows(forms_alias) if e.get('level', 0) == 0]
+        if siblings[0]['id'] == password['id']:
+            break
+        api('/authentication/executions/' + password['id'] + '/raise-priority', 'POST')
+    else:
+        raise RuntimeError('Could not place password authentication before OTP conditions.')
     required_actions = api('/authentication/required-actions')
     otp_action = next(a for a in required_actions if a['alias'] == 'CONFIGURE_TOTP')
     api('/authentication/required-actions/CONFIGURE_TOTP', 'PUT', {**otp_action, 'enabled': True, 'defaultAction': False})
@@ -172,7 +182,7 @@ def configure(usernames):
         actions = list(user.get('requiredActions', []))
         if not any(c['type'] == 'otp' for c in credentials) and 'CONFIGURE_TOTP' not in actions:
             actions.append('CONFIGURE_TOTP')
-        api('/users/' + user['id'], 'PUT', {'attributes': {**user.get('attributes', {}), ATTRIBUTE: ['true']},
+        api('/users/' + user['id'], 'PUT', {**user, 'attributes': {**user.get('attributes', {}), ATTRIBUTE: ['true']},
                                            'requiredActions': actions})
         api('/users/' + user['id'] + '/logout', 'POST')
         selected.append({'id': user['id'], 'username': username, 'role': roles[0],

@@ -1,0 +1,325 @@
+{
+  "startedAt": "2026-10-21T14:06:39.266117+00:00",
+  "checks": [
+    {
+      "name": "docker-ps.txt",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "name": "docker-images.txt",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "name": "postgres-ready.txt",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "name": "API health",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Missing token returns 401",
+      "actual": 401,
+      "expected": 401,
+      "passed": true
+    },
+    {
+      "name": "Malformed token returns 401",
+      "actual": 401,
+      "expected": 401,
+      "passed": true
+    },
+    {
+      "name": "employee01 browser login",
+      "actual": "employee01",
+      "expected": "employee01",
+      "passed": true
+    },
+    {
+      "name": "employee01 /api/profile",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "employee01 /api/manager",
+      "actual": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "employee01 /api/admin",
+      "actual": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "employee01 /api/audit",
+      "actual": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "employee01 tampered signature denied",
+      "actual": 401,
+      "expected": 401,
+      "passed": true
+    },
+    {
+      "name": "employee01 invalid audit limit",
+      "actual": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "employee01 audience",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "employee01 issuer",
+      "actual": "http://localhost:8080/realms/company-iam",
+      "expected": "http://localhost:8080/realms/company-iam",
+      "passed": true
+    },
+    {
+      "name": "employee01 logout",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "manager01 browser login",
+      "actual": "manager01",
+      "expected": "manager01",
+      "passed": true
+    },
+    {
+      "name": "manager01 /api/profile",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "manager01 /api/manager",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "manager01 /api/admin",
+      "actual": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "manager01 /api/audit",
+      "actual": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "manager01 tampered signature denied",
+      "actual": 401,
+      "expected": 401,
+      "passed": true
+    },
+    {
+      "name": "manager01 invalid audit limit",
+      "actual": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "manager01 audience",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "manager01 issuer",
+      "actual": "http://localhost:8080/realms/company-iam",
+      "expected": "http://localhost:8080/realms/company-iam",
+      "passed": true
+    },
+    {
+      "name": "manager01 logout",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "auditor01 browser login",
+      "actual": "auditor01",
+      "expected": "auditor01",
+      "passed": true
+    },
+    {
+      "name": "auditor01 /api/profile",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "auditor01 /api/manager",
+      "actual": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "auditor01 /api/admin",
+      "actual": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "auditor01 /api/audit",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Audit contains DENY events",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Audit contains ALLOW events",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "auditor01 tampered signature denied",
+      "actual": 401,
+      "expected": 401,
+      "passed": true
+    },
+    {
+      "name": "auditor01 invalid audit limit",
+      "actual": 400,
+      "expected": 400,
+      "passed": true
+    },
+    {
+      "name": "auditor01 audience",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "auditor01 issuer",
+      "actual": "http://localhost:8080/realms/company-iam",
+      "expected": "http://localhost:8080/realms/company-iam",
+      "passed": true
+    },
+    {
+      "name": "auditor01 logout",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "admin01 browser login",
+      "actual": "admin01",
+      "expected": "admin01",
+      "passed": true
+    },
+    {
+      "name": "admin01 /api/profile",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "admin01 /api/manager",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "admin01 /api/admin",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "admin01 /api/audit",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "admin01 tampered signature denied",
+      "actual": 401,
+      "expected": 401,
+      "passed": true
+    },
+    {
+      "name": "admin01 invalid audit limit",
+      "actual": 400,
+      "expected": 400,
+      "passed": true
+    },
+    {
+      "name": "admin01 audience",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "admin01 issuer",
+      "actual": "http://localhost:8080/realms/company-iam",
+      "expected": "http://localhost:8080/realms/company-iam",
+      "passed": true
+    },
+    {
+      "name": "admin01 logout",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Keycloak records LOGIN",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Audit does not contain passwords",
+      "actual": false,
+      "expected": false,
+      "passed": true
+    },
+    {
+      "name": "Audit does not contain bearer tokens",
+      "actual": false,
+      "expected": false,
+      "passed": true
+    }
+  ],
+  "screenshots": [
+    "01-keycloak-login.png",
+    "employee01-profile.png",
+    "employee01-admin.png",
+    "manager01-manager.png",
+    "auditor01-audit.png",
+    "admin01-admin.png",
+    "keycloak-realm.png",
+    "keycloak-roles.png",
+    "keycloak-clients.png",
+    "keycloak-events.png"
+  ],
+  "success": true,
+  "finishedAt": "2026-10-21T14:06:50.257201+00:00"
+}

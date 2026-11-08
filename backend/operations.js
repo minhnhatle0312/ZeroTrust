@@ -12,7 +12,7 @@ function registerOperations(app,c) {
     if(!u)reject(404,'NOT_FOUND','Không tìm thấy nhân viên.');
     return u;
   }
-  function protectedTarget(req) {const u=target(req);if(u.role==='admin'||u.id===req.staff.id)reject(403,'PROTECTED_ADMIN','Tài khoản quản trị được bảo vệ; quản lý trực tiếp trong Keycloak.');return u;}
+  function protectedTarget(req) {const u=target(req);if(u.role==='admin'||u.id===req.staff.id)reject(403,'PROTECTED_ADMIN','Tài khoản quản trị được bảo vệ; quản lý trực tiếp trong Keycloak.');if(u.governance_state!=='active')reject(409,'GOVERNANCE_HOLD','Tài khoản đang xử lý vòng đời hoặc đã nghỉ việc.');return u;}
   const validPassword=p=>typeof p==='string'&&p.length>=12&&p.length<=128&&/[a-z]/.test(p)&&/[A-Z]/.test(p)&&/\d/.test(p);
   const validEmail=v=>text(v,5,254)&&/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
   const validProfile=b=>text(b.name,2,100)&&b.name.trim().split(/\s+/).length>=2&&text(b.team,2,80)&&allowedRoles.includes(b.role)&&(!b.email||validEmail(b.email));
@@ -79,6 +79,7 @@ function registerOperations(app,c) {
     if(!text(b.username,3,50)||!/^[a-zA-Z0-9][a-zA-Z0-9._-]{2,49}$/.test(b.username)||!validProfile(b)||!validPassword(b.password))reject(400,'INVALID_USER','Tên đăng nhập 3–50 ký tự; họ tên/nhóm hợp lệ; mật khẩu 12–128 ký tự gồm chữ hoa, chữ thường và số. Chỉ cấp vai trò nhân viên, quản lý hoặc kiểm toán viên.');
     if(!validEmail(b.email))reject(400,'INVALID_EMAIL','Cần email hợp lệ và họ tên gồm cả họ và tên để hoàn tất hồ sơ đăng nhập Keycloak.');
     if(store.one('SELECT id FROM staff WHERE username=? COLLATE NOCASE',b.username))reject(409,'DUPLICATE_USER','Tên đăng nhập đã tồn tại.');
+    if(b.username.startsWith('ldap-')||store.one("SELECT id FROM lifecycle_workflows WHERE username=? COLLATE NOCASE AND approval IN ('requested','approved') AND state<>'synced'",b.username))reject(409,'WORKFLOW_EXISTS','Tên này dành cho nguồn LDAP hoặc đang có quy trình Join; xử lý trong quản trị vòng đời.');
     let created;try{created=await identity.createUser({...b,name:b.name.trim()});}catch(e){reject(e.status===409?409:503,e.status===409?'DUPLICATE_USER':'IDENTITY_UNAVAILABLE',e.status===409?'Tên đăng nhập đã tồn tại ở Keycloak.':'Chưa tạo được tài khoản tại Keycloak. Hãy thử lại.');}
     try{mutate(req,res,'USER_CREATED',()=>{store.run('INSERT INTO staff(id,username,name,team,role,email) VALUES(?,?,?,?,?,?)',created.id,b.username,b.name.trim(),b.team.trim(),b.role,b.email.trim());return {message:'Đã tạo nhân viên. Người dùng phải đổi mật khẩu ở lần đăng nhập đầu.',user:staffView(store.one('SELECT * FROM staff WHERE id=?',created.id))};},201);}
     catch(e){await identity.remediate(created.id,'disable').catch(()=>{});throw e;}
@@ -107,10 +108,12 @@ function registerOperations(app,c) {
     }
   }
   app.patch('/api/admin/users/:id',admin,async(req,res)=>{
+    if(target(req).identity_source==='ldap')reject(409,'DIRECTORY_READ_ONLY','Hồ sơ, nhóm và vai trò LDAP chỉ được thay đổi tại thư mục rồi đồng bộ.');
     fields(req.body,['name','email','team','role','note']);if(!validProfile(req.body)||!text(req.body.note,10,300))reject(400,'INVALID_USER','Cần họ và tên, nhóm, vai trò hợp lệ và lý do ít nhất 10 ký tự.');
     await change(req,res,'update-profile',u=>identity.updateUser(u.id,{name:req.body.name.trim(),role:req.body.role,email:req.body.email?.trim()}),u=>store.run('UPDATE staff SET name=?,team=?,role=?,email=?,disabled=? WHERE id=?',req.body.name.trim(),req.body.team.trim(),req.body.role,req.body.email?.trim() || u.email,u.disabled,u.id));
   });
   app.post('/api/admin/users/:id/reset-password',admin,async(req,res)=>{
+    if(target(req).identity_source==='ldap')reject(409,'DIRECTORY_READ_ONLY','Mật khẩu LDAP phải được đổi tại nguồn; ứng dụng không tạo mật khẩu local thay thế.');
     fields(req.body,['password','note']);if(!validPassword(req.body.password)||!text(req.body.note,10,300))reject(400,'INVALID_PASSWORD','Mật khẩu 12–128 ký tự gồm chữ hoa, chữ thường và số; lý do ít nhất 10 ký tự.');
     await change(req,res,'reset-password',u=>identity.resetPassword(u.id,req.body.password),()=>{});
   });

@@ -1,0 +1,142 @@
+{
+  "checks": [
+    {
+      "name": "join workflow created",
+      "actual": 201,
+      "expected": 201,
+      "passed": true
+    },
+    {
+      "name": "join approved",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "join queued",
+      "actual": 202,
+      "expected": 202,
+      "passed": true
+    },
+    {
+      "name": "join LDAP reconcile queued",
+      "actual": 202,
+      "expected": 202,
+      "passed": true
+    },
+    {
+      "name": "join confirmed",
+      "actual": "synced",
+      "expected": "synced",
+      "passed": true
+    },
+    {
+      "name": "ldap-qa-jcl-1794105920 enrolled TOTP",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Join account can use API after MFA",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Access request created",
+      "actual": 201,
+      "expected": 201,
+      "passed": true
+    },
+    {
+      "name": "change workflow created",
+      "actual": 201,
+      "expected": 201,
+      "passed": true
+    },
+    {
+      "name": "change approved",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "change queued",
+      "actual": 202,
+      "expected": 202,
+      "passed": true
+    },
+    {
+      "name": "change LDAP reconcile queued",
+      "actual": 202,
+      "expected": 202,
+      "passed": true
+    },
+    {
+      "name": "change confirmed",
+      "actual": "synced",
+      "expected": "synced",
+      "passed": true
+    },
+    {
+      "name": "Change rejects old session",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Changed account signs in",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "leave workflow created",
+      "actual": 201,
+      "expected": 201,
+      "passed": true
+    },
+    {
+      "name": "leave approved",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "leave queued",
+      "actual": 202,
+      "expected": 202,
+      "passed": true
+    },
+    {
+      "name": "leave LDAP reconcile queued",
+      "actual": 202,
+      "expected": 202,
+      "passed": true
+    },
+    {
+      "name": "leave confirmed",
+      "actual": "synced",
+      "expected": "synced",
+      "passed": true
+    },
+    {
+      "name": "Leave rejects existing token",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Leave locally disabled",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Leave state retained",
+      "actual": "left",
+      "expected": "left",
+      "passed": true
+    }
+  ]
+}

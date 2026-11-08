@@ -1,0 +1,41 @@
+{
+  "time": "2026-11-08T02:57:26.747564+00:00",
+  "scope": "read-only probes; not full security acceptance",
+  "cases": [
+    {
+      "case": "anonymous_profile",
+      "status": "PASS",
+      "expected": 401,
+      "actual": 401,
+      "request_id": "109c7bac-50ab-40fd-b9ae-87c03c0c839e"
+    },
+    {
+      "case": "malformed_token",
+      "status": "PASS",
+      "expected": 401,
+      "actual": 401,
+      "request_id": "3b741e27-b2cc-42b2-a5d8-d0779c0a22e6"
+    },
+    {
+      "case": "employee_admin",
+      "status": "PASS",
+      "expected": 403,
+      "actual": 403,
+      "request_id": "584e633d-50b0-453c-978e-0b183aa1d342"
+    },
+    {
+      "case": "employee_audit",
+      "status": "PASS",
+      "expected": 403,
+      "actual": 403,
+      "request_id": "b7426e3e-cff9-4dd7-87f1-fd2d73ec9272"
+    },
+    {
+      "case": "auditor_admin",
+      "status": "PASS",
+      "expected": 403,
+      "actual": 403,
+      "request_id": "73bb7b21-c89a-4fc3-a22d-31e83b5fe951"
+    }
+  ]
+}

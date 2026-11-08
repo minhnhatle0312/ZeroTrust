@@ -1,0 +1,179 @@
+{
+  "startedAt": "2026-10-31T02:09:06.042691+00:00",
+  "checks": [
+    {
+      "name": "employee01 login",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Employee cannot access admin users",
+      "actual": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "Employee cannot spoof check-in owner",
+      "actual": 400,
+      "expected": 400,
+      "passed": true
+    },
+    {
+      "name": "XSS payload rendered as text",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "name": "employee02 login",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Cross-user read denied",
+      "actual": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "manager01 login",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Manager sees own team only",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Cross-team review denied",
+      "actual": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "Approved request updates attendance",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "admin01 login",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Keycloak policy integration",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Revocation denies old real Keycloak JWT",
+      "actual": 401,
+      "expected": 401,
+      "passed": true
+    },
+    {
+      "name": "Disable synced with Keycloak",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Keycloak user disabled",
+      "actual": false,
+      "expected": false,
+      "passed": true
+    },
+    {
+      "name": "Enable synced with Keycloak",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Keycloak user enabled",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "MFA request synced with Keycloak",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Keycloak requires CONFIGURE_TOTP",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Blocked behavior generated alerts",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Admin records investigation",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "auditor01 login",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Auditor reads alerts",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Auditor cannot remediate",
+      "actual": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "employee01 login",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "Mobile has no horizontal overflow",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "Real check-out recorded",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    }
+  ],
+  "screenshots": [
+    "01-employee-dashboard.png",
+    "02-correction-request.png",
+    "03-manager-team.png",
+    "04-security-center.png",
+    "05-account-containment.png",
+    "06-mobile-attendance.png",
+    "08-completed-day.png",
+    "07-security-investigation.png"
+  ],
+  "success": true,
+  "finishedAt": "2026-10-31T02:09:20.826343+00:00"
+}

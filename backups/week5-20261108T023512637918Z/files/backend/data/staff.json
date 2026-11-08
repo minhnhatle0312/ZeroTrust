@@ -1,0 +1,44 @@
+[
+  {
+    "username": "admin01",
+    "role": "admin",
+    "team": "Điều hành",
+    "name": "Quản trị hệ thống",
+    "id": "b5300ca8-911b-44c3-968f-6b9113a6edbd"
+  },
+  {
+    "username": "manager01",
+    "role": "manager",
+    "team": "Sản phẩm",
+    "name": "Minh Anh",
+    "id": "3242fc36-8a3d-4ed2-ab8e-d4f4d425a57b"
+  },
+  {
+    "username": "employee01",
+    "role": "employee",
+    "team": "Sản phẩm",
+    "name": "Hoàng Nam",
+    "id": "ce8e25cd-5b4f-414a-bd65-3e844d45bcbe"
+  },
+  {
+    "username": "auditor01",
+    "role": "auditor",
+    "team": "Kiểm soát",
+    "name": "Thu Hà",
+    "id": "46f964e9-cd43-4369-b2b7-69c6f402f94d"
+  },
+  {
+    "username": "manager02",
+    "role": "manager",
+    "team": "Vận hành",
+    "name": "Quang Huy",
+    "id": "0c9bfc83-8cb2-4fa1-817b-585709abca98"
+  },
+  {
+    "username": "employee02",
+    "role": "employee",
+    "team": "Vận hành",
+    "name": "Ngọc Linh",
+    "id": "57117b82-a02e-42df-8705-11306bbb0202"
+  }
+]

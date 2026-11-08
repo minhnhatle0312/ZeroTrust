@@ -8,7 +8,8 @@ function permissions(user) {
   if(['manager','admin'].includes(user.role))resources.push({resource:'Quản lý nhóm',client:'Web A',operations:'Đọc công, duyệt/từ chối đơn',scope:user.role==='admin'?'Toàn bộ; không tự duyệt':'Nhóm '+user.team+'; không tự duyệt'});
   if(['admin','auditor'].includes(user.role))resources.push({resource:'Giám sát bảo mật',client:'Web A / Web B',operations:'Đọc audit, cảnh báo, xác thực, ma trận quyền',scope:'Dữ liệu giám sát đã lưu'});
   if(user.role==='admin')resources.push({resource:'Quản trị danh tính',client:'Web A / Web B',operations:'Quản lý user, MFA, phiên và đối chiếu đồng bộ',scope:'Tài khoản thường; bảo vệ admin và chính mình'});
-  return resources.map(p=>({...p,effective:!user.disabled,condition:user.disabled?'Tài khoản đang khóa':'Cần token đúng client, phiên hoạt động và hoàn tất bước xác thực bắt buộc'}));
+  const blocked=!!user.disabled||user.governance_state!=='active'||(user.identity_source==='ldap'&&user.directory_status!=='active');
+  return resources.map(p=>({...p,effective:!blocked,condition:blocked?'Tài khoản đang khóa':'Cần token đúng client, phiên hoạt động và hoàn tất bước xác thực bắt buộc'}));
 }
 
 function registerWeek5(app,c) {
@@ -22,6 +23,7 @@ function registerWeek5(app,c) {
   function protectedTarget(req) {
     const user=target(req);
     if(user.id===req.staff.id||user.role==='admin')reject(403,'PROTECTED_ADMIN','Tài khoản quản trị được bảo vệ.');
+    if(user.governance_state!=='active')reject(409,'GOVERNANCE_HOLD','Tài khoản đang xử lý vòng đời hoặc đã nghỉ việc.');
     return user;
   }
   async function securityState(user) {
@@ -131,6 +133,8 @@ function registerWeek5(app,c) {
     if(snapshot.version!==req.body.version)reject(409,'RECONCILIATION_CHANGED','Trạng thái tài khoản đã thay đổi. Đóng hộp thoại và đối chiếu lại trước khi xác nhận.');
     const action=store.one('SELECT * FROM actions WHERE id=? AND target_id=?',req.params.actionId,user.id);
     if(!action)reject(404,'NOT_FOUND','Không tìm thấy thao tác.');
+    if(user.identity_source==='ldap'&&['update-profile','reset-password','require-mfa'].includes(action.action))reject(409,'DIRECTORY_READ_ONLY','Không phát lại thay đổi thuộc tính hoặc mật khẩu local lên người dùng LDAP.');
+    if(user.identity_source==='ldap'&&action.action==='enable')await app.locals.directory.allowEnable(user);
     if(action.state!=='partial')reject(409,'ACTION_PENDING','Chỉ xử lý lại thao tác partial sau khi đối chiếu.');
     if(store.one('SELECT id FROM actions WHERE target_id=? ORDER BY rowid DESC LIMIT 1',user.id)?.id!==action.id)reject(409,'STALE_ACTION','Đã có thao tác mới hơn; không phát lại quyết định cũ.');
     if(!snapshot.actions.find(a=>a.id===action.id)?.retryable)reject(409,'MANUAL_RECONCILIATION_REQUIRED','Mật khẩu và khôi phục MFA cần thao tác mới với xác minh mới; không phát lại dữ liệu bí mật.');
@@ -138,6 +142,7 @@ function registerWeek5(app,c) {
     if(action.action==='update-profile'&&(!desired||!['employee','manager','auditor'].includes(desired.role)))reject(409,'MANUAL_RECONCILIATION_REQUIRED','Thiếu bản thay đổi hồ sơ cần đối chiếu.');
     const attempt=randomUUID(),stamp=now().toISOString();
     store.tx(()=>{
+      if(target(req).governance_state!=='active')reject(409,'GOVERNANCE_HOLD','Quy trình vòng đời vừa bắt đầu; giữ biện pháp chặn.');
       if(store.one('SELECT id FROM actions WHERE target_id=? ORDER BY rowid DESC LIMIT 1',user.id)?.id!==action.id||store.one('SELECT state FROM actions WHERE id=?',action.id)?.state!=='partial')reject(409,'STALE_ACTION','Trạng thái thao tác đã thay đổi. Hãy đối chiếu lại.');
       if(store.one("SELECT id FROM actions WHERE target_id=? AND state='pending'",user.id))reject(409,'ACTION_PENDING','Có thao tác khác đang xử lý.');
       store.run("UPDATE actions SET state='pending',attempts=attempts+1,updated_at=? WHERE id=?",stamp,action.id);

@@ -3,12 +3,13 @@ const TYPES=new Set(['LOGIN','LOGIN_ERROR','LOGOUT','LOGOUT_ERROR','UPDATE_PASSW
 
 // Bound each query in time; commit the cursor with its page. An overlap on
 // completed windows deduplicates late records without skipping a failed page.
-function createIdentityCollector({store,identity,now=Date.now,batchSize=200,maxPages=10,sourceRetentionDays=7,overlapMs=60000}) {
+function createIdentityCollector({store,identity,now=Date.now,batchSize=200,maxPages=10,sourceRetentionDays=7,overlapMs=60000,name='keycloak',fetchPage,persistCustom}) {
+  if(!['keycloak','keycloak-admin'].includes(name))throw Error('Invalid collector name');
   let running=null;
-  store.run("INSERT OR IGNORE INTO collector_state(name) VALUES('keycloak')");
+  store.run("INSERT OR IGNORE INTO collector_state(name) VALUES(?)",name);
   const state={lastSuccess:null,lastError:null,imported:0,checkpoint:null,backlog:false,retryAt:null,gaps:0};
   function refresh() {
-    const row=store.one("SELECT * FROM collector_state WHERE name='keycloak'");
+    const row=store.one("SELECT * FROM collector_state WHERE name=?",name);
     Object.assign(state,{lastSuccess:row.last_success,lastError:row.last_error,imported:row.imported,
       checkpoint:row.checkpoint_ms?new Date(row.checkpoint_ms).toISOString():null,
       backlog:row.window_to_ms!==null,retryAt:row.retry_after_ms?new Date(row.retry_after_ms).toISOString():null,
@@ -24,7 +25,8 @@ function createIdentityCollector({store,identity,now=Date.now,batchSize=200,maxP
     if(store.one('SELECT id FROM identity_events WHERE id=?',id))return false;
     const member=safe.userId?store.one('SELECT username FROM staff WHERE id=?',safe.userId):null;
     const username=member?.username || safe.username || 'Chưa xác định';
-    store.run('INSERT INTO identity_events(id,time,type,user_id,username,client_id,ip_address,error) VALUES(?,?,?,?,?,?,?,?)',id,safe.time,safe.type,safe.userId,username,safe.clientId,safe.ipAddress,safe.error);
+    const sessionRef=e.sessionId?createHash('sha256').update(String(e.sessionId)).digest('hex').slice(0,24):null;
+    store.run('INSERT INTO identity_events(id,time,type,user_id,username,client_id,ip_address,error,session_ref) VALUES(?,?,?,?,?,?,?,?,?)',id,safe.time,safe.type,safe.userId,username,safe.clientId,safe.ipAddress,safe.error,sessionRef);
     if(e.type==='LOGIN_ERROR')store.alert({actorId:safe.userId,username,kind:'Đăng nhập Keycloak thất bại',severity:['user_temporarily_disabled','user_disabled'].includes(e.error)?'high':'medium',time:safe.time});
     return true;
   }
@@ -34,11 +36,11 @@ function createIdentityCollector({store,identity,now=Date.now,batchSize=200,maxP
     const retention=Number.isFinite(sourceRetentionDays)&&sourceRetentionDays>0?sourceRetentionDays:7;
     const lowerBound=Math.max(0,started-retention*86400000);
     store.tx(()=>{
-      store.run("UPDATE collector_state SET last_attempt=? WHERE name='keycloak'",stamp);
+      store.run("UPDATE collector_state SET last_attempt=? WHERE name=?",stamp,name);
       const oldest=cursor.window_from_ms ?? cursor.checkpoint_ms;
       if(oldest&&oldest<lowerBound){
         store.run('INSERT INTO collector_gaps(id,detected_at,from_ms,to_ms,reason) VALUES(?,?,?,?,?)',randomUUID(),stamp,oldest,lowerBound,'Khoảng trống có thể vượt thời gian lưu tại Keycloak; cần đối chiếu backup nguồn.');
-        store.run("UPDATE collector_state SET checkpoint_ms=?,window_from_ms=NULL,window_to_ms=NULL,page_offset=0 WHERE name='keycloak'",lowerBound);
+        store.run("UPDATE collector_state SET checkpoint_ms=?,window_from_ms=NULL,window_to_ms=NULL,page_offset=0 WHERE name=?",lowerBound,name);
       }
     });
     let imported=0,pages=0;
@@ -48,30 +50,37 @@ function createIdentityCollector({store,identity,now=Date.now,batchSize=200,maxP
         const from=Math.max(lowerBound,(cursor.checkpoint_ms || lowerBound)-overlapMs);
         const to=Math.min(started-2000,(cursor.checkpoint_ms || lowerBound)+6*3600000);
         if(to<from)break;
-        store.run("UPDATE collector_state SET window_from_ms=?,window_to_ms=?,page_offset=0 WHERE name='keycloak'",from,to);
+        store.run("UPDATE collector_state SET window_from_ms=?,window_to_ms=?,page_offset=0 WHERE name=?",from,to,name);
         cursor=refresh();
       }
-      const page=await identity.events({max:batchSize,first:cursor.page_offset,dateFrom:cursor.window_from_ms,dateTo:cursor.window_to_ms,direction:'asc'});
+      const page=await (fetchPage || (options=>identity.events(options)))({max:batchSize,first:cursor.page_offset,dateFrom:cursor.window_from_ms,dateTo:cursor.window_to_ms,direction:'asc'});
       if(!Array.isArray(page))throw Error('Invalid identity page');
       store.tx(()=>{
-        for(const event of page)if(persistEvent(event))imported++;
-        if(page.length<batchSize)store.run("UPDATE collector_state SET checkpoint_ms=?,window_from_ms=NULL,window_to_ms=NULL,page_offset=0 WHERE name='keycloak'",cursor.window_to_ms);
-        else store.run("UPDATE collector_state SET page_offset=? WHERE name='keycloak'",cursor.page_offset+page.length);
-        store.run("UPDATE collector_state SET last_success=?,last_error=NULL,failures=0,retry_after_ms=0,imported=? WHERE name='keycloak'",new Date(now()).toISOString(),imported);
+        for(const event of page)if((persistCustom || persistEvent)(event))imported++;
+        if(page.length<batchSize)store.run("UPDATE collector_state SET checkpoint_ms=?,window_from_ms=NULL,window_to_ms=NULL,page_offset=0 WHERE name=?",cursor.window_to_ms,name);
+        else store.run("UPDATE collector_state SET page_offset=? WHERE name=?",cursor.page_offset+page.length,name);
+        store.run("UPDATE collector_state SET last_success=?,last_error=NULL,failures=0,retry_after_ms=0,imported=? WHERE name=?",new Date(now()).toISOString(),imported,name);
       });
       if(page.length<batchSize&&cursor.window_to_ms>=started-2000)break;
     }
     refresh();state.imported=imported;
-    const latest=store.one("SELECT checkpoint_ms,window_to_ms FROM collector_state WHERE name='keycloak'");
+    const latest=store.one("SELECT checkpoint_ms,window_to_ms FROM collector_state WHERE name=?",name);
     state.backlog=latest.window_to_ms!==null||latest.checkpoint_ms<started-2000;
     return {...state,imported,pages:Math.min(pages+1,maxPages)};
   }
-  return {state,collect(options){
+  return {state,backfill(from){
+    if(running)throw Error('Collector is running');
+    const retention=Number.isFinite(sourceRetentionDays)&&sourceRetentionDays>0?sourceRetentionDays:7;
+    const timestamp=Date.parse(from),lower=now()-retention*86400000;
+    if(!Number.isFinite(timestamp)||timestamp<lower||timestamp>now()-2000)throw Error('Backfill must remain within source retention');
+    store.run('UPDATE collector_state SET checkpoint_ms=?,window_from_ms=NULL,window_to_ms=NULL,page_offset=0,retry_after_ms=0 WHERE name=?',timestamp,name);
+    refresh();return {...state};
+  },collect(options){
     if(running)return running;
     running=collect(options).catch(e=>{
       try {
-        const failures=(store.one("SELECT failures FROM collector_state WHERE name='keycloak'")?.failures || 0)+1;
-        store.run("UPDATE collector_state SET last_error=?,failures=?,retry_after_ms=? WHERE name='keycloak'",'Chưa đồng bộ được sự kiện Keycloak; sẽ thử lại từ checkpoint.',failures,now()+Math.min(300000,1000*2**Math.min(failures,9)));
+        const failures=(store.one("SELECT failures FROM collector_state WHERE name=?",name)?.failures || 0)+1;
+        store.run("UPDATE collector_state SET last_error=?,failures=?,retry_after_ms=? WHERE name=?",'Chưa đồng bộ được sự kiện Keycloak; sẽ thử lại từ checkpoint.',failures,now()+Math.min(300000,1000*2**Math.min(failures,9)),name);
         refresh();
       }catch{/* Storage failure is still propagated to the caller. */}
       throw e;

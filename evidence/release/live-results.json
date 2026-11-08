@@ -1,0 +1,124 @@
+{
+  "checks": [
+    {
+      "name": "admin GET /api/security/directory",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "admin GET /api/security/directory/mappings",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "admin GET /api/security/governance",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "admin GET /api/security/governance/matrix",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "admin GET /api/security/central/health",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "admin GET /api/security/central/events",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "admin GET /api/security/central/summary",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "admin GET /api/security/central/incidents",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "admin GET /api/security/central/detection/status",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "LDAP sync accepted",
+      "actual": 202,
+      "expected": 202,
+      "passed": true
+    },
+    {
+      "name": "LDAP full sync completed",
+      "actual": "synced",
+      "expected": "synced",
+      "passed": true
+    },
+    {
+      "name": "Four LDAP profiles imported",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "ldap-employee01 rejects expired OTP",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "ldap-employee01 profile after MFA",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "ldap-employee01 denied admin",
+      "actual": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "ldap-employee01 SSO no password prompt",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "name": "ldap-auditor01 enrolled TOTP",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "ldap-auditor01 profile after MFA",
+      "actual": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "name": "ldap-auditor01 denied admin",
+      "actual": 403,
+      "expected": 403,
+      "passed": true
+    },
+    {
+      "name": "ldap-auditor01 SSO no password prompt",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    }
+  ]
+}

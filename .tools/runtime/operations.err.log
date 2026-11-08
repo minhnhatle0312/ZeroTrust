@@ -1,0 +1,7 @@
+ Container iam-postgres Running 
+ Container iam-keycloak Running 
+ Container iam-postgres Waiting 
+ Container iam-postgres Healthy 
+(node:13900) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node.EXE --trace-warnings ...` to show where the warning was created)
+An application stopped. Check the messages above; another process may already use the port.

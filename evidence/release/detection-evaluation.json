@@ -1,0 +1,27 @@
+{
+  "scope": "Controlled synthetic fixtures only; not real-world accuracy",
+  "evaluation": {
+    "id": "698b6d56-0437-4d15-94cc-2b446d6eee66",
+    "metrics": {
+      "tp": 7,
+      "fp": 0,
+      "tn": 20,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "false_positive_rate": 0.0,
+      "sample_count": 27,
+      "latency_mean_ms": 83493589.28477778,
+      "latency_p95_ms": 85497780.78099999,
+      "limitations": "Human labels required; signals are not proof of attack. Latency includes collection/backfill delays.",
+      "rule_version": "rules-v1",
+      "config_versions": [
+        1
+      ],
+      "class_coverage": true,
+      "warning": "Nh\u00e3n \u0111\u01b0\u1ee3c ng\u01b0\u1eddi d\u00f9ng nh\u1eadp; c\u1ea7n \u0111\u1ed1i chi\u1ebfu k\u1ecbch b\u1ea3n v\u00e0 t\u00ednh \u0111\u1ed9c l\u1eadp tr\u01b0\u1edbc khi k\u1ebft lu\u1eadn."
+    },
+    "dataset_hash": "ee18e234f01d3eaaec41d2e533d0de5099abb23a808c731316e4b39385e46d63"
+  }
+}

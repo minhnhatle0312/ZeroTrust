@@ -30,7 +30,14 @@ function openStore(filename) {
   }
   column('staff','mfa_required','INTEGER NOT NULL DEFAULT 0');
   column('staff','security_updated_at','TEXT');
+  column('staff','identity_source',"TEXT NOT NULL DEFAULT 'local'");
+  column('staff','directory_provider_id','TEXT');
+  column('staff','directory_status',"TEXT NOT NULL DEFAULT 'local'");
+  column('staff','directory_groups',"TEXT NOT NULL DEFAULT '[]'");
+  column('staff','directory_synced_at','TEXT');
+  column('staff','governance_state',"TEXT NOT NULL DEFAULT 'active'");
   for(const name of ['client_id','ip_address','role','session_ref'])column('events',name,'TEXT');
+  column('identity_events','session_ref','TEXT');
   column('actions','desired_json','TEXT');
   column('actions','remote_state',"TEXT NOT NULL DEFAULT 'unconfirmed'");
   column('actions','updated_at','TEXT');
@@ -55,6 +62,48 @@ function openStore(filename) {
     CREATE INDEX IF NOT EXISTS events_actor_time ON events(actor_id,time);
     CREATE INDEX IF NOT EXISTS actions_state_time ON actions(state,time);
     CREATE INDEX IF NOT EXISTS identity_events_user_time ON identity_events(user_id,time);
+    CREATE TABLE IF NOT EXISTS directory_sync_jobs (
+      id TEXT PRIMARY KEY,provider_id TEXT NOT NULL,mode TEXT NOT NULL,state TEXT NOT NULL,
+      actor_id TEXT,note TEXT NOT NULL,started_at TEXT NOT NULL,finished_at TEXT,
+      imported INTEGER NOT NULL DEFAULT 0,updated INTEGER NOT NULL DEFAULT 0,
+      blocked INTEGER NOT NULL DEFAULT 0,error_count INTEGER NOT NULL DEFAULT 0,
+      message TEXT,remote_json TEXT
+    );
+    CREATE UNIQUE INDEX IF NOT EXISTS directory_one_running ON directory_sync_jobs(provider_id) WHERE state IN ('pending','running');
+    CREATE TABLE IF NOT EXISTS directory_maintenance (
+      user_id TEXT PRIMARY KEY REFERENCES staff(id),state TEXT NOT NULL,
+      note TEXT NOT NULL,started_at TEXT NOT NULL,finished_at TEXT
+    );
+    CREATE INDEX IF NOT EXISTS staff_directory ON staff(directory_provider_id,directory_status);
+    CREATE TABLE IF NOT EXISTS lifecycle_workflows (
+      id TEXT PRIMARY KEY,kind TEXT NOT NULL,source TEXT NOT NULL,target_id TEXT,username TEXT NOT NULL,
+      desired_json TEXT NOT NULL,before_json TEXT,creator_id TEXT NOT NULL,note TEXT NOT NULL,
+      approval TEXT NOT NULL DEFAULT 'requested',reviewer_id TEXT,review_note TEXT,
+      state TEXT NOT NULL DEFAULT 'pending',step TEXT NOT NULL DEFAULT 'approval',version INTEGER NOT NULL DEFAULT 1,
+      attempts INTEGER NOT NULL DEFAULT 0,message TEXT,source_done INTEGER NOT NULL DEFAULT 0,
+      source_receipt TEXT,created_at TEXT NOT NULL,updated_at TEXT NOT NULL
+    );
+    CREATE UNIQUE INDEX IF NOT EXISTS lifecycle_one_open ON lifecycle_workflows(username COLLATE NOCASE) WHERE approval IN ('requested','approved') AND state<>'synced';
+    CREATE TABLE IF NOT EXISTS lifecycle_history (
+      id TEXT PRIMARY KEY,workflow_id TEXT NOT NULL REFERENCES lifecycle_workflows(id),
+      actor_id TEXT,event TEXT NOT NULL,note TEXT NOT NULL,time TEXT NOT NULL
+    );
+    CREATE TABLE IF NOT EXISTS access_requests (
+      id TEXT PRIMARY KEY,user_id TEXT NOT NULL REFERENCES staff(id),resource TEXT NOT NULL,team TEXT NOT NULL,
+      days INTEGER NOT NULL,note TEXT NOT NULL,state TEXT NOT NULL DEFAULT 'pending',
+      reviewer_id TEXT,review_note TEXT,created_at TEXT NOT NULL,reviewed_at TEXT,expires_at TEXT
+    );
+    CREATE UNIQUE INDEX IF NOT EXISTS access_one_open ON access_requests(user_id,resource) WHERE state IN ('pending','approved');
+    CREATE INDEX IF NOT EXISTS access_user ON access_requests(user_id,state,expires_at);
+    CREATE TABLE IF NOT EXISTS access_reviews (
+      id TEXT PRIMARY KEY,creator_id TEXT NOT NULL,created_at TEXT NOT NULL,note TEXT NOT NULL,
+      total INTEGER NOT NULL,complete INTEGER NOT NULL
+    );
+    CREATE TABLE IF NOT EXISTS access_review_items (
+      id TEXT PRIMARY KEY,review_id TEXT NOT NULL REFERENCES access_reviews(id),user_id TEXT NOT NULL,
+      grant_id TEXT,finding TEXT NOT NULL,snapshot_json TEXT NOT NULL,
+      recommendation TEXT,reviewer_id TEXT,note TEXT,reviewed_at TEXT
+    );
   `);
   if(migrateNotifications)db.exec("INSERT INTO notifications(id,audience,title,body,section,created_at) SELECT 'legacy-alert:'||id,'security',kind,'Tài khoản: '||username,'alerts',updated_at FROM alerts WHERE status IN ('open','reviewing')");
   return {
