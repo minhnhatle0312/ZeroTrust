@@ -1,0 +1,41 @@
+services:
+  audit-db:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: audit
+      POSTGRES_USER: audit
+      POSTGRES_PASSWORD: ${AUDIT_DB_PASSWORD:?Run prepare_week8.py and include audit/.local/compose.env}
+    volumes:
+      - audit_data:/var/lib/postgresql/data
+    networks: [audit-network]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U audit -d audit"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+  audit-service:
+    build: ./audit
+    environment:
+      PGHOST: audit-db
+      PGDATABASE: audit
+      PGUSER: audit
+      PGPASSWORD: ${AUDIT_DB_PASSWORD:?Missing audit database password}
+      AUDIT_SERVICE_TOKEN: ${AUDIT_SERVICE_TOKEN:?Missing audit service token}
+    ports: ["127.0.0.1:8090:8090"]
+    # Docker Desktop does not publish ports for an internal-only network.
+    # Only the API joins this bridge; PostgreSQL remains on the private network.
+    networks: [audit-network, audit-api]
+    depends_on:
+      audit-db: {condition: service_healthy}
+    read_only: true
+    tmpfs: [/tmp]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    restart: unless-stopped
+volumes:
+  audit_data:
+networks:
+  audit-api:
+  audit-network:
+    internal: true

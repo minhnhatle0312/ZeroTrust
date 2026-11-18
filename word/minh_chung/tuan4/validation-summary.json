@@ -1,0 +1,25 @@
+{
+  "recordedAt": "2026-11-01T13:07:33.724254+07:00",
+  "backend": {
+    "command": "npm.cmd test",
+    "tests": 73,
+    "pass": 73,
+    "fail": 0,
+    "source": "Observed actual command output in this implementation session; this file is a summary, not the raw TAP log."
+  },
+  "browser": {
+    "checks": 29,
+    "pass": 29,
+    "screenshots": 11,
+    "source": "browser-results.json"
+  },
+  "builds": {
+    "web-a": "passed",
+    "web-b": "passed"
+  },
+  "secondDevice": {
+    "httpsReachable": true,
+    "source": "User reported certificate warning on second LAN/VPN device",
+    "trustedCertificateAndLogin": "not yet confirmed"
+  }
+}

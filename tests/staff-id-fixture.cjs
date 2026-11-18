@@ -1,0 +1,27 @@
+// Synthetic data only; the preloader enforces paths under IAM_TEST_ROOT.
+const path=require('node:path'),fs=require('node:fs');
+const {openStore}=require('../backend/store');
+const {createCentralAudit}=require('../backend/central-audit');
+const {migrate}=require('../backend/incidents');
+const root=process.env.IAM_TEST_ROOT;
+if(!root)throw Error('Isolated root required');
+const store=openStore(path.join(root,'attendance.sqlite'));
+const roles={admin01:'admin',employee01:'employee',employee02:'employee',manager01:'manager',manager02:'manager',auditor01:'auditor'};
+const staff=Object.entries(roles).map(([username,role])=>({id:(username==='admin01'?'kc-':'old-')+username,username,role,name:'Demo '+username,team:'A'}));
+for(const u of staff)store.run('INSERT INTO staff(id,username,role,name,team) VALUES(?,?,?,?,?)',u.id,u.username,u.role,u.name,u.team);
+store.run("INSERT INTO attendance(id,user_id,day,check_in,updated_at) VALUES('attendance-1','old-employee01','2026-11-11','2026-11-11T01:00:00Z','2026-11-11T01:00:00Z')");
+store.run("INSERT INTO corrections(id,user_id,day,check_in,check_out,reason,status,created_at,reviewer_id) VALUES('correction-1','old-employee01','2026-11-10','2026-11-10T01:00:00Z','2026-11-10T10:00:00Z','Fixture reason','approved','2026-11-10T11:00:00Z','old-manager01')");
+store.notify({userId:'old-employee01',title:'Synthetic',body:'Synthetic notification',section:'profile',time:'2026-11-11T00:00:00Z'});
+store.run("INSERT INTO notification_reads(notification_id,user_id,read_at) SELECT id,'old-employee01','2026-11-11T00:00:00Z' FROM notifications");
+store.run("INSERT INTO access_requests(id,user_id,resource,team,days,note,state,reviewer_id,created_at,expires_at) VALUES('grant-1','old-employee01','audit-report','A',30,'Synthetic grant','approved','old-manager01','2026-11-01T00:00:00Z','2099-01-01T00:00:00Z')");
+store.run("INSERT INTO actions(id,actor_id,target_id,action,note,time,state) VALUES('action-1','kc-admin01','old-employee01','revoke','Fixture action','2026-11-10T00:00:00Z','synced')");
+store.run("INSERT INTO lifecycle_workflows(id,kind,source,target_id,username,desired_json,before_json,creator_id,note,approval,reviewer_id,state,created_at,updated_at) VALUES('workflow-1','move','local','old-employee01','employee01','{}',?, 'old-manager01','Fixture workflow','approved','kc-admin01','synced','2026-11-01T00:00:00Z','2026-11-01T00:00:00Z')",JSON.stringify({id:'old-employee01'}));
+store.run("INSERT INTO lifecycle_history(id,workflow_id,actor_id,event,note,time) VALUES('history-1','workflow-1','old-manager01','synced','Fixture history','2026-11-01T00:00:00Z')");
+store.run("INSERT INTO access_reviews(id,creator_id,created_at,note,total,complete) VALUES('review-1','old-auditor01','2026-11-01T00:00:00Z','Fixture review',1,1)");
+store.run("INSERT INTO access_review_items(id,review_id,user_id,finding,snapshot_json) VALUES('review-item-1','review-1','old-employee01','LOGIN_HISTORY_UNKNOWN',?)",JSON.stringify({id:'old-employee01',username:'employee01'}));
+createCentralAudit({store,identity:{}});
+store.event({requestId:'request-1',staff:staff.find(u=>u.username==='employee01'),method:'GET',path:'/api/profile',claims:{azp:'employee-portal'}},200,'AUTHORIZED');
+store.run("INSERT INTO identity_events(id,time,type,user_id,username) VALUES('login-1','2026-11-10T00:00:00Z','LOGIN','old-employee01','employee01')");
+migrate(store.db);
+store.db.close();
+fs.writeFileSync(path.join(root,'staff.json'),JSON.stringify(staff,null,2)+'\n');

@@ -1,0 +1,226 @@
+/* Phase 3: Web A only. Authentication and the Security application keep their theme. */
+.app-workspace {
+  --ink:#172f38; --muted:#526773; --line:#dce5e9; --brand:#087969;
+  --brand-dark:#102e34; --canvas:#f3f6f8; --radius:16px;
+  font-family:Inter,"Segoe UI",system-ui,-apple-system,sans-serif;
+  color:var(--ink); background:var(--canvas); font-size:14px;
+}
+.app-workspace :is(button,a,input,textarea,select,summary):focus-visible {
+  outline:3px solid #008676; outline-offset:3px; scroll-margin-block:100px;
+}
+.app-workspace :is(button,input,select) {min-height:40px}
+.app-workspace button:disabled {opacity:.55}
+.app-workspace h1 {font-size:clamp(25px,2.3vw,32px); font-weight:700; letter-spacing:-1px}
+.app-workspace h2 {font-size:17px; color:var(--ink)}
+.app-workspace .shell-sidebar {background:linear-gradient(165deg,#12363b,#102a30);padding:27px 16px 18px;border-right:1px solid #26474c}
+.app-workspace .shell-brand {padding-inline:12px}
+.app-workspace .shell-brand>span {background:#ffffff0a;border-color:#51797a;border-radius:14px}
+.app-workspace .shell-brand small {color:#a7ccca;letter-spacing:2.7px}
+.app-workspace .shell-workspace {border-color:#36585e;background:#ffffff08;margin-top:28px;border-radius:12px}
+.app-workspace .shell-workspace-icon {background:#234c50;color:#c3e9e2}
+.app-workspace .shell-workspace small,.app-workspace .shell-person small {color:#b2ccce}
+.app-workspace .shell-nav-label {color:#9ebfc3;font-size:10px;letter-spacing:1.5px;padding-inline:14px}
+.app-workspace .shell-sidebar nav button {padding:11px 13px;border-radius:10px;color:#c8dadd;font-weight:500}
+.app-workspace .shell-sidebar nav button:hover {background:#ffffff10}
+.app-workspace .shell-sidebar nav button.active {background:#d4f3e9;color:#0b4b44;box-shadow:none}
+.app-workspace .shell-sidebar nav button.active b {background:#b0dfd1}
+.app-workspace .shell-protected {border-color:#355057;color:#b7d0cc;font-size:11px}
+.app-workspace .shell-person .shell-avatar {background:#35666a;color:#e7f7f0}
+.app-workspace .shell-header {height:76px;padding-inline:32px;gap:20px;box-shadow:0 1px 8px #122f3803}
+.app-workspace .shell-breadcrumb {gap:10px}
+.app-workspace .shell-breadcrumb>span,.app-workspace .logout-button {color:var(--muted)}
+.app-workspace .shell-global-search {background:#f5f8fa;border-color:var(--line);color:#526773;border-radius:10px}
+.app-workspace .shell-header-actions {gap:8px}
+.app-workspace .ui-icon-button {color:#4b646e;min-width:40px;height:40px}
+.app-workspace .ui-icon-button:hover {background:#edf6f3}
+.app-workspace .shell-content {max-width:1510px;padding:30px 32px}
+.app-workspace .shell-footer {color:#526773;flex-wrap:wrap}
+.app-workspace .shell-footer>span:last-child {color:#637b85}
+.app-workspace .page-heading {margin-bottom:24px;align-items:flex-end}
+.app-workspace .page-heading .eyebrow {color:#087969;letter-spacing:1.6px;font-size:10px;font-weight:750;margin-bottom:8px}
+.app-workspace .page-heading p {color:#526773;max-width:680px;line-height:1.7}
+.app-workspace .month-picker {border-color:var(--line);border-radius:11px;padding:4px 12px;color:#087969;box-shadow:0 2px 4px #102a3003}
+.app-workspace .month-picker input {color:var(--ink);font-weight:600;min-width:140px;outline-offset:0}
+.app-workspace :is(.panel,.ui-panel,.day-card) {border-color:var(--line);border-radius:var(--radius);box-shadow:0 3px 12px #162e3803}
+.app-workspace .panel {padding:24px}
+.app-workspace :is(.section-title p,.ui-panel-heading p,.ui-feature p,.ui-stat-text>span,.ui-stat-text>small,.member small,.request-item small,.admin-pending-list small,.form-intro,.form-help,.ui-form-help,.clock-date,.day-timeline,.mini-note,.quick-panel>p) {color:#526773}
+.app-workspace :is(.btn,.ui-button) {border-radius:9px;font-weight:650;min-height:42px;line-height:1.4}
+.app-workspace :is(.btn.primary,.ui-button:not(.secondary):not(.danger)) {background:#087969;color:#fff;border-color:#087969}
+.app-workspace :is(.btn.primary,.ui-button:not(.secondary):not(.danger)):hover:not(:disabled) {background:#066658;border-color:#066658}
+.app-workspace :is(.btn.secondary,.ui-button.secondary) {color:#294f59;border-color:#cfdde1;background:white}
+.app-workspace :is(.btn.secondary,.ui-button.secondary):hover:not(:disabled) {background:#f0f7f6;border-color:#a2c5bd}
+.app-workspace :is(.text-button,.ui-link-button) {color:#08695c;min-height:36px}
+.app-workspace :is(.badge,.ui-badge) {color:#405e68;border-color:#dbe6ea;background:#f2f6f8;border-radius:7px;font-weight:600}
+.app-workspace :is(.badge.green,.ui-badge.green) {color:#176544;background:#e9f6ef;border-color:#c8e6d4}
+.app-workspace :is(.badge.amber,.ui-badge.amber) {color:#805512;background:#fff5df;border-color:#f0dfb8}
+.app-workspace :is(.badge.red,.ui-badge.rose,.ui-badge.red) {color:#9b333e;background:#fff0f1;border-color:#f1d4d9}
+.app-workspace :is(.notice,.ui-notice) {color:#1c634d;background:#eaf7f0;border-color:#cbe6da;border-radius:12px}
+.app-workspace :is(.notice.error,.ui-notice.error,.form-error) {color:#9b333e}
+.app-workspace :is(.notice.error,.ui-notice.error) {background:#fff0f1;border-color:#eed1d7}
+.app-workspace :is(.notice.warning,.ui-notice.warning) {background:#fff7e7;color:#805512;border-color:#f0dfb8}
+.app-workspace .workspace-loading {display:flex;align-items:center;gap:10px;padding:12px 16px;margin-bottom:18px;border:1px solid #cde3e1;border-radius:11px;background:#eaf5f3;color:#18594f;font-weight:600}
+.app-workspace .workspace-loading>span {margin-left:auto;font-weight:400;font-size:12px}
+.app-workspace .workspace-data[aria-busy="true"] {opacity:.55}
+.app-workspace .overview-grid {gap:20px;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}
+.app-workspace .clock-card {background:linear-gradient(130deg,#e4f4ef,#f1f8f4);border-color:#c2ded5;border-radius:16px;padding:26px 28px}
+.app-workspace .soft-label {color:#246957;font-weight:700;letter-spacing:1.4px;font-size:10px}
+.app-workspace .live-dot {background:#078270;box-shadow:0 0 0 4px #07827012}
+.app-workspace .live-clock {font-size:clamp(40px,4.2vw,58px);font-weight:600;letter-spacing:-2px;color:#174e44;margin-top:14px}
+.app-workspace .live-clock>span {color:#446e65;font-size:11px}
+.app-workspace .clock-date {margin-bottom:18px}
+.app-workspace .shift-row {border-color:#c7e0d7;color:#42685f}
+.app-workspace .shift-row strong {color:#28574b}
+.app-workspace .punch-times small {color:#486e64}
+.app-workspace .punch-times strong {color:#234e43;font-size:20px;font-weight:650}
+.app-workspace .punch-button {border-radius:10px;min-height:48px;background:#087969;font-weight:650}
+.app-workspace .punch-button:hover:not(:disabled) {background:#066658}
+.app-workspace .punch-button:disabled {background:#527e70;opacity:1}
+.app-workspace .clock-footnote {color:#496e63;font-size:11px}
+.app-workspace .day-card {padding:26px}
+.app-workspace .day-art {min-height:150px;margin-block:4px}
+.app-workspace .art-disc {width:114px;height:114px;background:#e9f4ed;box-shadow:inset -14px 0 0 #f1f8f1;color:#51846a;transform:rotate(-5deg)}
+.app-workspace .art-disc>span {font-size:12px}
+.app-workspace .day-timeline {border-top:1px solid var(--line);padding-top:6px}
+.app-workspace .day-timeline strong {color:#365f63}
+.app-workspace .bottom-grid {gap:20px}
+.app-workspace .bar {background:#b1dacf}
+.app-workspace .bar.current {background:#087969}
+.app-workspace .chart-col>span,.app-workspace .chart-col small {color:#526773}
+.app-workspace .quick-panel {background:#f5faf9}
+.app-workspace :is(.ui-stat,.ui-feature) {border-color:var(--line);box-shadow:0 3px 12px #162e3803;border-radius:14px}
+.app-workspace .ui-stat {padding:20px;align-items:flex-start}
+.app-workspace .ui-stat-text>strong {color:var(--ink);font-size:30px;letter-spacing:-1px}
+.app-workspace .ui-stat-icon.mint,.app-workspace .ui-feature-icon.mint {background:#e7f4ef;color:#087969}
+.app-workspace .ui-stats {gap:16px;margin-block:22px}
+.app-workspace .week5-kpis {gap:12px;grid-template-columns:repeat(5,minmax(0,1fr))}
+.app-workspace .week5-kpis .ui-stat {padding:17px;gap:11px}
+.app-workspace .ui-feature {padding:21px}
+.app-workspace .workspace-welcome {min-height:220px;padding:28px 30px;border-radius:16px;background:linear-gradient(115deg,#e5f4ee,#f0f7f6);border-color:#c9e2d8}
+.app-workspace .workspace-welcome h2 {font-size:clamp(25px,2.4vw,32px);color:#164c43;font-weight:650;letter-spacing:-.8px;margin-block:14px 9px}
+.app-workspace .workspace-welcome p {color:#3e655e;line-height:1.7}
+.app-workspace .workspace-welcome-art>span {background:#fcfffd;border-color:#c4dfd4;color:#568e7c}
+.app-workspace .workspace-welcome-art>i {color:#326456;border-color:#c9e2d8;background:#f9fffb;bottom:14px}
+.app-workspace .welcome-art-circle {width:200px;height:200px;border-color:#cce4da;box-shadow:0 0 0 20px #d9ede544}
+.app-workspace .workspace-admin-columns {gap:20px;grid-template-columns:minmax(0,1.7fr) minmax(270px,1fr)}
+.app-workspace .admin-pending-list strong,.app-workspace .request-item strong,.app-workspace .member strong {color:#254953}
+.app-workspace .admin-pending-list p,.app-workspace .request-item p {color:#526773}
+.app-workspace .ui-search {border-color:#cfdee3;border-radius:10px;color:#526773;min-width:0}
+.app-workspace .ui-search input {color:var(--ink);min-height:20px}
+.app-workspace .ui-search input::placeholder {color:#617680}
+.app-workspace .ui-search:focus-within {border-color:#087969;box-shadow:0 0 0 3px #08796915}
+.app-workspace :is(.ui-toolbar select,.workspace-request-filters select) {border-color:#cfdee3;color:#35545e;border-radius:9px}
+.app-workspace .workspace-attendance-table {border-color:var(--line);border-radius:12px}
+.app-workspace .workspace-attendance-table .ui-toolbar {padding:16px;gap:10px}
+.app-workspace .workspace-result-count {padding:10px 16px;margin:0;font-size:12px;color:#526773;background:#f8fafb;border-bottom:1px solid var(--line)}
+.app-workspace .workspace-requests>.workspace-result-count {border:0;border-radius:8px}
+.app-workspace .ui-table th {background:#f2f6f8;color:#49626c;font-size:11px;letter-spacing:.3px;padding:14px 18px;border-color:var(--line)}
+.app-workspace .ui-table td {padding:16px 18px;color:#35515c;border-color:#e8eef1}
+.app-workspace .ui-table td strong {color:#23454f;font-weight:650}
+.app-workspace .ui-table td small {color:#526773}
+.app-workspace .ui-table tbody tr:hover {background:#f3f9f7}
+.app-workspace .workspace-scroll-hint {display:none;color:#526773;background:#f8fafb;font-size:12px;margin:0;padding:10px 16px;border-bottom:1px solid var(--line)}
+.app-workspace .ui-table th button {min-height:30px}
+.app-workspace .ui-pagination {color:#526773;border-color:var(--line);padding:12px 16px;gap:12px;flex-wrap:wrap}
+.app-workspace .ui-pagination select {color:#35545e;border-color:#cfdee3;min-height:36px}
+.app-workspace .workspace-request-filters {border-color:var(--line);flex-wrap:wrap;gap:12px}
+.app-workspace .request-item {padding-block:20px;border-color:var(--line);align-items:flex-start}
+.app-workspace .request-item>.ui-badge {margin-top:3px}
+.app-workspace .request-item summary {color:#08695c;font-size:12px;cursor:pointer;margin-top:10px;min-height:28px;line-height:28px;width:fit-content}
+.app-workspace .request-icon,.app-workspace .avatar {background:#e8f2f3;color:#3a7380;border-radius:12px}
+.app-workspace .workspace-team-stats {grid-template-columns:repeat(3,minmax(0,1fr));margin-top:0}
+.app-workspace .workspace-roster {margin-bottom:20px}
+.app-workspace .workspace-roster summary {font-weight:650;cursor:pointer;min-height:28px}
+.app-workspace .workspace-roster .team-strip {margin-block:18px 0;gap:10px}
+.app-workspace .member {background:#f8fafb;padding:12px;border-color:var(--line)}
+.app-workspace :is(.ui-empty,.empty) {color:#526773;padding:40px 20px}
+.app-workspace :is(.ui-empty h3,.empty strong) {color:#2e515b}
+.app-workspace :is(.ui-empty>span,.empty-icon) {color:#548179;background:#edf5f2}
+.app-workspace .ui-dialog {border-color:#d5e2e6;border-radius:18px;color:var(--ink);box-shadow:0 24px 100px #0e293638;max-height:calc(100dvh - 40px);overscroll-behavior:contain}
+.app-workspace .ui-dialog::backdrop {background:#0d283868;backdrop-filter:blur(3px)}
+.app-workspace .ui-dialog-header {border-color:var(--line)}
+.app-workspace .ui-dialog-header h2 {font-size:21px;color:var(--ink)}
+.app-workspace .ui-dialog :is(input,textarea,select) {color:var(--ink);border-color:#c9d9df;border-radius:9px;background:#fff}
+.app-workspace .ui-dialog label {color:#375763;font-size:13px;font-weight:600}
+.app-workspace .ui-dialog textarea {resize:vertical;min-height:100px;line-height:1.6}
+.app-workspace .ui-dialog-actions {gap:10px;border-color:var(--line)}
+.app-workspace .workspace-review-summary {color:#2b5f54;background:#eef7f3;border-color:#cee4dc;border-radius:12px}
+.app-workspace .workspace-review-summary>span {color:#526773}
+.app-workspace .workspace-character-count {text-align:right;font-size:12px;color:#526773;margin:5px 0 8px}
+.app-workspace .week5-calendar-grid button {min-width:0;overflow:hidden;border-color:var(--line);color:#345a60}
+.app-workspace .week5-calendar-grid button small {color:#526773;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block;max-width:100%}
+.app-workspace .week5-calendar-grid button.today {border:2px solid #087969}
+.app-workspace .week5-calendar-grid button.has-record {background:#edf7f1}
+.app-workspace .week5-calendar-grid button.late {background:#fff7e7}
+.app-workspace .week5-calendar-kpis {color:#526773}
+.app-workspace .ops-tabs button {color:#49626c}
+.app-workspace .ops-tabs button.active {color:#08695c;border-color:#087969}
+.app-workspace .workspace-confirmation {padding:14px;border:1px solid #e6d29e;border-radius:10px;background:#fff8e8;line-height:1.7}
+.app-workspace label.workspace-confirmation {display:flex;align-items:flex-start;gap:10px;color:#745019;font-weight:500}
+.app-workspace .workspace-confirmation input {min-height:20px;width:18px;flex-shrink:0;margin:3px 0;accent-color:#087969}
+@media(min-width:1600px){.app-workspace .shell-content{padding-top:36px}}
+@media(max-width:1200px){
+  .app-workspace .shell-header{padding-inline:24px;gap:14px}
+  .app-workspace .shell-content{padding:26px 24px}
+  .app-workspace .workspace-admin-columns{grid-template-columns:1fr}
+  .app-workspace .week5-kpis{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .app-workspace .ui-stats .ui-stat{padding:16px;gap:10px}
+  .app-workspace .shell-breadcrumb>span:first-child{display:none}
+}
+@media(max-width:1000px){
+  .app-workspace .overview-grid,.app-workspace .bottom-grid{grid-template-columns:1fr}
+  .app-workspace .day-art{display:none}
+  .app-workspace .day-timeline{margin-top:20px}
+  .app-workspace .workspace-welcome-art{display:none}
+}
+@media(max-width:760px){
+  .app-workspace .shell-header{padding-inline:16px;gap:10px;height:68px}
+  .app-workspace .shell-content{padding:24px 16px}
+  .app-workspace .shell-header-actions{gap:2px;margin-left:auto}
+  .app-workspace .shell-breadcrumb{min-width:0;overflow:hidden;flex:1;font-size:12px}
+  .app-workspace .shell-breadcrumb>span{display:none}
+  .app-workspace .shell-breadcrumb strong{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .app-workspace .shell-mobile-nav nav button{color:#35545e;padding-block:12px;border:1px solid transparent}
+  .app-workspace .shell-mobile-nav nav button.active{background:#e1f3ec;color:#075c50;border-color:#b9dbce}
+  .app-workspace .shell-mobile-nav .shell-nav-label{color:#526773}
+  .app-workspace .page-heading{align-items:stretch;gap:16px}
+  .app-workspace .month-picker{align-self:flex-start}
+  .app-workspace .workspace-loading{align-items:flex-start}
+  .app-workspace .workspace-loading>span{display:none}
+  .app-workspace .panel,.app-workspace .clock-card,.app-workspace .day-card{padding:20px}
+  .app-workspace .workspace-welcome{padding:24px}
+  .app-workspace .workspace-team-stats{grid-template-columns:1fr}
+  .app-workspace .week5-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .app-workspace .ui-toolbar{padding:16px;gap:10px}
+  .app-workspace .ui-toolbar .ui-search{max-width:none;flex-basis:100%}
+  .app-workspace .ui-toolbar select{flex:1;min-width:0}
+  .app-workspace .ui-panel>.ui-toolbar select{flex-basis:100%;width:100%}
+  .app-workspace .workspace-scroll-hint{display:block}
+  .app-workspace .ui-toolbar .ui-export{margin-left:0}
+  .app-workspace .ui-panel-heading{padding:20px;align-items:flex-start;flex-wrap:wrap}
+  .app-workspace .ui-table{min-width:630px}
+  .app-workspace .ui-pagination>div{gap:7px;flex-wrap:wrap}
+  .app-workspace .ui-dialog{padding:20px;width:calc(100% - 24px);max-height:calc(100dvh - 24px)}
+  .app-workspace .ui-dialog .form-grid{grid-template-columns:1fr;gap:0}
+  .app-workspace .ui-dialog-actions{flex-wrap:wrap}
+  .app-workspace .ui-dialog-actions>.ui-button{flex:1;white-space:normal}
+  .app-workspace .workspace-request-filters select{min-width:0}
+  .app-workspace .request-item>.ui-badge,.app-workspace .request-item>.ui-button{margin-left:53px}
+  .app-workspace .week5-calendar-grid{gap:4px;padding:12px}
+  .app-workspace .week5-calendar-grid button{padding:7px 3px;min-height:65px}
+  .app-workspace .week5-calendar-grid button small{font-size:9px}
+  .app-workspace .week5-calendar-kpis{flex-wrap:wrap;gap:12px;padding:16px}
+}
+@media(max-width:380px){
+  .app-workspace .shell-header{padding-inline:10px;gap:5px}
+  .app-workspace .shell-header-actions>.shell-avatar{display:none}
+  .app-workspace .shell-content{padding-inline:12px}
+  .app-workspace .panel,.app-workspace .clock-card,.app-workspace .day-card{padding:16px}
+  .app-workspace .punch-times{gap:10px}
+  .app-workspace .punch-times strong{font-size:17px}
+  .app-workspace .punch-line{width:15px}
+  .app-workspace .live-clock{font-size:39px}
+  .app-workspace .week5-kpis{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  .app-workspace *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}

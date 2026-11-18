@@ -1,0 +1,22 @@
+{
+  "version": "incident-guidance-v1",
+  "rules": {
+    "LOGIN_ERROR": "Đối chiếu mã lỗi đăng nhập, ứng dụng và trạng thái tài khoản; một lần đăng nhập thất bại chưa chứng minh có dò mật khẩu hoặc tài khoản bị chiếm.",
+    "LOGIN_FAILURE_BURST": "Đối chiếu lỗi đăng nhập, IP và lịch sử tài khoản; kiểm tra cấu hình client và chính sách chống dò mật khẩu trước khi đề nghị biện pháp chặn.",
+    "DENY_BURST": "Đối chiếu tài nguyên bị từ chối, vai trò và thời điểm thay đổi quyền; xác minh nhu cầu truy cập trước khi đề nghị sửa quyền.",
+    "CONSECUTIVE_DENY": "Kiểm tra chuỗi từ chối và quyền hiệu lực; xác minh cấu hình client và phạm vi tài nguyên trước khi thay quyền.",
+    "EMPLOYEE_ADMIN_ACCESS": "Đối chiếu vai trò và endpoint quản trị; kiểm tra menu hoặc tích hợp gọi nhầm API, giữ nguyên kiểm soát phân quyền.",
+    "INSUFFICIENT_ROLE": "Đối chiếu vai trò trong hồ sơ và quyền tài nguyên; không cấp thêm quyền chỉ để làm mất cảnh báo.",
+    "DASHBOARD_ACCESS_DENIED": "Kiểm tra vai trò và ứng dụng được phép; xác minh có điều hướng nhầm sang Web B hay không.",
+    "SESSION_REVOKED": "Đối chiếu thời điểm thu hồi phiên với request; xác minh client còn dùng phiên cũ và yêu cầu đăng nhập lại theo quy trình hiện có.",
+    "REVOKED_TOKEN_REUSE": "Đối chiếu request với thời điểm thu hồi và trạng thái phiên; kiểm tra client còn giữ phiên cũ trước khi kết luận bị chiếm tài khoản.",
+    "NEW_IP_REVIEW": "Xác minh VPN, mạng công ty và thay đổi vị trí với người dùng; IP mới là tín hiệu cần điều tra, chưa phải bằng chứng tấn công.",
+    "OUTSIDE_BUSINESS_HOURS": "Đối chiếu múi giờ, lịch làm việc và công việc được phê duyệt; không mặc định truy cập ngoài giờ là trái phép.",
+    "REQUEST_SPIKE": "Đối chiếu lưu lượng nền, tác vụ hợp lệ và lỗi retry của client trước khi đề nghị giới hạn hoặc chặn.",
+    "INVALID_TOKEN": "Kiểm tra issuer, audience, thời hạn và cấu hình client bằng công cụ an toàn; không sao chép token vào ghi chú điều tra.",
+    "ACCOUNT_DISABLED": "Đối chiếu trạng thái vòng đời và lý do khóa; không tự mở lại tài khoản để thử truy cập.",
+    "MFA_SETUP_REQUIRED": "Hướng dẫn hoàn tất MFA tại Keycloak, đối chiếu trạng thái thiết bị; không thu thập OTP hoặc secret.",
+    "DIRECTORY_CONFLICT": "Đối chiếu ánh xạ danh tính và nhóm tại nguồn LDAP/Keycloak; giữ biện pháp chặn cho đến khi có kết quả xác minh."
+  },
+  "fallback": "Đối chiếu bằng chứng nguồn, thời điểm và phạm vi ảnh hưởng; chưa đủ dữ liệu để khẳng định nguyên nhân hoặc đề xuất thay đổi tài khoản cụ thể."
+}

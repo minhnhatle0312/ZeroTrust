@@ -1,0 +1,53 @@
+{
+  "date": "2026-11-08",
+  "backend": {
+    "passed": 130,
+    "total": 130
+  },
+  "frontendUtilities": {
+    "passed": 8,
+    "total": 8
+  },
+  "python": {
+    "passed": 7,
+    "total": 7
+  },
+  "live": {
+    "evidence/week3/browser-results.json": {
+      "passed": 29,
+      "total": 29
+    },
+    "evidence/ui-upgrade/results.json": {
+      "passed": 42,
+      "total": 42
+    },
+    "evidence/api-upgrade/browser-results.json": {
+      "passed": 24,
+      "total": 24
+    },
+    "evidence/release/audit-results.json": {
+      "passed": 100,
+      "total": 100
+    },
+    "evidence/release/governance-ldap-results.json": {
+      "passed": 23,
+      "total": 23
+    },
+    "evidence/release/governance-results.json": {
+      "passed": 24,
+      "total": 24
+    },
+    "evidence/release/live-results.json": {
+      "passed": 20,
+      "total": 20
+    },
+    "evidence/release/release-ui-results.json": {
+      "passed": 19,
+      "total": 19
+    },
+    "evidence/release/session-directory-results.json": {
+      "passed": 9,
+      "total": 9
+    }
+  }
+}

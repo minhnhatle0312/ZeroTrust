@@ -1,0 +1,599 @@
+TAP version 13
+# Audit write failed; request denied
+# Subtest: audit stores allow/deny across instances, excludes credentials and caps tail
+ok 1 - audit stores allow/deny across instances, excludes credentials and caps tail
+  ---
+  duration_ms: 7.6068
+  type: 'test'
+  ...
+# Subtest: audit write failure returns 503 instead of an ALLOW response
+ok 2 - audit write failure returns 503 instead of an ALLOW response
+  ---
+  duration_ms: 2.659
+  type: 'test'
+  ...
+# (node:6932) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: OPS: non-admin cannot create/update/reset users or list other sessions
+ok 3 - OPS: non-admin cannot create/update/reset users or list other sessions
+  ---
+  duration_ms: 95.037
+  type: 'test'
+  ...
+# Subtest: OPS: create joins Keycloak ID and app registry without leaking password
+ok 4 - OPS: create joins Keycloak ID and app registry without leaking password
+  ---
+  duration_ms: 10.1702
+  type: 'test'
+  ...
+# Subtest: OPS: duplicate username is rejected before remote work
+ok 5 - OPS: duplicate username is rejected before remote work
+  ---
+  duration_ms: 6.8357
+  type: 'test'
+  ...
+# Subtest: OPS: cannot create or assign admin from application
+ok 6 - OPS: cannot create or assign admin from application
+  ---
+  duration_ms: 8.1086
+  type: 'test'
+  ...
+# Subtest: OPS: weak password and mass-assigned fields are rejected
+ok 7 - OPS: weak password and mass-assigned fields are rejected
+  ---
+  duration_ms: 8.2123
+  type: 'test'
+  ...
+# Subtest: OPS: creation validates required profile fields and username type
+ok 8 - OPS: creation validates required profile fields and username type
+  ---
+  duration_ms: 10.2538
+  type: 'test'
+  ...
+# Subtest: OPS: server sorting is stable and cannot inject SQL
+ok 9 - OPS: server sorting is stable and cannot inject SQL
+  ---
+  duration_ms: 11.4246
+  type: 'test'
+  ...
+# Subtest: OPS: protected admin cannot be edited or password-reset
+ok 10 - OPS: protected admin cannot be edited or password-reset
+  ---
+  duration_ms: 6.6693
+  type: 'test'
+  ...
+# Subtest: OPS: profile changes persist and old role token is refused
+ok 11 - OPS: profile changes persist and old role token is refused
+  ---
+  duration_ms: 8.5546
+  type: 'test'
+  ...
+# Subtest: OPS: failed profile sync contains account and retains old role
+ok 12 - OPS: failed profile sync contains account and retains old role
+  ---
+  duration_ms: 5.2546
+  type: 'test'
+  ...
+# Subtest: OPS: concurrent profile changes serialize on target account
+ok 13 - OPS: concurrent profile changes serialize on target account
+  ---
+  duration_ms: 84.1659
+  type: 'test'
+  ...
+# Subtest: OPS: password reset is audited without recording the secret
+ok 14 - OPS: password reset is audited without recording the secret
+  ---
+  duration_ms: 5.7643
+  type: 'test'
+  ...
+# Subtest: OPS: Web B may manage users but still cannot access attendance
+ok 15 - OPS: Web B may manage users but still cannot access attendance
+  ---
+  duration_ms: 8.1184
+  type: 'test'
+  ...
+# Subtest: OPS: own sessions identify current and cannot revoke another user session
+ok 16 - OPS: own sessions identify current and cannot revoke another user session
+  ---
+  duration_ms: 10.9554
+  type: 'test'
+  ...
+# Subtest: OPS: session outage is visible and never reports success
+ok 17 - OPS: session outage is visible and never reports success
+  ---
+  duration_ms: 5.4751
+  type: 'test'
+  ...
+# Subtest: OPS: security events can query beyond original last 100
+ok 18 - OPS: security events can query beyond original last 100
+  ---
+  duration_ms: 6.9978
+  type: 'test'
+  ...
+# Subtest: OPS: log query treats SQL payload as text and enforces date/page limits
+ok 19 - OPS: log query treats SQL payload as text and enforces date/page limits
+  ---
+  duration_ms: 14.3859
+  type: 'test'
+  ...
+# Subtest: OPS: log detail carries all request correlation steps
+ok 20 - OPS: log detail carries all request correlation steps
+  ---
+  duration_ms: 4.4353
+  type: 'test'
+  ...
+# Subtest: OPS: employee cannot read global logs, summaries or identity events
+ok 21 - OPS: employee cannot read global logs, summaries or identity events
+  ---
+  duration_ms: 7.8448
+  type: 'test'
+  ...
+# Subtest: OPS: imported failed login creates alert and security notification once
+ok 22 - OPS: imported failed login creates alert and security notification once
+  ---
+  duration_ms: 9.3627
+  type: 'test'
+  ...
+# Subtest: OPS: auditors cannot trigger sync, and offline sync returns 503
+ok 23 - OPS: auditors cannot trigger sync, and offline sync returns 503
+  ---
+  duration_ms: 5.9841
+  type: 'test'
+  ...
+# Subtest: OPS: notification scope and read state are private to each account
+ok 24 - OPS: notification scope and read state are private to each account
+  ---
+  duration_ms: 10.3476
+  type: 'test'
+  ...
+# Subtest: OPS: security alert context excludes unrelated users
+ok 25 - OPS: security alert context excludes unrelated users
+  ---
+  duration_ms: 4.0195
+  type: 'test'
+  ...
+# Subtest: OPS: only owner can withdraw pending correction and review then fails
+ok 26 - OPS: only owner can withdraw pending correction and review then fails
+  ---
+  duration_ms: 8.2215
+  type: 'test'
+  ...
+# (node:17548) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: AUTH-01: no token is 401
+ok 27 - AUTH-01: no token is 401
+  ---
+  duration_ms: 200.0743
+  type: 'test'
+  ...
+# Subtest: AUTH-02: malformed token is 401
+ok 28 - AUTH-02: malformed token is 401
+  ---
+  duration_ms: 10.3947
+  type: 'test'
+  ...
+# Subtest: AUTH-03: wrong signature is 401
+ok 29 - AUTH-03: wrong signature is 401
+  ---
+  duration_ms: 12.22
+  type: 'test'
+  ...
+# Subtest: AUTH: rejects expired
+ok 30 - AUTH: rejects expired
+  ---
+  duration_ms: 8.578
+  type: 'test'
+  ...
+# Subtest: AUTH: rejects wrong audience
+ok 31 - AUTH: rejects wrong audience
+  ---
+  duration_ms: 7.819
+  type: 'test'
+  ...
+# Subtest: AUTH: rejects wrong issuer
+ok 32 - AUTH: rejects wrong issuer
+  ---
+  duration_ms: 7.5934
+  type: 'test'
+  ...
+# Subtest: AUTH: rejects future nbf
+ok 33 - AUTH: rejects future nbf
+  ---
+  duration_ms: 5.6801
+  type: 'test'
+  ...
+# Subtest: AUTH: rejects missing exp
+ok 34 - AUTH: rejects missing exp
+  ---
+  duration_ms: 6.8231
+  type: 'test'
+  ...
+# Subtest: AUTH-09: unsigned JWT is denied
+ok 35 - AUTH-09: unsigned JWT is denied
+  ---
+  duration_ms: 8.4838
+  type: 'test'
+  ...
+# Subtest: AUTH-10: registered subject required
+ok 36 - AUTH-10: registered subject required
+  ---
+  duration_ms: 6.0312
+  type: 'test'
+  ...
+# Subtest: AUTH-11: token role cannot overwrite employee registry
+ok 37 - AUTH-11: token role cannot overwrite employee registry
+  ---
+  duration_ms: 5.8004
+  type: 'test'
+  ...
+# Subtest: RBAC-01: employee cannot access team/admin/security
+ok 38 - RBAC-01: employee cannot access team/admin/security
+  ---
+  duration_ms: 10.3446
+  type: 'test'
+  ...
+# Subtest: RBAC-02: auditor can read security, cannot manage users
+ok 39 - RBAC-02: auditor can read security, cannot manage users
+  ---
+  duration_ms: 21.3354
+  type: 'test'
+  ...
+# Subtest: RBAC-03: manager cannot grant admin or disable accounts
+ok 40 - RBAC-03: manager cannot grant admin or disable accounts
+  ---
+  duration_ms: 5.1743
+  type: 'test'
+  ...
+# Subtest: IDOR-01: employee cannot read another employee attendance
+ok 41 - IDOR-01: employee cannot read another employee attendance
+  ---
+  duration_ms: 6.8066
+  type: 'test'
+  ...
+# Subtest: IDOR-02: manager only receives own team
+ok 42 - IDOR-02: manager only receives own team
+  ---
+  duration_ms: 5.8551
+  type: 'test'
+  ...
+# Subtest: IDOR-03: cross-team approval denied without modifying request
+ok 43 - IDOR-03: cross-team approval denied without modifying request
+  ---
+  duration_ms: 7.6058
+  type: 'test'
+  ...
+# Subtest: IDOR-04: employee cannot approve own request
+ok 44 - IDOR-04: employee cannot approve own request
+  ---
+  duration_ms: 6.8301
+  type: 'test'
+  ...
+# Subtest: IDOR-05: manager cannot approve own request
+ok 45 - IDOR-05: manager cannot approve own request
+  ---
+  duration_ms: 6.6535
+  type: 'test'
+  ...
+# Subtest: ATT-01: check-out before check-in is 409
+ok 46 - ATT-01: check-out before check-in is 409
+  ---
+  duration_ms: 4.7641
+  type: 'test'
+  ...
+# Subtest: ATT-02: check-in uses server identity and server time
+ok 47 - ATT-02: check-in uses server identity and server time
+  ---
+  duration_ms: 4.5367
+  type: 'test'
+  ...
+# Subtest: ATT-03: concurrent duplicate check-in creates exactly one record
+ok 48 - ATT-03: concurrent duplicate check-in creates exactly one record
+  ---
+  duration_ms: 8.1192
+  type: 'test'
+  ...
+# Subtest: ATT-04: duplicate checkout denied
+ok 49 - ATT-04: duplicate checkout denied
+  ---
+  duration_ms: 8.1583
+  type: 'test'
+  ...
+# Subtest: ATT-05: client cannot forge user, timestamp or status
+ok 50 - ATT-05: client cannot forge user, timestamp or status
+  ---
+  duration_ms: 9.6457
+  type: 'test'
+  ...
+# Subtest: REQ-01: same-team approval updates attendance and has audit trail
+ok 51 - REQ-01: same-team approval updates attendance and has audit trail
+  ---
+  duration_ms: 5.9134
+  type: 'test'
+  ...
+# Subtest: REQ-02: rejection leaves attendance unchanged
+ok 52 - REQ-02: rejection leaves attendance unchanged
+  ---
+  duration_ms: 6.5011
+  type: 'test'
+  ...
+# Subtest: REQ-03: replayed approval is 409
+ok 53 - REQ-03: replayed approval is 409
+  ---
+  duration_ms: 18.0593
+  type: 'test'
+  ...
+# Subtest: REQ-04: duplicate pending request denied
+ok 54 - REQ-04: duplicate pending request denied
+  ---
+  duration_ms: 8.8225
+  type: 'test'
+  ...
+# Subtest: REQ-05: future date, impossible date, reversed time, short reason denied
+ok 55 - REQ-05: future date, impossible date, reversed time, short reason denied
+  ---
+  duration_ms: 18.7313
+  type: 'test'
+  ...
+# Subtest: REQ-06: mass assignment cannot auto-approve
+ok 56 - REQ-06: mass assignment cannot auto-approve
+  ---
+  duration_ms: 4.8046
+  type: 'test'
+  ...
+# Subtest: INJ-01: SQL/XSS text stays literal data
+ok 57 - INJ-01: SQL/XSS text stays literal data
+  ---
+  duration_ms: 4.3868
+  type: 'test'
+  ...
+# Subtest: INPUT-01: malformed JSON returns 400
+ok 58 - INPUT-01: malformed JSON returns 400
+  ---
+  duration_ms: 4.1085
+  type: 'test'
+  ...
+# Subtest: INPUT-02: payload over 16 KiB returns 413
+ok 59 - INPUT-02: payload over 16 KiB returns 413
+  ---
+  duration_ms: 6.8377
+  type: 'test'
+  ...
+# Subtest: INPUT-03: malformed month and audit limit denied
+ok 60 - INPUT-03: malformed month and audit limit denied
+  ---
+  duration_ms: 5.8085
+  type: 'test'
+  ...
+# Subtest: CSRF-01: foreign Origin cannot mutate even with valid token
+ok 61 - CSRF-01: foreign Origin cannot mutate even with valid token
+  ---
+  duration_ms: 4.0579
+  type: 'test'
+  ...
+# Subtest: RATE-01: per-user rate limit returns 429
+ok 62 - RATE-01: per-user rate limit returns 429
+  ---
+  duration_ms: 7.6525
+  type: 'test'
+  ...
+# Subtest: AUDIT-01: failed audit rolls back attendance mutation
+ok 63 - AUDIT-01: failed audit rolls back attendance mutation
+  ---
+  duration_ms: 4.203
+  type: 'test'
+  ...
+# Subtest: AUDIT-02: denied role creates alert; no token/body in event
+ok 64 - AUDIT-02: denied role creates alert; no token/body in event
+  ---
+  duration_ms: 4.0782
+  type: 'test'
+  ...
+# Subtest: ALERT-01: auditor cannot resolve alerts
+ok 65 - ALERT-01: auditor cannot resolve alerts
+  ---
+  duration_ms: 6.1599
+  type: 'test'
+  ...
+# Subtest: ALERT-02: admin can record investigation with a reason
+ok 66 - ALERT-02: admin can record investigation with a reason
+  ---
+  duration_ms: 7.3045
+  type: 'test'
+  ...
+# Subtest: SESSION-01: revoke immediately rejects old valid JWT
+ok 67 - SESSION-01: revoke immediately rejects old valid JWT
+  ---
+  duration_ms: 5.8634
+  type: 'test'
+  ...
+# Subtest: SESSION-02: disable blocks API and syncs identity provider
+ok 68 - SESSION-02: disable blocks API and syncs identity provider
+  ---
+  duration_ms: 6.1221
+  type: 'test'
+  ...
+# Subtest: SESSION-03: Keycloak outage still contains user locally
+ok 69 - SESSION-03: Keycloak outage still contains user locally
+  ---
+  duration_ms: 5.8029
+  type: 'test'
+  ...
+# Subtest: SESSION-04: failed enable never unlocks locally
+ok 70 - SESSION-04: failed enable never unlocks locally
+  ---
+  duration_ms: 4.2455
+  type: 'test'
+  ...
+# Subtest: SESSION-05: successful enable allows fresh JWT only
+ok 71 - SESSION-05: successful enable allows fresh JWT only
+  ---
+  duration_ms: 10.052
+  type: 'test'
+  ...
+# Subtest: SESSION-06: cannot lock self/admin
+ok 72 - SESSION-06: cannot lock self/admin
+  ---
+  duration_ms: 4.729
+  type: 'test'
+  ...
+# Subtest: MFA-01: requiring MFA revokes old JWT and requests identity action
+ok 73 - MFA-01: requiring MFA revokes old JWT and requests identity action
+  ---
+  duration_ms: 6.5381
+  type: 'test'
+  ...
+# Subtest: TIME-01: Vietnamese day boundary and late minutes use UTC+7
+ok 74 - TIME-01: Vietnamese day boundary and late minutes use UTC+7
+  ---
+  duration_ms: 0.1327
+  type: 'test'
+  ...
+# Subtest: RACE-01: simultaneous approve/reject permits one decision only
+ok 75 - RACE-01: simultaneous approve/reject permits one decision only
+  ---
+  duration_ms: 8.7681
+  type: 'test'
+  ...
+# Subtest: RACE-02: cannot enable while a disable operation is in flight
+ok 76 - RACE-02: cannot enable while a disable operation is in flight
+  ---
+  duration_ms: 110.5648
+  type: 'test'
+  ...
+# Subtest: WEEK-01: recent-week data is independent of selected calendar month
+ok 77 - WEEK-01: recent-week data is independent of selected calendar month
+  ---
+  duration_ms: 12.472
+  type: 'test'
+  ...
+# Subtest: PERSIST-01: staff containment and attendance survive database reopen
+ok 78 - PERSIST-01: staff containment and attendance survive database reopen
+  ---
+  duration_ms: 27.3789
+  type: 'test'
+  ...
+# (node:6896) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: SSO: verify own audience for each OIDC client
+ok 79 - SSO: verify own audience for each OIDC client
+  ---
+  duration_ms: 147.7294
+  type: 'test'
+  ...
+# Subtest: SSO: reject cross-client audience
+ok 80 - SSO: reject cross-client audience
+  ---
+  duration_ms: 1.54
+  type: 'test'
+  ...
+# Subtest: SSO: reject unknown client
+ok 81 - SSO: reject unknown client
+  ---
+  duration_ms: 1.1588
+  type: 'test'
+  ...
+# Subtest: SSO: reject missing client
+ok 82 - SSO: reject missing client
+  ---
+  duration_ms: 1.1978
+  type: 'test'
+  ...
+# Subtest: SSO: reject missing sid
+ok 83 - SSO: reject missing sid
+  ---
+  duration_ms: 1.1855
+  type: 'test'
+  ...
+# Subtest: SSO: reject wrong issuer
+ok 84 - SSO: reject wrong issuer
+  ---
+  duration_ms: 1.1313
+  type: 'test'
+  ...
+# Subtest: SSO: reject expired token
+ok 85 - SSO: reject expired token
+  ---
+  duration_ms: 1.1699
+  type: 'test'
+  ...
+# Subtest: Web B: auditor can read security
+ok 86 - Web B: auditor can read security
+  ---
+  duration_ms: 47.074
+  type: 'test'
+  ...
+# Subtest: Web B: employee denied at backend despite valid token
+ok 87 - Web B: employee denied at backend despite valid token
+  ---
+  duration_ms: 12.9953
+  type: 'test'
+  ...
+# Subtest: Web B: manager denied
+ok 88 - Web B: manager denied
+  ---
+  duration_ms: 6.7643
+  type: 'test'
+  ...
+# Subtest: Web B: admin token cannot access attendance
+ok 89 - Web B: admin token cannot access attendance
+  ---
+  duration_ms: 9.4396
+  type: 'test'
+  ...
+# Subtest: Web B: auditor cannot manage users
+ok 90 - Web B: auditor cannot manage users
+  ---
+  duration_ms: 7.6301
+  type: 'test'
+  ...
+# Subtest: Web B: admin may view users
+ok 91 - Web B: admin may view users
+  ---
+  duration_ms: 7.4734
+  type: 'test'
+  ...
+# Subtest: SSO: ended Keycloak session rejects still-valid JWT
+ok 92 - SSO: ended Keycloak session rejects still-valid JWT
+  ---
+  duration_ms: 5.6615
+  type: 'test'
+  ...
+# Subtest: SSO: Keycloak outage fails closed with 503
+ok 93 - SSO: Keycloak outage fails closed with 503
+  ---
+  duration_ms: 6.2557
+  type: 'test'
+  ...
+# Subtest: CORS: Web B exact origin allowed
+ok 94 - CORS: Web B exact origin allowed
+  ---
+  duration_ms: 8.7379
+  type: 'test'
+  ...
+# Subtest: CORS: lookalike origin denied
+ok 95 - CORS: lookalike origin denied
+  ---
+  duration_ms: 5.7619
+  type: 'test'
+  ...
+# Subtest: SSO: cache expires and discovers logout
+ok 96 - SSO: cache expires and discovers logout
+  ---
+  duration_ms: 0.3291
+  type: 'test'
+  ...
+# Subtest: SSO: outage is not cached and simultaneous checks coalesce
+ok 97 - SSO: outage is not cached and simultaneous checks coalesce
+  ---
+  duration_ms: 0.6047
+  type: 'test'
+  ...
+1..97
+# tests 97
+# suites 0
+# pass 97
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 924.5008
